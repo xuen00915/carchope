@@ -155,9 +155,9 @@
   function updateFloatingActions(){
     if(!floatingActions) return;
     var threshold=Math.max(window.innerHeight*0.8,520);
-    var show=window.scrollY>threshold;
-    floatingActions.classList.toggle('visible',show);
-    floatingActions.setAttribute('aria-hidden',show?'false':'true');
+    var showTop=window.scrollY>threshold;
+    floatingActions.classList.toggle('show-top',showTop);
+    floatingActions.setAttribute('aria-hidden','false');
   }
 
   window.addEventListener('scroll',updateFloatingActions,{passive:true});
