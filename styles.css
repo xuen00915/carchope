@@ -4584,3 +4584,46 @@ body{
     height:430px!important;
   }
 }
+
+
+/* Wider About story and Home ownership titles */
+.story-grid{
+  grid-template-columns:1.04fr .96fr;
+  gap:48px;
+}
+.story-copy{
+  padding-right:0!important;
+}
+.story-copy .display-sm{
+  max-width:760px!important;
+}
+.home-closing-section{
+  grid-template-columns:40% 60%!important;
+}
+.home-closing-section .partner-copy{
+  padding-right:48px!important;
+}
+.home-closing-section .partner-copy h2{
+  max-width:860px!important;
+}
+@media(max-width:1180px){
+  .story-grid{
+    grid-template-columns:1fr 1fr;
+  }
+  .story-copy .display-sm{
+    max-width:700px!important;
+  }
+  .home-closing-section{
+    grid-template-columns:42% 58%!important;
+  }
+}
+@media(max-width:860px){
+  .story-grid,
+  .home-closing-section{
+    grid-template-columns:1fr!important;
+  }
+  .story-copy .display-sm,
+  .home-closing-section .partner-copy h2{
+    max-width:none!important;
+  }
+}
