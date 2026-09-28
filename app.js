@@ -180,6 +180,9 @@
   var queryBrand='';
   try{ queryBrand=(new URLSearchParams(window.location.search)).get('brand')||''; }catch(e){}
   var selectedBrand=brandById[queryBrand]?queryBrand:'all';
+  var currentPage=1;
+  var pageSize=9;
+  var pagination=document.getElementById('pagination');
 
   Array.from(new Set(cars.map(function(c){return c.type;}))).sort().forEach(function(t){
     var o=document.createElement('option');
@@ -234,6 +237,7 @@
     if(brandSelect) brandSelect.classList.remove('open');
     if(brandTrigger) brandTrigger.setAttribute('aria-expanded','false');
     syncBrandUrl();
+    currentPage=1;
     render();
   }
 
@@ -296,6 +300,73 @@
   function money(n){return n==null?'Sold':('$'+n.toLocaleString('en-SG'));}
   function brandName(id){return brandById[id]?brandById[id].name:id;}
 
+  function renderPagination(totalItems){
+    if(!pagination) return;
+    pagination.innerHTML='';
+
+    var totalPages=Math.max(1,Math.ceil(totalItems/pageSize));
+    if(currentPage>totalPages) currentPage=totalPages;
+
+    if(totalItems<=pageSize){
+      pagination.style.display='none';
+      return;
+    }
+
+    pagination.style.display='flex';
+
+    var prev=document.createElement('button');
+    prev.type='button';
+    prev.className='pagination-prev';
+    prev.textContent='← Previous';
+    prev.disabled=currentPage===1;
+    prev.addEventListener('click',function(){
+      if(currentPage>1){
+        currentPage--;
+        render();
+        scrollToInventory();
+      }
+    });
+    pagination.appendChild(prev);
+
+    for(var page=1;page<=totalPages;page++){
+      var btn=document.createElement('button');
+      btn.type='button';
+      btn.textContent=String(page);
+      btn.setAttribute('aria-label','Page '+page);
+      if(page===currentPage){
+        btn.className='active';
+        btn.setAttribute('aria-current','page');
+      }
+      (function(pageNumber){
+        btn.addEventListener('click',function(){
+          currentPage=pageNumber;
+          render();
+          scrollToInventory();
+        });
+      })(page);
+      pagination.appendChild(btn);
+    }
+
+    var next=document.createElement('button');
+    next.type='button';
+    next.className='pagination-next';
+    next.textContent='Next →';
+    next.disabled=currentPage===totalPages;
+    next.addEventListener('click',function(){
+      if(currentPage<totalPages){
+        currentPage++;
+        render();
+        scrollToInventory();
+      }
+    });
+    pagination.appendChild(next);
+  }
+
+  function scrollToInventory(){
+    var toolbar=document.querySelector('.inventory-toolbar');
+    if(toolbar) toolbar.scrollIntoView({behavior:'smooth',block:'start'});
+  }
+
   function render(){
     var q=(search&&search.value||'').toLowerCase().trim();
 
@@ -320,9 +391,15 @@
       if(sort.value==='new') data.sort(function(a,b){return b.year-a.year;});
     }
 
+    var totalPages=Math.max(1,Math.ceil(data.length/pageSize));
+    if(currentPage>totalPages) currentPage=totalPages;
+
+    var start=(currentPage-1)*pageSize;
+    var pageData=data.slice(start,start+pageSize);
+
     grid.innerHTML='';
 
-    data.forEach(function(c){
+    pageData.forEach(function(c){
       var a=document.createElement('a');
       a.className='inventory-card reveal in';
       a.href='https://www.carchope.com/products';
@@ -344,17 +421,21 @@
 
     if(count) count.textContent=data.length;
     if(empty) empty.style.display=data.length?'none':'block';
+    renderPagination(data.length);
   }
 
   [search,type,budget,sort].forEach(function(el){
-    if(el) el.addEventListener('input',render);
+    if(el) el.addEventListener('input',function(){
+      currentPage=1;
+      render();
+    });
   });
 
   if(searchBtn){
     searchBtn.addEventListener('click',function(){
+      currentPage=1;
       render();
-      var toolbar=document.querySelector('.inventory-toolbar');
-      if(toolbar) toolbar.scrollIntoView({behavior:'smooth',block:'start'});
+      scrollToInventory();
     });
   }
 
