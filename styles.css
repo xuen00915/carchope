@@ -4504,3 +4504,53 @@ body{
     animation-duration:200s!important;
   }
 }
+
+
+/* Homepage manifesto video background */
+.manifesto-video-section{
+  position:relative;
+  overflow:hidden;
+  background:#0d0f11;
+}
+.manifesto-video{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center;
+  z-index:0;
+  filter:saturate(.72) contrast(1.08) brightness(.66);
+}
+.manifesto-video-section::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:1;
+  background:
+    linear-gradient(90deg,rgba(8,10,12,.88) 0%,rgba(8,10,12,.66) 48%,rgba(8,10,12,.42) 100%),
+    linear-gradient(0deg,rgba(8,10,12,.3),rgba(8,10,12,.08));
+}
+.manifesto-video-section .manifesto-inner{
+  position:relative;
+  z-index:2;
+}
+@media(max-width:860px){
+  .manifesto-video{
+    object-position:center center;
+    filter:saturate(.68) contrast(1.06) brightness(.6);
+  }
+  .manifesto-video-section::after{
+    background:linear-gradient(90deg,rgba(8,10,12,.9),rgba(8,10,12,.7) 70%,rgba(8,10,12,.46));
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  .manifesto-video{
+    display:none;
+  }
+  .manifesto-video-section{
+    background:
+      linear-gradient(90deg,rgba(8,10,12,.88),rgba(8,10,12,.62)),
+      url("https://images.unsplash.com/photo-1562141961-b5d37d7d7f6c?auto=format&fit=crop&w=2200&q=90") center/cover no-repeat;
+  }
+}
