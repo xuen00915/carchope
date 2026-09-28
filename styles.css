@@ -1255,3 +1255,25 @@ button{cursor:pointer}
     padding:0 11px;
   }
 }
+
+
+/* Official Carchope header logo */
+.logo{
+  display:inline-flex;
+  align-items:center;
+  flex:0 0 auto;
+  line-height:1;
+}
+.logo img{
+  display:block;
+  width:auto;
+  height:36px;
+  max-width:190px;
+  object-fit:contain;
+}
+@media(max-width:580px){
+  .logo img{
+    height:32px;
+    max-width:168px;
+  }
+}
