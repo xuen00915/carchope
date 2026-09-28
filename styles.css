@@ -2508,3 +2508,211 @@ a.footer-contact-item:hover{color:#fff}
     height:40px;
   }
 }
+
+
+/* Floating buttons and featured labels refinement */
+.floating-actions{
+  right:24px;
+  bottom:24px;
+  gap:12px;
+  align-items:flex-end;
+}
+.floating-btn{
+  width:82px;
+  height:82px;
+  border-radius:50%;
+}
+.floating-whatsapp{
+  position:relative;
+  width:82px;
+  height:82px;
+  display:grid;
+  place-items:center;
+  background:transparent;
+  border:0;
+  box-shadow:none;
+}
+.whatsapp-ring,
+.whatsapp-core{display:none!important}
+.whatsapp-clip{
+  width:70px;
+  height:70px;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  background:#55c83f;
+  box-shadow:0 12px 30px rgba(31,112,53,.23);
+  transition:transform .2s var(--ease),box-shadow .2s var(--ease);
+}
+.whatsapp-clip svg{
+  width:100%;
+  height:100%;
+  display:block;
+}
+.whatsapp-clip circle{
+  fill:#55c83f;
+}
+.whatsapp-clip path{
+  fill:#fff;
+  stroke:none;
+}
+.floating-whatsapp:hover .whatsapp-clip{
+  transform:scale(1.04);
+  box-shadow:0 16px 34px rgba(31,112,53,.3);
+}
+.floating-top{
+  width:82px;
+  height:82px;
+  margin-left:0;
+  display:grid;
+  place-items:center;
+  border:1px solid #d3d6d8;
+  background:#fff;
+  color:#111;
+  box-shadow:0 12px 30px rgba(10,14,18,.15);
+  font-size:34px;
+  font-weight:400;
+}
+.floating-top span{
+  display:block;
+  transform:translateY(-2px);
+}
+
+/* Featured image identity moves to the upper-left */
+.product-featured-overlay{
+  background:
+    linear-gradient(180deg,rgba(8,10,12,.55) 0%,rgba(8,10,12,.14) 34%,rgba(8,10,12,.08) 58%,rgba(8,10,12,.72) 100%),
+    linear-gradient(90deg,rgba(8,10,12,.38) 0%,rgba(8,10,12,.08) 42%,rgba(8,10,12,.14) 100%);
+}
+.product-featured-identity{
+  position:absolute;
+  z-index:3;
+  top:24px;
+  left:24px;
+  max-width:min(68%,420px);
+}
+.product-featured-identity h3{
+  margin:0 0 12px;
+  color:#fff;
+  font-size:26px;
+  line-height:1.04;
+  letter-spacing:-.035em;
+  text-shadow:0 2px 18px rgba(0,0,0,.28);
+}
+.product-featured-tags{
+  display:flex;
+  flex-wrap:wrap;
+  gap:7px;
+}
+.product-featured-tags span{
+  min-height:28px;
+  padding:0 10px;
+  display:inline-flex;
+  align-items:center;
+  border:1px solid rgba(255,255,255,.45);
+  background:rgba(8,10,12,.26);
+  backdrop-filter:blur(7px);
+  color:#fff;
+  font-size:9px;
+  font-weight:800;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+}
+.product-featured-copy{
+  position:absolute;
+  z-index:3;
+  left:24px;
+  right:24px;
+  bottom:22px;
+  width:auto;
+  min-height:0;
+  margin:0;
+  padding:0;
+}
+.product-featured-bottom{
+  display:flex;
+  align-items:end;
+  justify-content:space-between;
+  gap:18px;
+  border-top:1px solid rgba(255,255,255,.34);
+  padding-top:14px;
+}
+.product-featured-bottom strong{
+  font-size:28px;
+  color:#fff;
+}
+.product-featured-bottom span{
+  font-size:12px;
+  color:rgba(255,255,255,.76);
+}
+
+@media(max-width:860px){
+  .floating-btn,
+  .floating-whatsapp,
+  .floating-top{
+    width:74px;
+    height:74px;
+  }
+  .whatsapp-clip{
+    width:64px;
+    height:64px;
+  }
+  .floating-top{
+    font-size:31px;
+  }
+  .product-featured-identity{
+    top:20px;
+    left:20px;
+    max-width:72%;
+  }
+  .product-featured-identity h3{
+    font-size:24px;
+  }
+  .product-featured-copy{
+    left:20px;
+    right:20px;
+    bottom:20px;
+  }
+}
+@media(max-width:580px){
+  .floating-actions{
+    right:12px;
+    bottom:12px;
+    gap:10px;
+  }
+  .floating-btn,
+  .floating-whatsapp,
+  .floating-top{
+    width:68px;
+    height:68px;
+  }
+  .whatsapp-clip{
+    width:58px;
+    height:58px;
+  }
+  .floating-top{
+    font-size:28px;
+  }
+  .product-featured-identity{
+    top:17px;
+    left:17px;
+    max-width:82%;
+  }
+  .product-featured-identity h3{
+    font-size:22px;
+    margin-bottom:9px;
+  }
+  .product-featured-tags span{
+    min-height:25px;
+    padding:0 8px;
+    font-size:8px;
+  }
+  .product-featured-copy{
+    left:17px;
+    right:17px;
+    bottom:16px;
+  }
+  .product-featured-bottom strong{
+    font-size:24px;
+  }
+}
