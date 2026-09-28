@@ -5,7 +5,8 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="description" content="Browse Carchope pre-owned cars in the premium frontend redesign preview.">
   <title>Pre-Owned Cars — Carchope</title>
-  <link rel="stylesheet" href="styles.css">\n  <link rel="stylesheet" href="road-hero.css">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="road-hero.css">
 </head>
 <body class="products-road-page">
 
@@ -51,22 +52,28 @@
   <a href="service.html">Services</a>
   <a href="about-us.html">About Us</a>
 </div>
-<main id="main">\n
+<main id="main">
+
   <section class="road-story" id="road-story" aria-label="Carchope road journey">
     <div class="road-stage" id="road-stage">
-      <div class="road-scene" aria-hidden="true">
-        <img class="road-scene-fallback" id="road-fallback" alt="">
-        <canvas class="road-webgl" id="road-webgl"></canvas>
-        <div class="road-scene-grade"></div>
-        <div class="road-scene-vignette"></div>
-      </div>
 
-      <div class="road-cockpit" aria-hidden="true">
-        <div class="road-pillar road-pillar-left"></div>
-        <div class="road-pillar road-pillar-right"></div>
-        <div class="road-rearview"></div>
-        <div class="road-dashboard"></div>
-        <div class="road-steering"></div>
+      <div class="road-video-wrap" aria-hidden="true">
+        <video
+          class="road-scroll-video"
+          id="road-scroll-video"
+          muted
+          playsinline
+          preload="auto"
+          disablepictureinpicture
+          tabindex="-1">
+          <source src="https://assets.mixkit.co/videos/48489/48489-720.mp4" type="video/mp4">
+        </video>
+        <div class="road-video-grade"></div>
+        <div class="road-video-vignette"></div>
+        <div class="road-video-loading" id="road-video-loading">
+          <span></span>
+          Loading road
+        </div>
       </div>
 
       <div class="container road-story-content">
@@ -104,6 +111,12 @@
           <strong id="road-chapter-count">01 / 03</strong>
         </div>
         <div class="road-story-track"><i></i></div>
+      </div>
+
+      <div class="road-video-time" aria-hidden="true">
+        <span id="road-video-current">00:00</span>
+        <i></i>
+        <span id="road-video-duration">00:00</span>
       </div>
 
       <a class="road-scroll-hint" href="#featured-cars" aria-label="Scroll through the road story">
@@ -347,6 +360,7 @@
     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m7 14 5-5 5 5"></path></svg>
   </button>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/three@0.160.1/build/three.min.js"></script>\n<script src="road-hero.js"></script>\n<script src="app.js"></script>
+<script src="road-hero.js"></script>
+<script src="app.js"></script>
 </body>
 </html>
