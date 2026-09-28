@@ -4709,3 +4709,113 @@ body{
     width:calc(100% - 24px)!important;
   }
 }
+
+
+/* Visible 1400px alignment for split sections */
+.partner-band,
+.service-story{
+  display:block!important;
+  width:100%;
+}
+
+.partner-shell,
+.service-story-shell{
+  width:min(1400px,calc(100% - 48px))!important;
+  max-width:1400px!important;
+  margin-left:auto!important;
+  margin-right:auto!important;
+}
+
+/* Home ownership now aligns to the same left/right content edges */
+.home-closing-section .partner-shell{
+  min-height:430px;
+  display:grid;
+  grid-template-columns:32% 68%;
+  align-items:stretch;
+}
+.home-closing-section .partner-image{
+  min-width:0;
+  clip-path:none!important;
+}
+.home-closing-section .partner-copy{
+  min-width:0;
+  padding:55px 0 55px 48px!important;
+}
+.home-closing-section .partner-copy h2{
+  width:100%!important;
+  max-width:none!important;
+}
+
+/* Service split sections use the same exact 1400px content shell */
+.service-story-shell{
+  min-height:520px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  align-items:stretch;
+}
+.service-story .service-photo{
+  min-width:0;
+}
+.service-story .service-text{
+  min-width:0;
+  padding:64px 0 64px 56px;
+}
+.service-story.reverse .service-photo{
+  order:2;
+}
+.service-story.reverse .service-text{
+  order:1;
+  padding:64px 56px 64px 0;
+}
+
+@media(max-width:1180px){
+  .partner-shell,
+  .service-story-shell{
+    width:calc(100% - 40px)!important;
+  }
+  .home-closing-section .partner-shell{
+    grid-template-columns:34% 66%;
+  }
+  .home-closing-section .partner-copy{
+    padding-left:38px!important;
+  }
+  .service-story .service-text{
+    padding-left:42px;
+  }
+  .service-story.reverse .service-text{
+    padding-right:42px;
+  }
+}
+
+@media(max-width:860px){
+  .partner-shell,
+  .service-story-shell{
+    width:calc(100% - 32px)!important;
+  }
+  .home-closing-section .partner-shell,
+  .service-story-shell{
+    grid-template-columns:1fr!important;
+  }
+  .home-closing-section .partner-image,
+  .service-story .service-photo{
+    min-height:320px;
+  }
+  .home-closing-section .partner-copy,
+  .service-story .service-text,
+  .service-story.reverse .service-text{
+    padding:42px 0!important;
+  }
+  .service-story.reverse .service-photo{
+    order:0;
+  }
+  .service-story.reverse .service-text{
+    order:1;
+  }
+}
+
+@media(max-width:580px){
+  .partner-shell,
+  .service-story-shell{
+    width:calc(100% - 24px)!important;
+  }
+}
