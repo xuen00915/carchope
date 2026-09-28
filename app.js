@@ -194,12 +194,65 @@
     items.slice(-3).reverse().forEach(function(item){
       var row=document.createElement('div');
       row.className='cart-popover-item';
+
       var name=document.createElement('span');
       name.textContent=item.name;
+
       var price=document.createElement('strong');
-      price.textContent=item.price==null?'Enquire':'  }
+      price.textContent=item.price==null?'Enquire':('$'+Number(item.price).toLocaleString('en-SG'));
+
+      row.appendChild(name);
+      row.appendChild(price);
+      list.appendChild(row);
+    });
+
+    if(items.length>3){
+      var more=document.createElement('div');
+      more.className='cart-popover-more';
+      more.textContent='+'+(items.length-3)+' more item(s)';
+      list.appendChild(more);
+    }
+  }
+
+  function updateCartCount(){
+    var total=getPreviewCart().length;
+    document.querySelectorAll('[data-cart-count]').forEach(function(el){
+      el.textContent=String(total);
+    });
+    renderCartPopover();
+  }
+
+  function addPreviewCartItem(car){
+    var items=getPreviewCart();
+    items.push({name:car.name,brand:car.brand,price:car.price});
+    try{localStorage.setItem(cartStorageKey,JSON.stringify(items));}catch(e){}
+    updateCartCount();
+  }
 
   updateCartCount();
+
+  var cartToggle=document.getElementById('header-cart-toggle');
+  var cartPopover=document.getElementById('cart-popover');
+
+  if(cartToggle&&cartPopover){
+    cartToggle.addEventListener('click',function(e){
+      e.stopPropagation();
+      var open=cartPopover.classList.toggle('open');
+      cartToggle.setAttribute('aria-expanded',open?'true':'false');
+      cartPopover.setAttribute('aria-hidden',open?'false':'true');
+      if(open) renderCartPopover();
+    });
+
+    cartPopover.addEventListener('click',function(e){
+      e.stopPropagation();
+    });
+
+    document.addEventListener('click',function(){
+      cartPopover.classList.remove('open');
+      cartToggle.setAttribute('aria-expanded','false');
+      cartPopover.setAttribute('aria-hidden','true');
+    });
+  }
 
   var grid=document.getElementById('inventory-grid');
   if(!grid) return;
