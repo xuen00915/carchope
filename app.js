@@ -17,6 +17,38 @@
     });
   }
 
+  var autoplayVideo=document.querySelector('[data-autoplay-video]');
+  if(autoplayVideo){
+    autoplayVideo.muted=true;
+    var videoSection=autoplayVideo.closest('.manifesto-video-section');
+
+    function tryPlayVideo(){
+      var playPromise=autoplayVideo.play();
+      if(playPromise&&typeof playPromise.catch==='function'){
+        playPromise.catch(function(){
+          if(videoSection) videoSection.classList.add('video-fallback');
+        });
+      }
+    }
+
+    autoplayVideo.addEventListener('loadeddata',function(){
+      if(videoSection) videoSection.classList.remove('video-fallback');
+      tryPlayVideo();
+    });
+
+    autoplayVideo.addEventListener('canplay',tryPlayVideo);
+
+    autoplayVideo.addEventListener('error',function(){
+      if(videoSection) videoSection.classList.add('video-fallback');
+    });
+
+    document.addEventListener('visibilitychange',function(){
+      if(!document.hidden) tryPlayVideo();
+    });
+
+    tryPlayVideo();
+  }
+
   var reveals=document.querySelectorAll('.reveal');
   if('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches){
     var io=new IntersectionObserver(function(entries){
