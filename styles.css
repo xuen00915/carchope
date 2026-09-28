@@ -4554,3 +4554,33 @@ body{
       url("https://images.unsplash.com/photo-1562141961-b5d37d7d7f6c?auto=format&fit=crop&w=2200&q=90") center/cover no-repeat;
   }
 }
+
+
+/* Homepage manifesto video reliability + original sizing */
+.manifesto-video-section{
+  min-height:500px!important;
+  height:500px!important;
+}
+.manifesto-video-section .manifesto-inner{
+  min-height:500px!important;
+  height:500px!important;
+}
+.manifesto-video{
+  display:block;
+  background:#0d0f11;
+}
+.manifesto-video-section.video-fallback{
+  background:
+    linear-gradient(90deg,rgba(8,10,12,.88),rgba(8,10,12,.58)),
+    url("https://images.unsplash.com/photo-1562141961-b5d37d7d7f6c?auto=format&fit=crop&w=2200&q=90") center/cover no-repeat;
+}
+.manifesto-video-section.video-fallback .manifesto-video{
+  opacity:0;
+}
+@media(max-width:580px){
+  .manifesto-video-section,
+  .manifesto-video-section .manifesto-inner{
+    min-height:430px!important;
+    height:430px!important;
+  }
+}
