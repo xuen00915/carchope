@@ -4674,3 +4674,38 @@ body{
     font-size:clamp(34px,3.8vw,46px)!important;
   }
 }
+
+
+/* Unified site content width */
+:root{
+  --max:1400px;
+}
+
+.container,
+.container-wide{
+  width:min(1400px,calc(100% - 48px))!important;
+  max-width:1400px!important;
+  margin-left:auto!important;
+  margin-right:auto!important;
+}
+
+@media(max-width:1180px){
+  .container,
+  .container-wide{
+    width:calc(100% - 40px)!important;
+  }
+}
+
+@media(max-width:860px){
+  .container,
+  .container-wide{
+    width:calc(100% - 32px)!important;
+  }
+}
+
+@media(max-width:580px){
+  .container,
+  .container-wide{
+    width:calc(100% - 24px)!important;
+  }
+}
