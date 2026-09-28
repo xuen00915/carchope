@@ -3755,3 +3755,35 @@ a.footer-contact-item:hover{color:#fff}
     height:21px;
   }
 }
+
+
+/* Clean WhatsApp vector icon */
+.whatsapp-round-icon{
+  width:36px!important;
+  height:36px!important;
+  display:grid!important;
+  place-items:center!important;
+}
+.whatsapp-round-icon svg{
+  display:none!important;
+}
+.whatsapp-round-icon img{
+  width:31px!important;
+  height:31px!important;
+  display:block!important;
+  object-fit:contain!important;
+  filter:none!important;
+}
+.floating-whatsapp{
+  overflow:visible!important;
+}
+@media(max-width:580px){
+  .whatsapp-round-icon{
+    width:33px!important;
+    height:33px!important;
+  }
+  .whatsapp-round-icon img{
+    width:28px!important;
+    height:28px!important;
+  }
+}
