@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="A scroll-controlled driving experience concept for Carchope.">
+  <title>Road Experience — Carchope</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="road-hero.css">
+</head>
+<body class="road-experience-page">
+
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo logo-text" href="index.html" aria-label="Carchope home">CARCHOPE</a>
+    <nav class="desktop-nav" aria-label="Primary navigation">
+      <a href="products.html">Buy</a>
+      <a href="https://www.carchope.com/sell-your-cars" target="_blank" rel="noopener">Sell</a>
+      <a href="https://www.carchope.com/consignment" target="_blank" rel="noopener">Consign</a>
+      <a  href="service.html">Services</a>
+      <a  href="about-us.html">About</a>
+    </nav>
+    <div class="header-cart-wrap">
+      <button class="header-cart" id="header-cart-toggle" type="button" aria-label="Open cart menu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2l2.2 10.2a2 2 0 0 0 2 1.6h7.8a2 2 0 0 0 1.9-1.4L21 8H7"></path><circle cx="10" cy="20" r="1.4"></circle><circle cx="18" cy="20" r="1.4"></circle></svg>
+        <span class="header-cart-label">Cart</span>
+        <span class="header-cart-count" data-cart-count>0</span>
+      </button>
+      <div class="cart-popover" id="cart-popover" aria-hidden="true">
+        <div class="cart-popover-head">
+          <div>
+            <strong>Your Cart</strong>
+            <span><span data-cart-count>0</span> item(s)</span>
+          </div>
+          <button class="cart-clear-btn" id="cart-clear-btn" type="button">Clear Cart</button>
+        </div>
+        <div class="cart-popover-items" id="cart-popover-items"></div>
+        <div class="cart-popover-empty" id="cart-popover-empty">No cars added yet.</div>
+        <a class="cart-popover-link" href="https://www.carchope.com/cart" target="_blank" rel="noopener">View Cart</a>
+      </div>
+    </div>
+    <a class="header-cta" href="https://www.carchope.com/contact-us" target="_blank" rel="noopener">Contact Us</a>
+    <button class="menu-toggle" id="menu-toggle" aria-label="Open navigation" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
+</header>
+<div class="mobile-panel" id="mobile-panel">
+  <a class="mobile-cart-link" href="https://www.carchope.com/cart" target="_blank" rel="noopener">Cart <span data-cart-count>0</span></a>
+  <a href="products.html">Buy / Pre-Owned Cars</a>
+  <a href="https://www.carchope.com/sell-your-cars" target="_blank" rel="noopener">Sell Your Car</a>
+  <a href="https://www.carchope.com/consignment" target="_blank" rel="noopener">Consign</a>
+  <a href="service.html">Services</a>
+  <a href="about-us.html">About Us</a>
+</div>
+<main id="main">
+  <section class="road-story" id="road-story" aria-label="Carchope road journey">
+    <div class="road-stage" id="road-stage">
+      <div class="road-video-wrap" aria-hidden="true">
+        <video
+          class="road-scroll-video"
+          id="road-scroll-video"
+          muted
+          playsinline
+          preload="auto"
+          disablepictureinpicture
+          tabindex="-1">
+          <source src="https://assets.mixkit.co/videos/48489/48489-720.mp4" type="video/mp4">
+        </video>
+        <div class="road-video-grade"></div>
+        <div class="road-video-vignette"></div>
+        <div class="road-video-loading" id="road-video-loading">
+          <span></span>
+          Loading road
+        </div>
+      </div>
+
+      <div class="container road-story-content">
+        <article class="road-chapter is-visible" data-road-chapter="0" style="--chapter-opacity:1;--chapter-y:0px">
+          <div class="road-chapter-kicker">The Carchope Journey</div>
+          <h1>Drive Forward.<br><span class="road-orange">Discover What’s Next.</span></h1>
+          <p>Scroll to move through the road. The driving footage advances with you while the story stays layered in front.</p>
+        </article>
+
+        <article class="road-chapter" data-road-chapter="1" aria-hidden="true">
+          <div class="road-chapter-kicker">A clearer way forward</div>
+          <h2>The road ahead should feel this clear.</h2>
+          <p>Less noise, fewer surprises. Carchope keeps the important details visible so the next decision feels easier to make.</p>
+          <div class="road-mini-points" aria-label="Carchope highlights">
+            <span>Clear details</span>
+            <span>Curated selection</span>
+            <span>Practical support</span>
+          </div>
+        </article>
+
+        <article class="road-chapter" data-road-chapter="2" aria-hidden="true">
+          <div class="road-chapter-kicker">Your next chapter</div>
+          <h2>Find the car that fits where you’re going.</h2>
+          <p>Continue into Carchope’s pre-owned selection when you’re ready.</p>
+          <a class="road-story-cta" href="products.html">
+            Explore Pre-Owned Cars
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 7l5 5-5 5"></path></svg>
+          </a>
+        </article>
+      </div>
+
+      <div class="road-story-hud" aria-hidden="true">
+        <div class="road-story-hud-copy">
+          <span>Journey</span>
+          <strong id="road-chapter-count">01 / 03</strong>
+        </div>
+        <div class="road-story-track"><i></i></div>
+      </div>
+
+      <div class="road-video-time" aria-hidden="true">
+        <span id="road-video-current">00:00</span>
+        <i></i>
+        <span id="road-video-duration">00:00</span>
+      </div>
+
+      <a class="road-scroll-hint" href="#road-end" aria-label="Scroll through the road story">
+        <span>Scroll to drive</span>
+        <i></i>
+      </a>
+    </div>
+  </section>
+
+  <section class="road-experience-end" id="road-end">
+    <div class="container road-experience-end-inner">
+      <div>
+        <div class="eyebrow orange-line">Carchope</div>
+        <h2>Ready for the real selection?</h2>
+      </div>
+      <div class="road-experience-end-copy">
+        <p>The driving story is a standalone concept page. Your Products page remains unchanged with its original hero and full inventory experience.</p>
+        <a class="road-experience-end-link" href="products.html">View Pre-Owned Cars</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid footer-grid-four">
+      <div class="footer-col footer-brand-col">
+        <a class="footer-logo" href="index.html" aria-label="Carchope home">
+          <img src="https://www.carchope.com//image/catalog/Slicing/header/logo.png" alt="Carchope">
+        </a>
+        <p class="footer-brand-copy">A simpler, more transparent way to buy, sell and consign cars in Singapore — with real people, competitive value and practical support around every journey.</p>
+        <div class="footer-brand-social">
+        <div class="footer-subtitle">Follow Us</div>
+        <div class="footer-social-icons">
+          <a href="https://m.facebook.com/carchope/" target="_blank" rel="noopener" aria-label="Follow Carchope on Facebook">
+            <span class="footer-social-vector" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M14.2 8H17V4h-3.4C10.5 4 9 5.9 9 9v2H6v4h3v5h4v-5h3.2l.8-4H13V9.3c0-.9.3-1.3 1.2-1.3Z"></path></svg>
+            </span>
+            <span>Facebook</span>
+          </a>
+          <a href="https://www.instagram.com/invites/contact/?i=u53lhditdk3o&amp;utm_content=n6bo93j" target="_blank" rel="noopener" aria-label="Follow Carchope on Instagram">
+            <span class="footer-social-vector" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="4"></rect><circle cx="12" cy="12" r="3.6"></circle><circle cx="17.3" cy="6.8" r=".9" class="fill-dot"></circle></svg>
+            </span>
+            <span>Instagram</span>
+          </a>
+        </div>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <div class="footer-title">Quick Links</div>
+        <div class="footer-links">
+          <a href="index.html">Home</a>
+          <a href="about-us.html">About Us</a>
+          <a href="service.html">Services</a>
+          <a href="products.html">Pre-Owned Cars</a>
+          <a href="https://www.carchope.com/sell-your-cars" target="_blank" rel="noopener">Sell Your Cars</a>
+          <a href="https://www.carchope.com/consignment" target="_blank" rel="noopener">Consignment</a>
+          <a href="https://www.carchope.com/testimonial" target="_blank" rel="noopener">Testimonials</a>
+          <a href="https://www.carchope.com/contact-us" target="_blank" rel="noopener">Contact Us</a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <div class="footer-title">Account</div>
+        <div class="footer-links">
+          <a href="https://www.carchope.com/login" target="_blank" rel="noopener">Login / Register</a>
+          <a href="https://www.carchope.com/cart" target="_blank" rel="noopener">My Cart</a>
+          <a href="https://www.carchope.com/customer-care" target="_blank" rel="noopener">Customer Care</a>
+          <a href="https://www.carchope.com/delivery" target="_blank" rel="noopener">Shipping Info</a>
+          <a href="https://www.carchope.com/terms" target="_blank" rel="noopener">T&amp;C</a>
+          <a href="https://www.carchope.com/privacy" target="_blank" rel="noopener">Privacy Policy</a>
+          <a href="https://www.carchope.com/faqs" target="_blank" rel="noopener">FAQ</a>
+        </div>
+      </div>
+
+      <div class="footer-col footer-contact-col">
+        <div class="footer-title">Contact</div>
+
+        <div class="footer-contact-list">
+          <a class="footer-contact-item" href="https://www.google.com/maps/search/?api=1&amp;query=37+Jalan+Pemimpin+%2303-03+Mapex+Singapore+577177" target="_blank" rel="noopener">
+            <span class="footer-contact-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M12 21s6-5.2 6-11a6 6 0 1 0-12 0c0 5.8 6 11 6 11Z"></path><circle cx="12" cy="10" r="2.2"></circle></svg>
+            </span>
+            <span>37 Jalan Pemimpin #03-03<br>Mapex, Singapore 577177</span>
+          </a>
+
+          <a class="footer-contact-item" href="tel:+6596268890">
+            <span class="footer-contact-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M7.2 3.7 9.6 8l-2 1.8c1 2.2 2.8 4 5 5l1.8-2 4.3 2.4-.8 3.8c-.2.8-.9 1.3-1.7 1.3C9.3 20.3 3.7 14.7 3.7 7.8c0-.8.5-1.5 1.3-1.7l2.2-.5Z"></path></svg>
+            </span>
+            <span>Tel: (65) 9626 8890</span>
+          </a>
+
+          <a class="footer-contact-item" href="tel:+6561234567">
+            <span class="footer-contact-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M7 8V3h10v5"></path><rect x="4" y="8" width="16" height="9" rx="2"></rect><path d="M7 14h10v7H7z"></path><path d="M16 11h1"></path></svg>
+            </span>
+            <span>Fax: (65) 6123 4567</span>
+          </a>
+
+          <a class="footer-contact-item" href="mailto:sales@carchope.com">
+            <span class="footer-contact-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="m4 7 8 6 8-6"></path></svg>
+            </span>
+            <span>sales@carchope.com</span>
+          </a>
+        </div>
+
+
+
+        <div class="footer-newsletter-title">Newsletter Subscription</div>
+        <form class="footer-newsletter footer-newsletter-compact" data-footer-newsletter>
+          <label class="sr-only" for="footer-email">Email address</label>
+          <input id="footer-email" type="email" required placeholder="Enter email address">
+          <button type="submit">Submit</button>
+        </form>
+        <div class="footer-newsletter-note" aria-live="polite"></div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2026 Carchope. All Rights Reserved.</span>
+      <span>Frontend redesign preview</span>
+    </div>
+  </div>
+</footer>
+
+<div class="floating-actions" id="floating-actions" aria-hidden="true">
+  <a class="floating-btn floating-whatsapp" href="https://api.whatsapp.com/send?phone=96268890" target="_blank" rel="noopener" aria-label="Contact Carchope on WhatsApp">
+    <span class="whatsapp-round-icon" aria-hidden="true">
+      <img src="https://cdn.simpleicons.org/whatsapp/FFFFFF" alt="">
+    </span>
+  </a>
+  <button class="floating-btn floating-top" id="scroll-top-btn" type="button" aria-label="Scroll to top">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m7 14 5-5 5 5"></path></svg>
+  </button>
+</div>
+<script src="road-hero.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

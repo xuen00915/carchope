@@ -5,7 +5,7 @@
    https://assets.mixkit.co/videos/48489/48489-720.mp4
    ========================================================= */
 
-.products-road-page .site-header{
+.road-experience-page .site-header{
   position:fixed;
   top:0;
   left:0;
@@ -24,15 +24,15 @@
     box-shadow .35s ease;
 }
 
-.products-road-page .site-header .desktop-nav a,
-.products-road-page .site-header .header-cart{
+.road-experience-page .site-header .desktop-nav a,
+.road-experience-page .site-header .header-cart{
   color:rgba(255,255,255,.92);
 }
 
-.products-road-page .site-header .logo{color:#fff}
-.products-road-page .site-header .menu-toggle span{background:currentColor}
+.road-experience-page .site-header .logo{color:#fff}
+.road-experience-page .site-header .menu-toggle span{background:currentColor}
 
-.products-road-page.road-header-solid .site-header{
+.road-experience-page.road-header-solid .site-header{
   color:var(--ink);
   background:rgba(255,255,255,.94);
   border-bottom-color:rgba(17,18,20,.07);
@@ -40,12 +40,12 @@
   box-shadow:0 10px 32px rgba(17,18,20,.05);
 }
 
-.products-road-page.road-header-solid .site-header .desktop-nav a,
-.products-road-page.road-header-solid .site-header .header-cart{
+.road-experience-page.road-header-solid .site-header .desktop-nav a,
+.road-experience-page.road-header-solid .site-header .header-cart{
   color:#2f3337;
 }
 
-.products-road-page.road-header-solid .site-header .logo{color:var(--ink)}
+.road-experience-page.road-header-solid .site-header .logo{color:var(--ink)}
 
 /* Long scroll track; video itself remains fixed/sticky in viewport. */
 .road-story{
@@ -382,7 +382,7 @@
 }
 
 /* Transition back into existing product page. */
-.products-road-page .product-featured-section{
+.road-experience-page .product-featured-section{
   position:relative;
   z-index:2;
   background:#fff;
@@ -400,7 +400,7 @@
 
 /* Mobile */
 @media(max-width:760px){
-  .products-road-page .site-header{height:64px}
+  .road-experience-page .site-header{height:64px}
 
   .road-story{
     height:360svh;
@@ -507,4 +507,56 @@
   .road-video-loading span{
     animation:none;
   }
+}
+
+
+/* Standalone road-experience page ending */
+.road-experience-end{
+  position:relative;
+  z-index:3;
+  padding:110px 0 120px;
+  background:#fff;
+  color:var(--ink);
+}
+.road-experience-end-inner{
+  display:grid;
+  grid-template-columns:minmax(0,1.05fr) minmax(320px,.62fr);
+  align-items:end;
+  gap:72px;
+}
+.road-experience-end h2{
+  max-width:840px;
+  margin:20px 0 0;
+  font-size:clamp(48px,5.8vw,88px);
+  line-height:.94;
+  letter-spacing:-.065em;
+}
+.road-experience-end-copy{
+  max-width:540px;
+}
+.road-experience-end-copy p{
+  margin:0;
+  color:var(--smoke);
+  font-size:16px;
+  line-height:1.65;
+}
+.road-experience-end-link{
+  margin-top:28px;
+  min-height:48px;
+  display:inline-flex;
+  align-items:center;
+  padding:0 18px;
+  border-radius:4px;
+  background:var(--orange);
+  color:#fff;
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+@media(max-width:760px){
+  .road-experience-end{padding:74px 0 84px}
+  .road-experience-end-inner{grid-template-columns:1fr;gap:26px}
+  .road-experience-end h2{font-size:clamp(44px,13vw,64px)}
+  .road-experience-end-copy p{font-size:14px}
 }
