@@ -1098,3 +1098,82 @@ button{cursor:pointer}
   .footer-copy,.footer-links a{font-size:14px}
   .footer-bottom{font-size:10px}
 }
+
+
+/* Larger homepage brand showcase */
+.brand-marquee-section{
+  padding:38px 0 32px;
+}
+.brand-marquee-head{
+  padding-bottom:22px;
+}
+.brand-marquee-head .label{
+  font-size:13px;
+  letter-spacing:.14em;
+}
+.brand-marquee-note{
+  font-size:12px;
+}
+.brand-marquee-item{
+  width:190px;
+  min-height:112px;
+  padding:20px 24px;
+  gap:14px;
+}
+.brand-marquee-logo{
+  width:50px;
+  height:46px;
+}
+.brand-marquee-name{
+  font-size:13px;
+  font-weight:800;
+}
+.brand-marquee-logo.fallback{
+  font-size:10px;
+}
+
+@media(max-width:860px){
+  .brand-marquee-section{
+    padding:32px 0 27px;
+  }
+  .brand-marquee-head{
+    padding-bottom:18px;
+  }
+  .brand-marquee-item{
+    width:170px;
+    min-height:100px;
+    padding:17px 20px;
+  }
+  .brand-marquee-logo{
+    width:44px;
+    height:40px;
+  }
+  .brand-marquee-name{
+    font-size:12px;
+  }
+}
+
+@media(max-width:580px){
+  .brand-marquee-section{
+    padding:28px 0 24px;
+  }
+  .brand-marquee-item{
+    width:148px;
+    min-height:90px;
+    padding:15px 16px;
+    gap:11px;
+  }
+  .brand-marquee-logo{
+    width:39px;
+    height:36px;
+  }
+  .brand-marquee-name{
+    font-size:11px;
+  }
+  .brand-marquee-head .label{
+    font-size:11px;
+  }
+  .brand-marquee-note{
+    font-size:10px;
+  }
+}
