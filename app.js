@@ -665,7 +665,7 @@
     });
   }
 
-  selectBrand(selectedBrand);
+  render();
 })();+Number(item.price).toLocaleString('en-SG');
       row.appendChild(name);
       row.appendChild(price);
@@ -979,8 +979,8 @@
 
     var data=cars.filter(function(c){
       var qok=!q||(c.name+' '+c.type+' '+brandName(c.brand)).toLowerCase().indexOf(q)>-1;
-      var brandOk=selectedBrand==='all'||c.brand===selectedBrand;
-      var tok=!type||type.value==='all'||c.type===type.value;
+      var brandOk=selectedBrands.size===0||selectedBrands.has(c.brand);
+      var tok=selectedTypes.size===0||selectedTypes.has(c.type);
       var bok=maxBudget>=budgetMax || (c.price!=null && c.price<=maxBudget);
       return qok&&brandOk&&tok&&bok;
     });
@@ -1017,9 +1017,9 @@
         '<div class="inventory-price-actions">'+
           '<div class="inventory-price">'+money(c.price)+'</div>'+
           '<div class="inventory-actions">'+
-            '<a class="inventory-view-btn" href="https://www.carchope.com/products" target="_blank" rel="noopener">View Car</a>'+
+            '<a class="inventory-view-btn" href="https://www.carchope.com/products" target="_blank" rel="noopener">View</a>'+
             '<button class="inventory-cart-btn" type="button" data-add-cart aria-label="Add '+c.name+' to cart" '+(canAdd?'':'disabled')+'>'+
-              '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2l2.2 10.2a2 2 0 0 0 2 1.6h7.8a2 2 0 0 0 1.9-1.4L21 8H7"></path><circle cx="10" cy="20" r="1.4"></circle><circle cx="18" cy="20" r="1.4"></circle></svg>'+
+              '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2l2.2 10.2a2 2 0 0 0 2 1.6h7.8a2 2 0 0 0 1.9-1.4L21 8H7"></path><circle cx="10" cy="20" r="1.4"></circle><circle cx="18" cy="20" r="1.4"></circle></svg><span class="cart-plus" aria-hidden="true">+</span>'+
             '</button>'+
           '</div>'+
         '</div>'+
@@ -1063,7 +1063,7 @@
     renderPagination(data.length);
   }
 
-  [search,type,sort].forEach(function(el){
+  [search,sort].forEach(function(el){
     if(el) el.addEventListener('input',function(){
       currentPage=1;
       render();
