@@ -7,7 +7,7 @@
   <meta name="description" content="Carchope roadside driving experience — homepage content transformed into roadside billboards, sky messages and approaching car panels.">
   <title>Carchope — Roadside Experience</title>
   <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="roadside-experience-v4.css">
+  <link rel="stylesheet" href="roadside-experience-v5.css">
 </head>
 <body class="roadside-page">
 
@@ -79,6 +79,17 @@
     <source src="https://assets.mixkit.co/videos/48489/48489-720.mp4" type="video/mp4">
   </video>
   <canvas class="road-webgl" id="road-webgl" aria-hidden="true"></canvas>
+  <div class="photo-car-layer" aria-hidden="true">
+    <div class="photo-car photo-car-0" data-photo-car="0">
+      <img src="https://static.auto.co.il/media/1jlcxvto/1698459-xpeng-g6-2024-11.jpg?format=webp&width=1088" alt="">
+    </div>
+    <div class="photo-car photo-car-1" data-photo-car="1">
+      <img src="https://assets.autoweek.nl/m/20cy8ypbhlxp_1200.jpg" alt="">
+    </div>
+    <div class="photo-car photo-car-2" data-photo-car="2">
+      <img src="https://s1.cdn.autoevolution.com/images/gallery/TOYOTA-Prius-v-Prius-5660_29.jpg" alt="">
+    </div>
+  </div>
   <div class="roadside-grade"></div>
   <div class="roadside-vignette"></div>
   <div class="roadside-horizon-glow"></div>
@@ -248,7 +259,7 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/three@0.160.1/build/three.min.js"></script>
-<script src="roadside-experience-v4.js"></script>
+<script src="roadside-experience-v5.js"></script>
 <script src="app.js"></script>
 </body>
 </html>
