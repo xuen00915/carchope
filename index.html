@@ -1,80 +1,99 @@
 <!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="Carchope Design 05 exact visual preview">
-<title>Carchope — Design 05</title>
-<style>
-*{box-sizing:border-box}
-html,body{margin:0;min-height:100%;background:#fff}
-body{font-family:Arial,Helvetica,sans-serif}
-.stage{position:relative;width:min(100%,1000px);margin:0 auto;background:#fff;line-height:0}
-#design{display:block;width:100%;height:auto;opacity:0;transition:opacity .15s ease}
-#design.ready{opacity:1}
-.loader{height:100vh;display:flex;align-items:center;justify-content:center;font:11px/1 Arial,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#999}
-.hot{position:absolute;z-index:4;display:block;background:transparent}
-.buy{left:34.7%;top:1.1%;width:8%;height:3.5%}
-.sell{left:43.8%;top:1.1%;width:8%;height:3.5%}
-.consign{left:52.2%;top:1.1%;width:12%;height:3.5%}
-.services{left:64.2%;top:1.1%;width:12%;height:3.5%}
-.about{left:76.1%;top:1.1%;width:9%;height:3.5%}
-.menu{left:89%;top:1%;width:7%;height:4%}
-.arrow{left:6.5%;top:26%;width:11%;height:4.8%;border-radius:50%}
-.p1{left:5%;top:34.4%;width:28%;height:7.4%}
-.p2{left:35%;top:34.4%;width:28%;height:7.4%}
-.p3{left:66%;top:34.4%;width:29%;height:7.4%}
-.viewall{left:80%;top:53.1%;width:16%;height:3.6%}
-.car1{left:5%;top:56.2%;width:28.7%;height:14.8%}
-.car2{left:35.4%;top:56.2%;width:28.7%;height:14.8%}
-.car3{left:66%;top:56.2%;width:29%;height:14.8%}
-@media(max-width:640px){.stage{width:100%}}
-</style>
-</head>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Carchope — Drive A Brighter Tomorrow</title><link rel="stylesheet" href="styles.css"></head>
 <body>
-<div class="stage">
-  <div class="loader" id="loader">Loading Design 05</div>
-  <img id="design" alt="Carchope Design 05 exact visual preview">
-  <a class="hot buy" aria-label="Buy" href="https://www.carchope.com/products" target="_blank" rel="noopener"></a>
-  <a class="hot sell" aria-label="Sell" href="https://www.carchope.com/sell-your-cars" target="_blank" rel="noopener"></a>
-  <a class="hot consign" aria-label="Consign" href="https://www.carchope.com/consignment" target="_blank" rel="noopener"></a>
-  <a class="hot services" aria-label="Services" href="https://www.carchope.com/service" target="_blank" rel="noopener"></a>
-  <a class="hot about" aria-label="About" href="https://www.carchope.com/about-us" target="_blank" rel="noopener"></a>
-  <a class="hot menu" aria-label="Home" href="https://www.carchope.com/" target="_blank" rel="noopener"></a>
-  <a class="hot arrow" aria-label="Browse cars" href="https://www.carchope.com/products" target="_blank" rel="noopener"></a>
-  <a class="hot p1" aria-label="Buy a car" href="https://www.carchope.com/products" target="_blank" rel="noopener"></a>
-  <a class="hot p2" aria-label="Sell your car" href="https://www.carchope.com/sell-your-cars" target="_blank" rel="noopener"></a>
-  <a class="hot p3" aria-label="Consign your car" href="https://www.carchope.com/consignment" target="_blank" rel="noopener"></a>
-  <a class="hot viewall" aria-label="View all cars" href="https://www.carchope.com/products" target="_blank" rel="noopener"></a>
-  <a class="hot car1" aria-label="Featured car one" href="https://www.carchope.com/products" target="_blank" rel="noopener"></a>
-  <a class="hot car2" aria-label="Featured car two" href="https://www.carchope.com/products" target="_blank" rel="noopener"></a>
-  <a class="hot car3" aria-label="Featured car three" href="https://www.carchope.com/products" target="_blank" rel="noopener"></a>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="index.html"><b>CA</b>RCHOPE</a>
+    <nav class="desktop-nav">
+      <a class="active" href="index.html">Home</a>
+      <a  href="about-us.html">About</a>
+      <a  href="service.html">Services</a>
+      <a  href="products.html">Pre-Owned Cars</a>
+      <a href="https://www.carchope.com/sell-your-cars" target="_blank" rel="noopener">Sell</a>
+      <a href="https://www.carchope.com/consignment" target="_blank" rel="noopener">Consign</a>
+    </nav>
+    <a class="header-cta" href="https://www.carchope.com/contact-us" target="_blank" rel="noopener">Contact</a>
+    <button class="menu-toggle" id="menu-toggle" aria-label="Open navigation" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
+</header>
+<div class="mobile-panel" id="mobile-panel">
+  <a href="index.html">Home <span>→</span></a>
+  <a href="about-us.html">About Us <span>→</span></a>
+  <a href="service.html">Services <span>→</span></a>
+  <a href="products.html">Pre-Owned Cars <span>→</span></a>
+  <a href="https://www.carchope.com/sell-your-cars" target="_blank" rel="noopener">Sell Your Car <span>↗</span></a>
+  <a href="https://www.carchope.com/consignment" target="_blank" rel="noopener">Consign <span>↗</span></a>
 </div>
-<script>
-(async()=>{
-  const files=[
-    'assets/d5-000.txt','assets/d5-001.txt',
-    'assets/d5-01x.txt','assets/d5-02x.txt','assets/d5-03x.txt',
-    'assets/d5-04x.txt','assets/d5-05x.txt','assets/d5-06x.txt',
-    'assets/d5-01.txt','assets/d5-02.txt','assets/d5-03.txt',
-    'assets/d5-04.txt','assets/d5-05.txt'
-  ];
-  try{
-    const parts=await Promise.all(files.map(async f=>{
-      const r=await fetch(f,{cache:'no-store'});
-      if(!r.ok) throw new Error(f);
-      return (await r.text()).trim();
-    }));
-    const img=document.getElementById('design');
-    img.onload=()=>{
-      document.getElementById('loader').style.display='none';
-      img.classList.add('ready');
-    };
-    img.src='data:image/jpeg;base64,'+parts.join('');
-  }catch(e){
-    document.getElementById('loader').textContent='Preview failed to load — refresh once';
-  }
-})();
-</script>
-</body>
-</html>
+<main>
+<section class="home-hero">
+  <div class="container home-hero-grid">
+    <div class="home-copy">
+      <div class="home-topline"><span class="eyebrow">Simple<br>Honest<br>Better Cars</span><span class="eyebrow">Since 2017</span></div>
+      <h1 class="display">Drive<br>A Brighter<br>Tomorrow</h1>
+      <p class="lead">Quality pre-owned cars, direct buyer-to-seller connections and practical ownership services — built around a simpler car journey in Singapore.</p>
+      <a class="round-link" href="products.html" aria-label="Browse pre-owned cars">→</a>
+    </div>
+    <div class="home-image"><img src="https://www.carchope.com//image/cache/catalog/Slicing/banner/slide1-767x800.jpg" alt="Carchope car"></div>
+  </div>
+</section>
+
+<section class="journey">
+  <div class="container journey-grid">
+    <a class="journey-card" href="products.html"><div class="journey-num">01</div><h3>Buy a Car</h3><p>Browse our pre-owned inventory</p></a>
+    <a class="journey-card" href="https://www.carchope.com/sell-your-cars" target="_blank" rel="noopener"><div class="journey-num">02</div><h3>Sell Your Car</h3><p>Get an instant quote</p></a>
+    <a class="journey-card" href="https://www.carchope.com/consignment" target="_blank" rel="noopener"><div class="journey-num">03</div><h3>Consign Your Car</h3><p>Let Carchope handle the sale</p></a>
+  </div>
+</section>
+
+<section class="brand-split">
+  <div class="container brand-split-grid">
+    <div class="brand-photo"><img src="https://www.carchope.com//image/cache/catalog/Slicing/banner/slide2-767x800.jpg" alt="Carchope automotive experience"></div>
+    <div class="brand-black"><div><strong>CARCHOPE.</strong><small>Driven by people. For people.</small></div></div>
+  </div>
+</section>
+
+<section class="section section-border" id="featured">
+  <div class="container">
+    <div class="section-head"><h2>Featured Cars</h2><a href="products.html">View All →</a></div>
+    <div class="cars-3">
+      <a class="car-card" href="products.html"><div class="car-image"><img src="https://images.unsplash.com/photo-1619767886558-efdc259cde1a?auto=format&fit=crop&w=1200&q=86" alt="Pre-owned SUV"></div><div class="car-copy"><h3>XPENG G6 Electric</h3><div class="car-meta"><span>2025</span><span>7,000 km</span><span>SUV</span></div><div class="car-price">$201,705</div></div></a>
+      <a class="car-card" href="products.html"><div class="car-image"><img src="https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&w=1200&q=86" alt="Pre-owned hatchback"></div><div class="car-copy"><h3>Volkswagen Golf SV 1.4A TSI Comfortline</h3><div class="car-meta"><span>2018</span><span>50,000 km</span><span>Hatchback</span></div><div class="car-price">$55,988</div></div></a>
+      <a class="car-card" href="products.html"><div class="car-image"><img src="https://images.unsplash.com/photo-1542362567-b07e54358753?auto=format&fit=crop&w=1200&q=86" alt="Pre-owned MPV"></div><div class="car-copy"><h3>Toyota Prius Plus Hybrid 1.8A</h3><div class="car-meta"><span>2020</span><span>89,000 km</span><span>MPV</span></div><div class="car-price">$98,888</div></div></a>
+    </div>
+    <div class="preview-caption">Vehicle names and listing figures are based on Carchope’s current public catalogue. Photography is concept imagery for this frontend preview.</div>
+  </div>
+</section>
+
+<section class="forward">
+  <div class="container forward-grid">
+    <div class="forward-copy"><h2 class="display-serif">A<br>Better<br>Way Forward</h2><div class="short-rule"></div><p>Cars. People. Journeys.</p></div>
+    <div class="forward-image"><img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1800&q=86" alt="Minimal modern architecture"><small>Since 2017</small></div>
+  </div>
+</section>
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-title">Carchope</div>
+        <div class="footer-copy">37 Jalan Pemimpin #03-03<br>Mapex, Singapore 577177<br>Tel: (65) 9626 8890<br>sales@carchope.com</div>
+      </div>
+      <div>
+        <div class="footer-title">Explore</div>
+        <div class="footer-links">
+          <a href="about-us.html">About Us</a>
+          <a href="service.html">Services</a>
+          <a href="products.html">Pre-Owned Cars</a>
+          <a href="https://www.carchope.com/sell-your-cars" target="_blank" rel="noopener">Sell Your Car</a>
+          <a href="https://www.carchope.com/consignment" target="_blank" rel="noopener">Consignment</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-title">Design Direction 05</div>
+        <div class="footer-copy">Minimal Swiss / Japanese<br>White · Black · Carchope Orange<br>Frontend concept preview</div>
+      </div>
+    </div>
+    <div class="footer-bottom"><span>© 2026 Carchope · Concept preview</span><span>Client approval frontend</span></div>
+  </div>
+</footer><script src="app.js"></script></body></html>
