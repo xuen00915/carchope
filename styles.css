@@ -1277,3 +1277,196 @@ button{cursor:pointer}
     max-width:168px;
   }
 }
+
+
+/* Full original Carchope footer content */
+.sr-only{
+  position:absolute!important;
+  width:1px!important;
+  height:1px!important;
+  padding:0!important;
+  margin:-1px!important;
+  overflow:hidden!important;
+  clip:rect(0,0,0,0)!important;
+  white-space:nowrap!important;
+  border:0!important;
+}
+.site-footer{
+  position:relative;
+  padding:58px 0 34px;
+  background:#111;
+  color:#fff;
+}
+.footer-grid-full{
+  display:grid;
+  grid-template-columns:1.25fr 1fr 1fr .8fr 1.35fr;
+  gap:46px;
+  align-items:start;
+}
+.footer-title{
+  color:var(--orange);
+}
+.footer-copy{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  gap:4px;
+  font-size:17px;
+  line-height:1.75;
+}
+.footer-copy a{
+  color:#c7c9cb;
+  transition:color .2s;
+}
+.footer-copy a:hover{color:#fff}
+.footer-contact-gap{height:12px}
+.footer-links{
+  gap:2px;
+}
+.footer-links a{
+  font-size:16px;
+  line-height:1.72;
+}
+.footer-socials{
+  display:flex;
+  flex-direction:column;
+  gap:15px;
+}
+.footer-socials a{
+  display:flex;
+  align-items:center;
+  gap:11px;
+  color:#c7c9cb;
+  font-size:16px;
+  line-height:1.4;
+  transition:color .2s;
+}
+.footer-socials a:hover{color:#fff}
+.social-mark{
+  width:29px;
+  height:29px;
+  display:grid;
+  place-items:center;
+  flex:0 0 auto;
+  border:1px solid rgba(255,255,255,.3);
+  color:#fff;
+  font-size:11px;
+  font-weight:850;
+}
+.footer-newsletter{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  margin-top:2px;
+}
+.footer-newsletter input{
+  min-width:0;
+  height:52px;
+  padding:0 14px;
+  border:1px solid rgba(255,255,255,.18);
+  border-right:0;
+  border-radius:0;
+  background:#fff;
+  color:#111;
+  outline:0;
+  font-size:15px;
+}
+.footer-newsletter input::placeholder{color:#8d9194}
+.footer-newsletter input:focus{border-color:var(--orange)}
+.footer-newsletter button{
+  min-width:86px;
+  height:52px;
+  border:0;
+  background:var(--orange);
+  color:#fff;
+  font-size:14px;
+  font-weight:800;
+  transition:background .2s,transform .2s var(--ease);
+}
+.footer-newsletter button:hover{background:#e95000}
+.footer-newsletter button:active{transform:scale(.98)}
+.footer-newsletter-note{
+  min-height:20px;
+  margin-top:9px;
+  color:#aeb1b4;
+  font-size:12px;
+  line-height:1.5;
+}
+.footer-bottom{
+  margin-top:44px;
+  padding-top:18px;
+  font-size:11px;
+}
+.whatsapp-float{
+  position:fixed;
+  right:22px;
+  bottom:22px;
+  z-index:45;
+  width:58px;
+  height:58px;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  background:var(--orange);
+  color:#fff;
+  box-shadow:0 14px 36px rgba(255,90,0,.28);
+  transition:transform .2s var(--ease),box-shadow .2s;
+}
+.whatsapp-float span{
+  width:36px;
+  height:36px;
+  display:grid;
+  place-items:center;
+  border:2px solid #fff;
+  border-radius:50%;
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:.02em;
+}
+.whatsapp-float:hover{
+  transform:translateY(-2px);
+  box-shadow:0 18px 42px rgba(255,90,0,.36);
+}
+.whatsapp-float:active{transform:scale(.97)}
+
+@media(max-width:1180px){
+  .footer-grid-full{
+    grid-template-columns:1.2fr 1fr 1fr;
+    gap:44px 38px;
+  }
+  .footer-newsletter-col{
+    grid-column:2/4;
+  }
+}
+@media(max-width:760px){
+  .footer-grid-full{
+    grid-template-columns:1fr 1fr;
+    gap:38px 28px;
+  }
+  .footer-newsletter-col{
+    grid-column:1/-1;
+  }
+  .footer-copy{font-size:16px}
+  .footer-links a,.footer-socials a{font-size:15px}
+}
+@media(max-width:520px){
+  .site-footer{padding-top:46px}
+  .footer-grid-full{
+    grid-template-columns:1fr;
+    gap:34px;
+  }
+  .footer-newsletter-col{grid-column:auto}
+  .footer-copy{font-size:16px}
+  .footer-links a,.footer-socials a{font-size:15px}
+  .footer-bottom{font-size:10px}
+  .whatsapp-float{
+    width:52px;
+    height:52px;
+    right:14px;
+    bottom:14px;
+  }
+  .whatsapp-float span{
+    width:32px;
+    height:32px;
+    font-size:9px;
+  }
+}
