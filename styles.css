@@ -2075,3 +2075,300 @@ button{cursor:pointer}
     padding:15px 16px!important;
   }
 }
+
+
+/* Cart, hover zoom, featured image and floating button refinement */
+.header-cart{
+  min-height:42px;
+  padding:0 13px;
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  border:1px solid #d9dcde;
+  background:#fff;
+  color:#17191b;
+  font-size:12px;
+  font-weight:800;
+  transition:border-color .2s var(--ease),background .2s var(--ease);
+}
+.header-cart:hover{
+  border-color:#b9bdc0;
+  background:#f7f8f8;
+}
+.header-cart svg{
+  width:18px;
+  height:18px;
+  fill:none;
+  stroke:currentColor;
+  stroke-width:1.8;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+.header-cart-count{
+  min-width:20px;
+  height:20px;
+  padding:0 5px;
+  display:grid;
+  place-items:center;
+  border-radius:999px;
+  background:var(--orange);
+  color:#fff;
+  font-size:10px;
+  line-height:1;
+}
+.mobile-cart-link{
+  display:flex!important;
+  align-items:center;
+  justify-content:space-between;
+}
+.mobile-cart-link span{
+  min-width:24px;
+  height:24px;
+  display:grid;
+  place-items:center;
+  border-radius:999px;
+  background:var(--orange);
+  color:#fff;
+  font-size:10px;
+  font-weight:800;
+}
+
+/* Featured cards use the car image across the whole card */
+.product-featured-card{
+  position:relative;
+  display:block;
+  min-height:390px;
+  overflow:hidden;
+  border-top:1px solid #17191c;
+  background:#151719;
+  color:#fff;
+}
+.product-featured-image{
+  position:absolute;
+  inset:0;
+  min-height:0;
+}
+.product-featured-image img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center;
+  filter:saturate(.78) contrast(1.03);
+  transition:transform .6s var(--ease);
+}
+.product-featured-card:hover .product-featured-image img{transform:scale(1.035)}
+.product-featured-overlay{
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(90deg,rgba(8,10,12,.12) 0%,rgba(8,10,12,.08) 38%,rgba(8,10,12,.64) 76%,rgba(8,10,12,.88) 100%),
+    linear-gradient(0deg,rgba(8,10,12,.48),transparent 55%);
+}
+.product-featured-copy{
+  position:relative;
+  z-index:2;
+  width:min(48%,360px);
+  min-height:390px;
+  margin-left:auto;
+  padding:30px 28px;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+}
+.product-featured-meta{
+  margin-bottom:auto;
+  color:rgba(255,255,255,.72);
+}
+.product-featured-copy h3{
+  color:#fff;
+  text-shadow:0 1px 18px rgba(0,0,0,.2);
+}
+.product-featured-bottom{
+  border-top-color:rgba(255,255,255,.28);
+}
+.product-featured-bottom strong{color:#fff}
+.product-featured-bottom span{color:rgba(255,255,255,.7)}
+
+/* Inventory card actions sit beside price */
+.inventory-photo .view{display:none!important}
+.inventory-card{display:block}
+.inventory-price-actions{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:14px;
+  margin:12px 0;
+}
+.inventory-price-actions .inventory-price{margin:0}
+.inventory-actions{
+  display:flex;
+  align-items:center;
+  gap:7px;
+  flex:0 0 auto;
+}
+.inventory-view-btn,
+.inventory-cart-btn{
+  min-height:38px;
+  border:1px solid #d6d9da;
+  background:#fff;
+  color:#111;
+  font-size:10px;
+  font-weight:850;
+  letter-spacing:.04em;
+  text-transform:uppercase;
+  transition:background .2s,border-color .2s,color .2s,transform .2s var(--ease);
+}
+.inventory-view-btn{
+  padding:0 12px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+}
+.inventory-cart-btn{
+  width:40px;
+  display:grid;
+  place-items:center;
+  padding:0;
+}
+.inventory-view-btn:hover,
+.inventory-cart-btn:hover:not(:disabled){
+  background:#111;
+  border-color:#111;
+  color:#fff;
+}
+.inventory-cart-btn:active:not(:disabled){transform:scale(.96)}
+.inventory-cart-btn:disabled{opacity:.35;cursor:not-allowed}
+.inventory-cart-btn.added{
+  background:var(--orange)!important;
+  border-color:var(--orange)!important;
+  color:#fff!important;
+}
+.inventory-cart-btn svg{
+  width:18px;
+  height:18px;
+  fill:none;
+  stroke:currentColor;
+  stroke-width:1.8;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+
+/* Cursor-led image zoom */
+.inventory-photo{
+  overflow:hidden;
+  cursor:zoom-in;
+}
+.inventory-photo::before,
+.inventory-photo::after{
+  display:none!important;
+  content:none!important;
+}
+.inventory-photo img{
+  transform:scale(1);
+  transform-origin:50% 50%;
+  will-change:transform,transform-origin;
+  transition:transform .28s ease-out;
+}
+@media(hover:hover) and (pointer:fine){
+  .inventory-photo.is-zooming img{
+    transform:scale(1.7);
+    transition:transform .16s ease-out;
+  }
+}
+@media(hover:none),(pointer:coarse){
+  .inventory-photo{cursor:default}
+  .inventory-photo img{transform:none!important}
+}
+
+/* WhatsApp and scroll-to-top controls */
+.floating-actions{
+  right:24px;
+  bottom:24px;
+  gap:12px;
+}
+.floating-whatsapp{
+  position:relative;
+  width:74px;
+  height:74px;
+  background:transparent;
+  box-shadow:none;
+  overflow:visible;
+}
+.whatsapp-ring{
+  position:absolute;
+  inset:0;
+  border-radius:50%;
+  border:1px solid rgba(37,211,102,.17);
+  background:rgba(37,211,102,.055);
+  pointer-events:none;
+}
+.whatsapp-ring-one{transform:scale(.86)}
+.whatsapp-ring-two{transform:scale(1.08);opacity:.72}
+.whatsapp-core{
+  position:relative;
+  z-index:2;
+  width:50px;
+  height:50px;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  background:#fff;
+  box-shadow:0 8px 22px rgba(20,60,38,.16);
+}
+.whatsapp-core img{
+  width:30px;
+  height:30px;
+  object-fit:contain;
+}
+.floating-whatsapp:hover{transform:translateY(-2px)}
+.floating-top{
+  width:50px;
+  height:50px;
+  margin-left:auto;
+  border:1px solid #d6d8d9;
+  background:#fff;
+  color:#111;
+  font-size:22px;
+  font-weight:500;
+  line-height:1;
+}
+
+@media(max-width:1180px){
+  .header-cart-label{display:none}
+  .header-cart{padding:0 10px}
+  .product-featured-card{min-height:360px}
+  .product-featured-copy{min-height:360px;width:min(50%,330px)}
+}
+@media(max-width:860px){
+  .header-cart{display:none}
+  .product-featured-card{min-height:360px}
+  .product-featured-copy{
+    width:min(58%,340px);
+    min-height:360px;
+  }
+  .product-featured-overlay{
+    background:
+      linear-gradient(90deg,rgba(8,10,12,.08) 0%,rgba(8,10,12,.12) 34%,rgba(8,10,12,.74) 75%,rgba(8,10,12,.88) 100%),
+      linear-gradient(0deg,rgba(8,10,12,.52),transparent 54%);
+  }
+}
+@media(max-width:580px){
+  .product-featured-card{min-height:330px}
+  .product-featured-copy{
+    width:100%;
+    min-height:330px;
+    padding:22px 18px;
+  }
+  .product-featured-overlay{
+    background:linear-gradient(0deg,rgba(8,10,12,.88) 0%,rgba(8,10,12,.62) 46%,rgba(8,10,12,.08) 82%);
+  }
+  .inventory-price-actions{align-items:flex-end}
+  .inventory-actions{gap:6px}
+  .inventory-view-btn{padding:0 10px}
+  .inventory-cart-btn{width:38px}
+  .floating-actions{right:12px;bottom:12px}
+  .floating-whatsapp{width:68px;height:68px}
+  .whatsapp-core{width:46px;height:46px}
+  .whatsapp-core img{width:28px;height:28px}
+  .floating-top{width:46px;height:46px;font-size:20px}
+}
