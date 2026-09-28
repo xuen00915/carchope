@@ -21,11 +21,17 @@
       <a  href="service.html">Services</a>
       <a  href="about-us.html">About</a>
     </nav>
+    <a class="header-cart" href="https://www.carchope.com/cart" target="_blank" rel="noopener" aria-label="Open cart">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2l2.2 10.2a2 2 0 0 0 2 1.6h7.8a2 2 0 0 0 1.9-1.4L21 8H7"></path><circle cx="10" cy="20" r="1.4"></circle><circle cx="18" cy="20" r="1.4"></circle></svg>
+      <span class="header-cart-label">Cart</span>
+      <span class="header-cart-count" data-cart-count>0</span>
+    </a>
     <a class="header-cta" href="https://www.carchope.com/contact-us" target="_blank" rel="noopener">Contact Us</a>
     <button class="menu-toggle" id="menu-toggle" aria-label="Open navigation" aria-expanded="false"><span></span><span></span><span></span></button>
   </div>
 </header>
 <div class="mobile-panel" id="mobile-panel">
+  <a class="mobile-cart-link" href="https://www.carchope.com/cart" target="_blank" rel="noopener">Cart <span data-cart-count>0</span></a>
   <a href="products.html">Buy / Pre-Owned Cars</a>
   <a href="https://www.carchope.com/sell-your-cars" target="_blank" rel="noopener">Sell Your Car</a>
   <a href="https://www.carchope.com/consignment" target="_blank" rel="noopener">Consign</a>
@@ -216,8 +222,12 @@
 </footer>
 
 <div class="floating-actions" id="floating-actions" aria-hidden="true">
-  <a class="floating-btn floating-whatsapp" href="https://api.whatsapp.com/send?phone=96268890" target="_blank" rel="noopener" aria-label="Contact Carchope on WhatsApp">WA</a>
-  <button class="floating-btn floating-top" id="scroll-top-btn" type="button" aria-label="Scroll to top">TOP</button>
+  <a class="floating-btn floating-whatsapp" href="https://api.whatsapp.com/send?phone=96268890" target="_blank" rel="noopener" aria-label="Contact Carchope on WhatsApp">
+    <span class="whatsapp-ring whatsapp-ring-one"></span>
+    <span class="whatsapp-ring whatsapp-ring-two"></span>
+    <span class="whatsapp-core"><img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt=""></span>
+  </a>
+  <button class="floating-btn floating-top" id="scroll-top-btn" type="button" aria-label="Scroll to top">↑</button>
 </div>
 <script src="app.js"></script>
 </body>
