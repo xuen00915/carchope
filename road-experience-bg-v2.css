@@ -517,3 +517,104 @@ body.road-experience-page{
     transition:none!important;
   }
 }
+
+
+/* Road Experience hero layout correction */
+.road-experience-page .site-header{
+  width:100%;
+}
+
+.road-experience-page .hero{
+  min-height:680px!important;
+  height:auto!important;
+  border-radius:0!important;
+}
+
+.road-experience-page .hero-inner{
+  min-height:680px!important;
+  padding:52px 0 40px!important;
+}
+
+.road-experience-page .hero-top{
+  top:42px!important;
+}
+
+.road-experience-page .hero-title{
+  max-width:680px!important;
+}
+
+.road-experience-page .hero-title .display{
+  font-size:clamp(64px,6vw,96px)!important;
+  line-height:.88!important;
+}
+
+.road-experience-page .hero-copy{
+  max-width:620px!important;
+  margin-top:20px!important;
+}
+
+.road-experience-page .hero-actions{
+  margin-top:22px!important;
+}
+
+.road-experience-page .hero-vertical-nav{
+  top:54px!important;
+  right:72px!important;
+}
+
+/* Reveal more road and remove the washed-out white panel feeling. */
+.road-experience-page .hero::after{
+  background:
+    linear-gradient(90deg,
+      rgba(247,247,246,.84) 0%,
+      rgba(247,247,246,.66) 31%,
+      rgba(247,247,246,.08) 59%,
+      rgba(0,0,0,.16) 100%),
+    linear-gradient(0deg,rgba(0,0,0,.12),transparent 42%)!important;
+}
+
+@media(max-width:1180px){
+  .road-experience-page .hero,
+  .road-experience-page .hero-inner{
+    min-height:640px!important;
+  }
+  .road-experience-page .hero-title .display{
+    font-size:clamp(58px,7vw,82px)!important;
+  }
+  .road-experience-page .hero-vertical-nav{
+    right:58px!important;
+  }
+}
+
+@media(max-width:860px){
+  .road-experience-page .hero,
+  .road-experience-page .hero-inner{
+    min-height:600px!important;
+  }
+  .road-experience-page .hero-inner{
+    padding:42px 0 34px!important;
+  }
+  .road-experience-page .hero-title .display{
+    font-size:clamp(50px,10vw,72px)!important;
+  }
+  .road-experience-page .hero::after{
+    background:
+      linear-gradient(90deg,
+        rgba(247,247,246,.88) 0%,
+        rgba(247,247,246,.68) 56%,
+        rgba(247,247,246,.10) 100%)!important;
+  }
+}
+
+@media(max-width:580px){
+  .road-experience-page .hero,
+  .road-experience-page .hero-inner{
+    min-height:560px!important;
+  }
+  .road-experience-page .hero-top{
+    top:28px!important;
+  }
+  .road-experience-page .hero-title .display{
+    font-size:clamp(46px,13vw,62px)!important;
+  }
+}
