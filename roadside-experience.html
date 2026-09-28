@@ -7,7 +7,7 @@
   <meta name="description" content="Carchope roadside driving experience — homepage content transformed into roadside billboards, sky messages and approaching car panels.">
   <title>Carchope — Roadside Experience</title>
   <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="roadside-experience-v6.css">
+  <link rel="stylesheet" href="roadside-experience-v7.css">
 </head>
 <body class="roadside-page">
 
@@ -79,17 +79,6 @@
     <source src="https://assets.mixkit.co/videos/48489/48489-720.mp4" type="video/mp4">
   </video>
   <canvas class="road-webgl" id="road-webgl" aria-hidden="true"></canvas>
-  <div class="photo-car-layer" aria-hidden="true">
-    <div class="photo-car photo-car-0" data-photo-car="0">
-      <img src="https://images.unsplash.com/photo-1619767886558-efdc259cde1a?auto=format&fit=crop&w=1200&q=90" alt="">
-    </div>
-    <div class="photo-car photo-car-1" data-photo-car="1">
-      <img src="https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&w=1200&q=90" alt="">
-    </div>
-    <div class="photo-car photo-car-2" data-photo-car="2">
-      <img src="https://images.unsplash.com/photo-1542362567-b07e54358753?auto=format&fit=crop&w=1200&q=90" alt="">
-    </div>
-  </div>
   <div class="roadside-grade"></div>
   <div class="roadside-vignette"></div>
   <div class="roadside-horizon-glow"></div>
@@ -247,8 +236,15 @@
   </button>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/three@0.160.1/build/three.min.js"></script>
-<script src="roadside-experience-v6.js"></script>
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.160.1/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.1/examples/jsm/"
+  }
+}
+</script>
+<script type="module" src="roadside-experience-v7.js"></script>
 <script src="app.js"></script>
 </body>
 </html>
