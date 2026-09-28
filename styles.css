@@ -4488,3 +4488,19 @@ body{
     font-size:10.5px!important;
   }
 }
+
+
+/* Extra-slow homepage brand marquee */
+.brand-marquee-track{
+  animation-duration:220s!important;
+}
+@media(max-width:860px){
+  .brand-marquee-track{
+    animation-duration:210s!important;
+  }
+}
+@media(max-width:580px){
+  .brand-marquee-track{
+    animation-duration:200s!important;
+  }
+}
