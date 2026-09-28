@@ -3787,3 +3787,50 @@ a.footer-contact-item:hover{color:#fff}
     height:28px!important;
   }
 }
+
+
+/* Always-visible WhatsApp refinement */
+.floating-actions{
+  opacity:1!important;
+  visibility:visible!important;
+  transform:none!important;
+  pointer-events:none;
+}
+.floating-whatsapp{
+  opacity:1!important;
+  visibility:visible!important;
+  pointer-events:auto;
+}
+.floating-top{
+  opacity:0!important;
+  visibility:hidden!important;
+  transform:translateY(8px)!important;
+  pointer-events:none;
+  transition:opacity .22s var(--ease),transform .22s var(--ease),visibility .22s!important;
+}
+.floating-actions.show-top .floating-top{
+  opacity:1!important;
+  visibility:visible!important;
+  transform:none!important;
+  pointer-events:auto;
+}
+
+/* Smaller WhatsApp mark inside the same round button */
+.whatsapp-round-icon{
+  width:30px!important;
+  height:30px!important;
+}
+.whatsapp-round-icon img{
+  width:24px!important;
+  height:24px!important;
+}
+@media(max-width:580px){
+  .whatsapp-round-icon{
+    width:28px!important;
+    height:28px!important;
+  }
+  .whatsapp-round-icon img{
+    width:22px!important;
+    height:22px!important;
+  }
+}
