@@ -1,76 +1,94 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Pre-Owned Cars — Carchope</title><link rel="stylesheet" href="styles.css"></head>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Browse Carchope pre-owned cars in the premium frontend redesign preview.">
+  <title>Pre-Owned Cars — Carchope</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
 <body>
+
+<a class="skip-link" href="#main">Skip to content</a>
 <header class="site-header">
   <div class="container header-inner">
-    <a class="logo" href="index.html"><b>CA</b>RCHOPE</a>
-    <nav class="desktop-nav">
-      <a  href="index.html">Home</a>
-      <a  href="about-us.html">About</a>
-      <a  href="service.html">Services</a>
-      <a class="active" href="products.html">Pre-Owned Cars</a>
+    <a class="logo" href="index.html" aria-label="Carchope home"><b>CA</b>RCHOPE</a>
+    <nav class="desktop-nav" aria-label="Primary navigation">
+      <a class="active" href="products.html">Buy</a>
       <a href="https://www.carchope.com/sell-your-cars" target="_blank" rel="noopener">Sell</a>
       <a href="https://www.carchope.com/consignment" target="_blank" rel="noopener">Consign</a>
+      <a  href="service.html">Services</a>
+      <a  href="about-us.html">About</a>
     </nav>
-    <a class="header-cta" href="https://www.carchope.com/contact-us" target="_blank" rel="noopener">Contact</a>
+    <a class="header-cta" href="https://www.carchope.com/contact-us" target="_blank" rel="noopener">Contact Us →</a>
     <button class="menu-toggle" id="menu-toggle" aria-label="Open navigation" aria-expanded="false"><span></span><span></span><span></span></button>
   </div>
 </header>
 <div class="mobile-panel" id="mobile-panel">
-  <a href="index.html">Home <span>→</span></a>
-  <a href="about-us.html">About Us <span>→</span></a>
-  <a href="service.html">Services <span>→</span></a>
-  <a href="products.html">Pre-Owned Cars <span>→</span></a>
+  <a href="products.html">Buy / Pre-Owned Cars <span>→</span></a>
   <a href="https://www.carchope.com/sell-your-cars" target="_blank" rel="noopener">Sell Your Car <span>↗</span></a>
   <a href="https://www.carchope.com/consignment" target="_blank" rel="noopener">Consign <span>↗</span></a>
+  <a href="service.html">Services <span>→</span></a>
+  <a href="about-us.html">About Us <span>→</span></a>
 </div>
-<main>
-<section class="page-hero">
-  <div class="container page-hero-grid">
-    <div class="page-hero-copy"><div class="eyebrow">Pre-Owned / Singapore</div><h1 class="display">Find Your<br>Next Car.</h1><p class="lead">A cleaner catalogue that puts the vehicle, price, registration date, mileage and depreciation first — without the current shopping-cart treatment.</p></div>
-    <div class="page-hero-media"><img src="https://www.carchope.com//image/cache/catalog/Slicing/banner/slide1-767x800.jpg" alt="Carchope pre-owned car"><span class="corner-note">Current public inventory data</span></div>
-  </div>
-</section>
+<main id="main">
+  <section class="page-hero inventory-hero">
+    <div class="page-hero-media"><img src="https://images.unsplash.com/photo-1542282088-72c9c27ed0cd?auto=format&fit=crop&w=2200&q=90" alt="Pre-owned car in modern architecture"></div>
+    <div class="container page-hero-inner">
+      <div class="page-hero-copy" style="max-width:860px">
+        <div class="eyebrow orange-line reveal">Pre-Owned Cars</div>
+        <h1 class="display-md reveal" data-delay="1">Quality Cars.<br>For A Brighter Tomorrow.</h1>
+        <p class="lead reveal" data-delay="2">Browse Carchope’s pre-owned selection with the important ownership details surfaced first.</p>
 
-<section class="section">
-  <div class="container">
-    <div class="inventory-intro"><div><div class="eyebrow with-line">Current selection</div><h2 class="display-serif">Pre-Owned Cars</h2></div><p>Search and filter this coded preview. Listing information reflects examples currently shown on Carchope’s public catalogue.</p></div>
-    <div class="filter-bar">
-      <div class="filter-field"><label>Search</label><input id="car-search" placeholder="Model or make"></div>
-      <div class="filter-field"><label>Body type</label><select id="car-type"><option value="all">All body types</option></select></div>
-      <div class="filter-field"><label>Budget</label><select id="car-budget"><option value="all">Any price</option><option value="u50">Under $50k</option><option value="50to100">$50k–$100k</option><option value="o100">$100k+</option></select></div>
-      <div class="filter-field"><label>Sort</label><select id="car-sort"><option value="featured">Featured</option><option value="low">Price: low to high</option><option value="high">Price: high to low</option><option value="new">Newest registration</option></select></div>
-      <div class="filter-count"><strong id="car-count">9</strong> Cars</div>
+        <div class="inventory-search reveal" data-delay="3">
+          <div class="filter-field"><label>Make / keyword</label><input id="car-search" placeholder="Search model"></div>
+          <div class="filter-field"><label>Body type</label><select id="car-type"><option value="all">Any type</option></select></div>
+          <div class="filter-field"><label>Budget</label><select id="car-budget"><option value="all">Any budget</option><option value="u50">Under $50k</option><option value="50to100">$50k–$100k</option><option value="o100">$100k+</option></select></div>
+          <div class="filter-field"><label>Sort</label><select id="car-sort"><option value="featured">Featured</option><option value="low">Price: low to high</option><option value="high">Price: high to low</option><option value="new">Newest registration</option></select></div>
+          <button class="search-btn" type="button" aria-label="Search cars">⌕</button>
+        </div>
+      </div>
     </div>
-    <div class="inventory-grid" id="inventory-grid"></div>
-    <div class="inventory-empty" id="inventory-empty">No cars match these filters.</div>
-    <div class="preview-caption">Frontend concept only. Inventory photography is illustrative; production would connect each listing to Carchope’s actual vehicle images and detail pages.</div>
-  </div>
-</section>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="inventory-toolbar">
+        <p>Showing <strong id="car-count">9</strong> cars in this concept preview</p>
+        <a class="text-link" href="https://www.carchope.com/products" target="_blank" rel="noopener">Open live inventory</a>
+      </div>
+      <div class="inventory-grid" id="inventory-grid"></div>
+      <div class="inventory-empty" id="inventory-empty">No cars match these filters.</div>
+      <div class="preview-caption">Frontend concept only. Listing details reflect examples from Carchope’s public catalogue; production would connect each card to the live inventory and original vehicle photography.</div>
+    </div>
+  </section>
 </main>
+
 <footer class="site-footer">
   <div class="container">
     <div class="footer-grid">
       <div>
         <div class="footer-title">Carchope</div>
-        <div class="footer-copy">37 Jalan Pemimpin #03-03<br>Mapex, Singapore 577177<br>Tel: (65) 9626 8890<br>sales@carchope.com</div>
+        <div class="footer-copy">37 Jalan Pemimpin #03-03<br>Mapex, Singapore 577177<br>Tel: (65) 9626 8890<br>Email: sales@carchope.com</div>
       </div>
       <div>
         <div class="footer-title">Explore</div>
         <div class="footer-links">
-          <a href="about-us.html">About Us</a>
-          <a href="service.html">Services</a>
           <a href="products.html">Pre-Owned Cars</a>
+          <a href="service.html">Services</a>
+          <a href="about-us.html">About Us</a>
           <a href="https://www.carchope.com/sell-your-cars" target="_blank" rel="noopener">Sell Your Car</a>
           <a href="https://www.carchope.com/consignment" target="_blank" rel="noopener">Consignment</a>
         </div>
       </div>
       <div>
-        <div class="footer-title">Design Direction 05</div>
-        <div class="footer-copy">Minimal Swiss / Japanese<br>White · Black · Carchope Orange<br>Frontend concept preview</div>
+        <div class="footer-title">Client Preview</div>
+        <div class="footer-copy">Premium automotive redesign<br>Cold monochrome · Carchope orange<br>HTML + CSS + JavaScript</div>
       </div>
     </div>
-    <div class="footer-bottom"><span>© 2026 Carchope · Concept preview</span><span>Client approval frontend</span></div>
+    <div class="footer-bottom"><span>© 2026 Carchope · Frontend concept preview</span><span>Privacy · Terms</span></div>
   </div>
-</footer><script src="app.js"></script></body></html>
+</footer>
+<script src="app.js"></script>
+</body>
+</html>
