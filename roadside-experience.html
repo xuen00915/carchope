@@ -7,7 +7,7 @@
   <meta name="description" content="Carchope roadside driving experience — homepage content transformed into roadside billboards, sky messages and approaching car panels.">
   <title>Carchope — Roadside Experience</title>
   <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="roadside-experience-v1.css">
+  <link rel="stylesheet" href="roadside-experience-v2.css">
 </head>
 <body class="roadside-page">
 
@@ -66,193 +66,201 @@
   <a href="about-us.html">About Us</a>
 </div>
 
+
+<div class="roadside-fixed-scene" aria-hidden="true">
+  <video
+    class="roadside-video"
+    id="roadside-video"
+    muted
+    playsinline
+    preload="auto"
+    disablepictureinpicture
+    tabindex="-1">
+    <source src="https://assets.mixkit.co/videos/48489/48489-720.mp4" type="video/mp4">
+  </video>
+  <div class="roadside-grade"></div>
+  <div class="roadside-vignette"></div>
+  <div class="roadside-horizon-glow"></div>
+  <div class="roadside-loading" id="roadside-loading"><span></span>Loading road</div>
+</div>
+
+<nav class="roadside-section-nav" aria-label="Roadside experience sections">
+  <a href="#road-intro" data-section-link="road-intro"><span>01</span><b>Intro</b></a>
+  <a href="#road-journey" data-section-link="road-journey"><span>02</span><b>Buy / Sell / Consign</b></a>
+  <a href="#road-story" data-section-link="road-story"><span>03</span><b>Our Story</b></a>
+  <a href="#road-featured" data-section-link="road-featured"><span>04</span><b>Featured Cars</b></a>
+  <a href="#road-support" data-section-link="road-support"><span>05</span><b>Ownership</b></a>
+  <a href="#road-finish" data-section-link="road-finish"><span>06</span><b>Next Road</b></a>
+</nav>
+
 <main id="roadside-experience" class="roadside-experience">
-  <div class="roadside-stage" id="roadside-stage">
 
-    <video
-      class="roadside-video"
-      id="roadside-video"
-      muted
-      playsinline
-      preload="auto"
-      disablepictureinpicture
-      tabindex="-1"
-      aria-hidden="true">
-      <source src="https://assets.mixkit.co/videos/48489/48489-720.mp4" type="video/mp4">
-    </video>
-
-    <div class="roadside-grade" aria-hidden="true"></div>
-    <div class="roadside-vignette" aria-hidden="true"></div>
-    <div class="roadside-horizon-glow" aria-hidden="true"></div>
-
-    <div class="roadside-loading" id="roadside-loading" aria-hidden="true">
-      <span></span>
-      Loading road
-    </div>
-
-    <div class="roadside-progress" aria-hidden="true">
-      <span>Journey</span>
-      <i><b id="roadside-progress-bar"></b></i>
-      <strong id="roadside-progress-label">01 / 10</strong>
-    </div>
-
-    <div class="roadside-speed" aria-hidden="true">
-      <span>DRIVE</span>
-      <b id="roadside-speed-value">048</b>
-      <small>KM/H</small>
-    </div>
-
-    <!-- 01: hero floating in the sky -->
-    <section class="road-scene sky-scene" data-scene="0" data-start="0" data-end="0.13">
-      <div class="sky-kicker">
+  <section class="road-section road-intro-section" id="road-intro" data-road-section>
+    <div class="road-section-inner">
+      <div class="road-intro-kicker">
         <span>Simple<br>Honest<br>Better Cars</span>
         <i></i>
         <span>Since 2017</span>
       </div>
-      <div class="sky-hero-copy">
+
+      <div class="road-intro-copy" data-road-object="sky">
+        <span class="road-section-label">Carchope</span>
         <h1>Drive A<br>Brighter<br><em>Tomorrow</em></h1>
         <p>Quality pre-owned cars, direct buyer-to-seller connections and practical ownership support — without the old dealership clutter.</p>
-        <div class="sky-actions">
+        <div class="road-actions">
           <a class="road-cta" href="products.html">Browse Cars</a>
-          <a class="road-link" href="about-us.html">Why Carchope</a>
+          <a class="road-text-link" href="about-us.html">Why Carchope</a>
         </div>
       </div>
-    </section>
 
-    <!-- 02: buy billboard left -->
-    <section class="road-scene board-scene board-left" data-scene="1" data-start="0.09" data-end="0.24">
-      <div class="billboard billboard-orange">
-        <span class="board-number">01</span>
-        <span class="board-kicker">Your next car</span>
-        <h2>Buy a Car</h2>
-        <p>Browse our pre-owned inventory</p>
-        <a href="products.html">Explore cars →</a>
-        <div class="billboard-posts" aria-hidden="true"><i></i><i></i></div>
+      <a class="road-next-link" href="#road-journey">Next chapter <span>↓</span></a>
+    </div>
+  </section>
+
+  <section class="road-section road-journey-section" id="road-journey" data-road-section>
+    <div class="road-section-inner">
+      <div class="road-section-heading">
+        <span class="road-section-label">01 — 03</span>
+        <h2>Three ways to move forward.</h2>
       </div>
-    </section>
 
-    <!-- 03: sell billboard right -->
-    <section class="road-scene board-scene board-right" data-scene="2" data-start="0.18" data-end="0.33">
-      <div class="billboard billboard-white">
-        <span class="board-number">02</span>
-        <span class="board-kicker">Ready to move on?</span>
-        <h2>Sell Your Car</h2>
-        <p>Get an instant quote</p>
-        <a href="https://www.carchope.com/sell-your-cars" target="_blank" rel="noopener">Start selling →</a>
-        <div class="billboard-posts" aria-hidden="true"><i></i><i></i></div>
+      <div class="road-window-band road-window-band-journey">
+        <a class="premium-board premium-board-left" href="products.html" data-road-object="board" data-side="left" data-delay="0">
+          <span class="premium-board-index">01</span>
+          <small>Pre-Owned Cars</small>
+          <h3>Buy a Car</h3>
+          <p>Browse our pre-owned inventory</p>
+          <strong>Explore Cars →</strong>
+          <i class="premium-board-post"></i>
+        </a>
+
+        <a class="premium-board premium-board-right premium-board-light" href="https://www.carchope.com/sell-your-cars" target="_blank" rel="noopener" data-road-object="board" data-side="right" data-delay=".16">
+          <span class="premium-board-index">02</span>
+          <small>Direct Selling</small>
+          <h3>Sell Your Car</h3>
+          <p>Get an instant quote</p>
+          <strong>Start Selling →</strong>
+          <i class="premium-board-post"></i>
+        </a>
+
+        <a class="premium-board premium-board-left premium-board-third" href="https://www.carchope.com/consignment" target="_blank" rel="noopener" data-road-object="board" data-side="left" data-delay=".32">
+          <span class="premium-board-index">03</span>
+          <small>Full-Service Selling</small>
+          <h3>Consign Your Car</h3>
+          <p>Let Carchope handle the sale</p>
+          <strong>Learn More →</strong>
+          <i class="premium-board-post"></i>
+        </a>
       </div>
-    </section>
 
-    <!-- 04: consign billboard left -->
-    <section class="road-scene board-scene board-left board-far" data-scene="3" data-start="0.27" data-end="0.42">
-      <div class="billboard billboard-dark">
-        <span class="board-number">03</span>
-        <span class="board-kicker">We handle the sale</span>
-        <h2>Consign Your Car</h2>
-        <p>Let Carchope handle the sale</p>
-        <a href="https://www.carchope.com/consignment" target="_blank" rel="noopener">Learn more →</a>
-        <div class="billboard-posts" aria-hidden="true"><i></i><i></i></div>
-      </div>
-    </section>
+      <a class="road-next-link" href="#road-story">Skip to our story <span>↓</span></a>
+    </div>
+  </section>
 
-    <!-- 05: brands floating high across the sky -->
-    <section class="road-scene brands-sky-scene" data-scene="4" data-start="0.36" data-end="0.51">
-      <div class="brands-sky-card">
-        <span>Brands in our inventory</span>
-        <strong>From everyday favourites<br>to premium marques.</strong>
-        <div class="brand-cloud">
-          <b>TOYOTA</b>
-          <b>BMW</b>
-          <b>PORSCHE</b>
-          <b>XPENG</b>
-          <b>VOLKSWAGEN</b>
-          <b>MERCEDES-BENZ</b>
+  <section class="road-section road-story-section" id="road-story" data-road-section>
+    <div class="road-section-inner">
+      <div class="road-story-sky" data-road-object="sky">
+        <span class="road-section-label">Brands in our inventory</span>
+        <h2>From everyday favourites<br>to premium marques.</h2>
+
+        <div class="road-brand-line">
+          <b>TOYOTA</b><b>BMW</b><b>PORSCHE</b><b>XPENG</b><b>VOLKSWAGEN</b><b>MERCEDES-BENZ</b>
         </div>
       </div>
-    </section>
 
-    <!-- 06: manifesto floating in sky -->
-    <section class="road-scene manifesto-sky-scene" data-scene="5" data-start="0.45" data-end="0.60">
-      <div class="manifesto-sky">
+      <div class="road-story-quote" data-road-object="sky" data-delay=".2">
         <small>Real cars. Real people. A brighter tomorrow.</small>
-        <h2>A more direct way<br>to move from one car<br>to the next.</h2>
+        <h3>A more direct way<br>to move from one car<br>to the next.</h3>
         <a href="about-us.html">Learn More →</a>
       </div>
-    </section>
 
-    <!-- 07: feature car panel comes from the horizon -->
-    <section class="road-scene car-coming-scene" data-scene="6" data-start="0.54" data-end="0.70">
-      <a class="coming-car-card coming-car-primary" href="products.html">
-        <div class="coming-car-image">
-          <img src="https://images.unsplash.com/photo-1619767886558-efdc259cde1a?auto=format&fit=crop&w=1600&q=90" alt="XPENG G6 Electric">
-        </div>
-        <div class="coming-car-info">
-          <span>Featured Car</span>
-          <h2>XPENG G6 Electric</h2>
-          <div><b>2025</b><b>7,000 km</b><b>SUV</b></div>
-          <strong>$201,705</strong>
-        </div>
-      </a>
-    </section>
+      <a class="road-next-link" href="#road-featured">Jump to featured cars <span>↓</span></a>
+    </div>
+  </section>
 
-    <!-- 08: two smaller feature panels pass the car -->
-    <section class="road-scene passing-cars-scene" data-scene="7" data-start="0.64" data-end="0.79">
-      <a class="passing-car passing-car-left" href="products.html">
-        <img src="https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&w=1200&q=90" alt="Volkswagen Golf SV">
-        <div>
-          <small>2018 · 50,000 km</small>
-          <strong>Volkswagen Golf SV</strong>
-          <b>$55,988</b>
-        </div>
-      </a>
-
-      <a class="passing-car passing-car-right" href="products.html">
-        <img src="https://images.unsplash.com/photo-1542362567-b07e54358753?auto=format&fit=crop&w=1200&q=90" alt="Toyota Prius Plus Hybrid">
-        <div>
-          <small>2020 · 89,000 km</small>
-          <strong>Toyota Prius Plus Hybrid</strong>
-          <b>$98,888</b>
-        </div>
-      </a>
-    </section>
-
-    <!-- 09: ownership support roadside board -->
-    <section class="road-scene board-scene board-right support-board-scene" data-scene="8" data-start="0.73" data-end="0.90">
-      <div class="billboard billboard-support">
-        <span class="board-kicker">Ownership support</span>
-        <h2>Your partner on every mile.</h2>
-        <p>Carchope supports more than the transaction, with insurance, financing, rental and consignment services around your car journey.</p>
-        <div class="support-pills">
-          <span>Insurance</span>
-          <span>Financing</span>
-          <span>Rental</span>
-          <span>Consignment</span>
-        </div>
-        <a href="service.html">Our Services →</a>
-        <div class="billboard-posts" aria-hidden="true"><i></i><i></i></div>
+  <section class="road-section road-featured-section" id="road-featured" data-road-section>
+    <div class="road-section-inner">
+      <div class="road-section-heading road-section-heading-light">
+        <span class="road-section-label">Featured Cars</span>
+        <h2>Cars that come into view.</h2>
       </div>
-    </section>
 
-    <!-- 10: final destination -->
-    <section class="road-scene destination-scene" data-scene="9" data-start="0.84" data-end="1">
-      <div class="destination-sign">
+      <div class="road-window-band road-window-band-cars">
+        <a class="premium-car-board premium-car-board-left" href="products.html" data-road-object="car" data-side="left">
+          <img src="https://images.unsplash.com/photo-1619767886558-efdc259cde1a?auto=format&fit=crop&w=1200&q=90" alt="XPENG G6 Electric">
+          <div>
+            <small>2025 · 7,000 km · SUV</small>
+            <h3>XPENG G6 Electric</h3>
+            <strong>$201,705</strong>
+          </div>
+        </a>
+
+        <a class="premium-car-board premium-car-board-right" href="products.html" data-road-object="car" data-side="right" data-delay=".18">
+          <img src="https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&w=1000&q=90" alt="Volkswagen Golf SV">
+          <div>
+            <small>2018 · 50,000 km</small>
+            <h3>Volkswagen Golf SV</h3>
+            <strong>$55,988</strong>
+          </div>
+        </a>
+
+        <a class="premium-car-board premium-car-board-left premium-car-board-third" href="products.html" data-road-object="car" data-side="left" data-delay=".34">
+          <img src="https://images.unsplash.com/photo-1542362567-b07e54358753?auto=format&fit=crop&w=1000&q=90" alt="Toyota Prius Plus Hybrid">
+          <div>
+            <small>2020 · 89,000 km</small>
+            <h3>Toyota Prius Plus Hybrid</h3>
+            <strong>$98,888</strong>
+          </div>
+        </a>
+      </div>
+
+      <a class="road-next-link" href="#road-support">Ownership support <span>↓</span></a>
+    </div>
+  </section>
+
+  <section class="road-section road-support-section" id="road-support" data-road-section>
+    <div class="road-section-inner">
+      <div class="road-window-band">
+        <a class="premium-board premium-board-right premium-board-support" href="service.html" data-road-object="board" data-side="right">
+          <small>Ownership Support</small>
+          <h3>Your partner on every mile.</h3>
+          <p>Carchope supports more than the transaction, with insurance, financing, rental and consignment services around your car journey.</p>
+          <div class="premium-board-tags">
+            <span>Insurance</span><span>Financing</span><span>Rental</span><span>Consignment</span>
+          </div>
+          <strong>Our Services →</strong>
+          <i class="premium-board-post"></i>
+        </a>
+      </div>
+
+      <a class="road-next-link" href="#road-finish">Final stop <span>↓</span></a>
+    </div>
+  </section>
+
+  <section class="road-section road-finish-section" id="road-finish" data-road-section>
+    <div class="road-section-inner road-finish-inner">
+      <div class="road-destination" data-road-object="destination">
         <span>CARCHOPE</span>
         <h2>Your next road starts here.</h2>
         <p>Buy, sell, consign or get support for the next part of your car journey.</p>
-        <div class="destination-actions">
+        <div class="road-actions road-actions-center">
           <a class="road-cta" href="products.html">Browse Cars</a>
-          <a class="road-link light" href="https://www.carchope.com/contact-us" target="_blank" rel="noopener">Contact Us</a>
+          <a class="road-text-link" href="https://www.carchope.com/contact-us" target="_blank" rel="noopener">Contact Us</a>
         </div>
       </div>
-    </section>
 
-    <div class="roadside-scroll-note" aria-hidden="true">
-      <span>Scroll to drive</span>
-      <i></i>
+      <a class="road-next-link road-back-top" href="#road-intro">Back to start <span>↑</span></a>
     </div>
+  </section>
 
-  </div>
 </main>
+
+<div class="roadside-speed" aria-hidden="true">
+  <span>DRIVE</span>
+  <b id="roadside-speed-value">048</b>
+  <small>KM/H</small>
+</div>
+
 
 <div class="floating-actions" id="floating-actions" aria-hidden="true">
   <a class="floating-btn floating-whatsapp" href="https://api.whatsapp.com/send?phone=96268890" target="_blank" rel="noopener" aria-label="Contact Carchope on WhatsApp">
@@ -265,7 +273,7 @@
   </button>
 </div>
 
-<script src="roadside-experience-v1.js"></script>
+<script src="roadside-experience-v2.js"></script>
 <script src="app.js"></script>
 </body>
 </html>
