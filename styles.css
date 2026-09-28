@@ -1029,3 +1029,139 @@ button{cursor:pointer}
 @media(prefers-reduced-motion:reduce){
   .brand-marquee-track{animation:none}
 }
+
+
+/* Typography scale increase — header, descriptions, footer */
+.logo{
+  font-size:23px;
+}
+.desktop-nav a{
+  font-size:13px;
+}
+.header-cta{
+  font-size:11px;
+}
+.mobile-panel a{
+  font-size:14px;
+}
+
+.lead{
+  font-size:16px;
+  line-height:1.72;
+}
+.label{
+  font-size:10px;
+}
+.hero-scroll{
+  font-size:10px;
+}
+.hero-vertical-nav a{
+  font-size:11px;
+}
+.journey-item p{
+  font-size:12px;
+  line-height:1.55;
+}
+.manifesto-kicker{
+  font-size:14px;
+}
+.play-link{
+  font-size:11px;
+}
+.section-heading p{
+  font-size:14px;
+}
+.feature-meta{
+  font-size:10px;
+}
+.partner-services span{
+  font-size:11px;
+}
+.metric span{
+  font-size:10px;
+}
+.quote-copy p{
+  font-size:13px;
+}
+.service-pill p{
+  font-size:12px;
+  line-height:1.6;
+}
+.partner-cloud span{
+  font-size:10px;
+}
+.why-item p{
+  font-size:12px;
+  line-height:1.6;
+}
+.field label{
+  font-size:10px;
+}
+.field input,
+.field select,
+.field textarea{
+  font-size:14px;
+}
+.form-note{
+  font-size:11px;
+}
+.inventory-search .filter-field label{
+  font-size:9px;
+}
+.inventory-search input,
+.inventory-search select{
+  font-size:13px;
+}
+.inventory-toolbar p{
+  font-size:12px;
+}
+.inventory-toolbar select{
+  font-size:11px;
+}
+.inventory-top{
+  font-size:9px;
+}
+.inventory-spec span{
+  font-size:8.5px;
+}
+.inventory-spec strong{
+  font-size:11.5px;
+}
+.preview-caption{
+  font-size:11px;
+  line-height:1.7;
+}
+.brand-marquee-note{
+  font-size:10px;
+}
+.brand-marquee-name{
+  font-size:10px;
+}
+.brand-option-name{
+  font-size:11px;
+}
+
+.footer-title{
+  font-size:11px;
+}
+.footer-copy,
+.footer-links a{
+  font-size:13px;
+  line-height:1.85;
+}
+.footer-bottom{
+  font-size:10px;
+}
+
+@media(max-width:580px){
+  .logo{font-size:21px}
+  .mobile-panel a{font-size:14px}
+  .lead{font-size:15px}
+  .journey-item p,
+  .service-pill p,
+  .why-item p{font-size:12px}
+  .footer-title{font-size:10px}
+  .footer-copy,
+  .footer-links a{font-size:12px}
+  .footer-bottom{font-size:9px}
+}
