@@ -3,13 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Carchope — Design 05 Exact Preview</title>
+<meta name="description" content="Carchope Design 05 exact visual preview">
+<title>Carchope — Design 05</title>
 <style>
-*{box-sizing:border-box}html,body{margin:0;background:#fff}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;background:#fff}
 body{font-family:Arial,Helvetica,sans-serif}
 .stage{position:relative;width:min(100%,1000px);margin:0 auto;background:#fff;line-height:0}
-.stage img{display:block;width:100%;height:auto}
-.hot{position:absolute;display:block;z-index:3;background:transparent}
+#design{display:block;width:100%;height:auto;opacity:0;transition:opacity .15s ease}
+#design.ready{opacity:1}
+.loader{height:100vh;display:flex;align-items:center;justify-content:center;font:11px/1 Arial,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#999}
+.hot{position:absolute;z-index:4;display:block;background:transparent}
 .buy{left:34.7%;top:1.1%;width:8%;height:3.5%}
 .sell{left:43.8%;top:1.1%;width:8%;height:3.5%}
 .consign{left:52.2%;top:1.1%;width:12%;height:3.5%}
@@ -29,21 +33,48 @@ body{font-family:Arial,Helvetica,sans-serif}
 </head>
 <body>
 <div class="stage">
-<img alt="Carchope Design 05 exact visual preview" src="data:image/jpeg;base64,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[...truncated...]">
-<a class="hot buy" aria-label="Buy" href="https://www.carchope.com/products" target="_blank"></a>
-<a class="hot sell" aria-label="Sell" href="https://www.carchope.com/sell-your-cars" target="_blank"></a>
-<a class="hot consign" aria-label="Consign" href="https://www.carchope.com/consignment" target="_blank"></a>
-<a class="hot services" aria-label="Services" href="https://www.carchope.com/service" target="_blank"></a>
-<a class="hot about" aria-label="About" href="https://www.carchope.com/about-us" target="_blank"></a>
-<a class="hot menu" aria-label="Menu" href="https://www.carchope.com/" target="_blank"></a>
-<a class="hot arrow" aria-label="Browse cars" href="https://www.carchope.com/products" target="_blank"></a>
-<a class="hot p1" aria-label="Buy a car" href="https://www.carchope.com/products" target="_blank"></a>
-<a class="hot p2" aria-label="Sell your car" href="https://www.carchope.com/sell-your-cars" target="_blank"></a>
-<a class="hot p3" aria-label="Consign your car" href="https://www.carchope.com/consignment" target="_blank"></a>
-<a class="hot viewall" aria-label="View all cars" href="https://www.carchope.com/products" target="_blank"></a>
-<a class="hot car1" aria-label="Featured car one" href="https://www.carchope.com/products" target="_blank"></a>
-<a class="hot car2" aria-label="Featured car two" href="https://www.carchope.com/products" target="_blank"></a>
-<a class="hot car3" aria-label="Featured car three" href="https://www.carchope.com/products" target="_blank"></a>
+  <div class="loader" id="loader">Loading Design 05</div>
+  <img id="design" alt="Carchope Design 05 exact visual preview">
+  <a class="hot buy" aria-label="Buy" href="https://www.carchope.com/products" target="_blank" rel="noopener"></a>
+  <a class="hot sell" aria-label="Sell" href="https://www.carchope.com/sell-your-cars" target="_blank" rel="noopener"></a>
+  <a class="hot consign" aria-label="Consign" href="https://www.carchope.com/consignment" target="_blank" rel="noopener"></a>
+  <a class="hot services" aria-label="Services" href="https://www.carchope.com/service" target="_blank" rel="noopener"></a>
+  <a class="hot about" aria-label="About" href="https://www.carchope.com/about-us" target="_blank" rel="noopener"></a>
+  <a class="hot menu" aria-label="Home" href="https://www.carchope.com/" target="_blank" rel="noopener"></a>
+  <a class="hot arrow" aria-label="Browse cars" href="https://www.carchope.com/products" target="_blank" rel="noopener"></a>
+  <a class="hot p1" aria-label="Buy a car" href="https://www.carchope.com/products" target="_blank" rel="noopener"></a>
+  <a class="hot p2" aria-label="Sell your car" href="https://www.carchope.com/sell-your-cars" target="_blank" rel="noopener"></a>
+  <a class="hot p3" aria-label="Consign your car" href="https://www.carchope.com/consignment" target="_blank" rel="noopener"></a>
+  <a class="hot viewall" aria-label="View all cars" href="https://www.carchope.com/products" target="_blank" rel="noopener"></a>
+  <a class="hot car1" aria-label="Featured car one" href="https://www.carchope.com/products" target="_blank" rel="noopener"></a>
+  <a class="hot car2" aria-label="Featured car two" href="https://www.carchope.com/products" target="_blank" rel="noopener"></a>
+  <a class="hot car3" aria-label="Featured car three" href="https://www.carchope.com/products" target="_blank" rel="noopener"></a>
 </div>
+<script>
+(async()=>{
+  const files=[
+    'assets/d5-000.txt','assets/d5-001.txt',
+    'assets/d5-01x.txt','assets/d5-02x.txt','assets/d5-03x.txt',
+    'assets/d5-04x.txt','assets/d5-05x.txt','assets/d5-06x.txt',
+    'assets/d5-01.txt','assets/d5-02.txt','assets/d5-03.txt',
+    'assets/d5-04.txt','assets/d5-05.txt'
+  ];
+  try{
+    const parts=await Promise.all(files.map(async f=>{
+      const r=await fetch(f,{cache:'no-store'});
+      if(!r.ok) throw new Error(f);
+      return (await r.text()).trim();
+    }));
+    const img=document.getElementById('design');
+    img.onload=()=>{
+      document.getElementById('loader').style.display='none';
+      img.classList.add('ready');
+    };
+    img.src='data:image/jpeg;base64,'+parts.join('');
+  }catch(e){
+    document.getElementById('loader').textContent='Preview failed to load — refresh once';
+  }
+})();
+</script>
 </body>
 </html>
