@@ -7,7 +7,7 @@
   <meta name="description" content="Carchope roadside driving experience — homepage content transformed into roadside billboards, sky messages and approaching car panels.">
   <title>Carchope — Roadside Experience</title>
   <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="roadside-experience-v3.css">
+  <link rel="stylesheet" href="roadside-experience-v4.css">
 </head>
 <body class="roadside-page">
 
@@ -78,6 +78,7 @@
     tabindex="-1">
     <source src="https://assets.mixkit.co/videos/48489/48489-720.mp4" type="video/mp4">
   </video>
+  <canvas class="road-webgl" id="road-webgl" aria-hidden="true"></canvas>
   <div class="roadside-grade"></div>
   <div class="roadside-vignette"></div>
   <div class="roadside-horizon-glow"></div>
@@ -122,42 +123,20 @@
       <div class="road-section-heading">
         <span class="road-section-label">01 — 03</span>
         <h2>Three ways to move forward.</h2>
+        <p class="road-section-intro">The boards now live in a real 3D roadside world. They approach from the horizon and pass at the side-window sightline.</p>
       </div>
 
-      <div class="road-window-band road-window-band-journey">
-        <a class="premium-board premium-board-left" href="products.html" data-road-object="board" data-side="left" data-delay="0">
-          <span class="premium-board-index">01</span>
-          <small>Pre-Owned Cars</small>
-          <h3>Buy a Car</h3>
-          <p>Browse our pre-owned inventory</p>
-          <strong>Explore Cars →</strong>
-          <i class="premium-board-post"></i>
-        </a>
-
-        <a class="premium-board premium-board-right premium-board-light" href="https://www.carchope.com/sell-your-cars" target="_blank" rel="noopener" data-road-object="board" data-side="right" data-delay=".16">
-          <span class="premium-board-index">02</span>
-          <small>Direct Selling</small>
-          <h3>Sell Your Car</h3>
-          <p>Get an instant quote</p>
-          <strong>Start Selling →</strong>
-          <i class="premium-board-post"></i>
-        </a>
-
-        <a class="premium-board premium-board-left premium-board-third" href="https://www.carchope.com/consignment" target="_blank" rel="noopener" data-road-object="board" data-side="left" data-delay=".32">
-          <span class="premium-board-index">03</span>
-          <small>Full-Service Selling</small>
-          <h3>Consign Your Car</h3>
-          <p>Let Carchope handle the sale</p>
-          <strong>Learn More →</strong>
-          <i class="premium-board-post"></i>
-        </a>
+      <div class="road-action-strip road-action-strip-left">
+        <a href="products.html"><span>01</span><strong>Buy a Car</strong><small>Browse Inventory</small></a>
+        <a href="https://www.carchope.com/sell-your-cars" target="_blank" rel="noopener"><span>02</span><strong>Sell Your Car</strong><small>Instant Quote</small></a>
+        <a href="https://www.carchope.com/consignment" target="_blank" rel="noopener"><span>03</span><strong>Consign</strong><small>We Handle It</small></a>
       </div>
 
       <a class="road-next-link" href="#road-story">Skip to our story <span>↓</span></a>
     </div>
   </section>
 
-  <section class="road-section road-story-section" id="road-story" data-road-section>
+<section class="road-section road-story-section" id="road-story" data-road-section>
     <div class="road-section-inner">
       <div class="road-story-sky" data-road-object="sky">
         <span class="road-section-label">Brands in our inventory</span>
@@ -183,80 +162,30 @@
     <div class="road-section-inner">
       <div class="road-section-heading road-section-heading-light">
         <span class="road-section-label">Featured Cars</span>
-        <h2>They pass us — then lead the way.</h2>
+        <h2>Overtake us. Merge ahead. Keep driving.</h2>
+        <p class="road-section-intro">The featured cars are now actual 3D vehicles moving through perspective, not floating cards.</p>
       </div>
 
-      <div class="overtake-stage" aria-label="Featured cars overtaking and merging ahead">
-        <a class="overtake-car overtake-left" href="products.html"
-           data-road-object="overtake" data-side="left" data-delay="0">
-          <div class="road-car road-car-orange" aria-hidden="true">
-            <div class="road-car-shadow"></div>
-            <div class="road-car-roof"></div>
-            <div class="road-car-glass"></div>
-            <div class="road-car-trunk"></div>
-            <div class="road-car-light road-car-light-left"></div>
-            <div class="road-car-light road-car-light-right"></div>
-            <div class="road-car-plate">G6</div>
-            <div class="road-car-bumper"></div>
-            <div class="road-car-wheel road-car-wheel-left"></div>
-            <div class="road-car-wheel road-car-wheel-right"></div>
-          </div>
-          <div class="overtake-label">
-            <small>2025 · 7,000 km · SUV</small>
-            <strong>XPENG G6 Electric</strong>
-            <b>$201,705</b>
-          </div>
+      <div class="car-ahead-hud" aria-live="polite">
+        <a class="car-ahead-chip" href="products.html" data-car-hud="0">
+          <small>Now ahead</small>
+          <strong>XPENG G6 Electric</strong>
+          <span>2025 · 7,000 km · $201,705</span>
         </a>
-
-        <a class="overtake-car overtake-right" href="products.html"
-           data-road-object="overtake" data-side="right" data-delay=".30">
-          <div class="road-car road-car-silver" aria-hidden="true">
-            <div class="road-car-shadow"></div>
-            <div class="road-car-roof"></div>
-            <div class="road-car-glass"></div>
-            <div class="road-car-trunk"></div>
-            <div class="road-car-light road-car-light-left"></div>
-            <div class="road-car-light road-car-light-right"></div>
-            <div class="road-car-plate">GOLF</div>
-            <div class="road-car-bumper"></div>
-            <div class="road-car-wheel road-car-wheel-left"></div>
-            <div class="road-car-wheel road-car-wheel-right"></div>
-          </div>
-          <div class="overtake-label">
-            <small>2018 · 50,000 km</small>
-            <strong>Volkswagen Golf SV</strong>
-            <b>$55,988</b>
-          </div>
+        <a class="car-ahead-chip" href="products.html" data-car-hud="1">
+          <small>Now ahead</small>
+          <strong>Volkswagen Golf SV</strong>
+          <span>2018 · 50,000 km · $55,988</span>
         </a>
-
-        <a class="overtake-car overtake-left" href="products.html"
-           data-road-object="overtake" data-side="left" data-delay=".60">
-          <div class="road-car road-car-white" aria-hidden="true">
-            <div class="road-car-shadow"></div>
-            <div class="road-car-roof"></div>
-            <div class="road-car-glass"></div>
-            <div class="road-car-trunk"></div>
-            <div class="road-car-light road-car-light-left"></div>
-            <div class="road-car-light road-car-light-right"></div>
-            <div class="road-car-plate">PRIUS</div>
-            <div class="road-car-bumper"></div>
-            <div class="road-car-wheel road-car-wheel-left"></div>
-            <div class="road-car-wheel road-car-wheel-right"></div>
-          </div>
-          <div class="overtake-label">
-            <small>2020 · 89,000 km</small>
-            <strong>Toyota Prius Plus Hybrid</strong>
-            <b>$98,888</b>
-          </div>
+        <a class="car-ahead-chip" href="products.html" data-car-hud="2">
+          <small>Now ahead</small>
+          <strong>Toyota Prius Plus Hybrid</strong>
+          <span>2020 · 89,000 km · $98,888</span>
         </a>
       </div>
 
       <div class="overtake-caption">
-        <span>Rear window</span>
-        <i></i>
-        <span>Overtake</span>
-        <i></i>
-        <span>Merge ahead</span>
+        <span>Side window</span><i></i><span>Overtake</span><i></i><span>Merge ahead</span>
       </div>
 
       <a class="road-next-link" href="#road-support">Ownership support <span>↓</span></a>
@@ -265,24 +194,24 @@
 
 <section class="road-section road-support-section" id="road-support" data-road-section>
     <div class="road-section-inner">
-      <div class="road-window-band">
-        <a class="premium-board premium-board-right premium-board-support" href="service.html" data-road-object="board" data-side="right">
-          <small>Ownership Support</small>
-          <h3>Your partner on every mile.</h3>
-          <p>Carchope supports more than the transaction, with insurance, financing, rental and consignment services around your car journey.</p>
-          <div class="premium-board-tags">
-            <span>Insurance</span><span>Financing</span><span>Rental</span><span>Consignment</span>
-          </div>
-          <strong>Our Services →</strong>
-          <i class="premium-board-post"></i>
-        </a>
+      <div class="road-section-heading">
+        <span class="road-section-label">Ownership Support</span>
+        <h2>Your partner on every mile.</h2>
+        <p class="road-section-intro">A premium service billboard approaches on the passenger-side window while the road remains clear ahead.</p>
+      </div>
+
+      <div class="road-action-strip road-action-strip-right">
+        <a href="service.html"><strong>Insurance</strong><small>Drive with confidence</small></a>
+        <a href="service.html"><strong>Financing</strong><small>Flexible loan support</small></a>
+        <a href="service.html"><strong>Rental</strong><small>Short or long term</small></a>
+        <a href="https://www.carchope.com/consignment" target="_blank" rel="noopener"><strong>Consignment</strong><small>Let us handle it</small></a>
       </div>
 
       <a class="road-next-link" href="#road-finish">Final stop <span>↓</span></a>
     </div>
   </section>
 
-  <section class="road-section road-finish-section" id="road-finish" data-road-section>
+<section class="road-section road-finish-section" id="road-finish" data-road-section>
     <div class="road-section-inner road-finish-inner">
       <div class="road-destination" data-road-object="destination">
         <span>CARCHOPE</span>
@@ -318,7 +247,8 @@
   </button>
 </div>
 
-<script src="roadside-experience-v3.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.160.1/build/three.min.js"></script>
+<script src="roadside-experience-v4.js"></script>
 <script src="app.js"></script>
 </body>
 </html>
