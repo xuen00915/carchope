@@ -20,11 +20,22 @@
       <a  href="service.html">Services</a>
       <a class="active" href="about-us.html">About</a>
     </nav>
-    <a class="header-cart" href="https://www.carchope.com/cart" target="_blank" rel="noopener" aria-label="Open cart">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2l2.2 10.2a2 2 0 0 0 2 1.6h7.8a2 2 0 0 0 1.9-1.4L21 8H7"></path><circle cx="10" cy="20" r="1.4"></circle><circle cx="18" cy="20" r="1.4"></circle></svg>
-      <span class="header-cart-label">Cart</span>
-      <span class="header-cart-count" data-cart-count>0</span>
-    </a>
+    <div class="header-cart-wrap">
+      <button class="header-cart" id="header-cart-toggle" type="button" aria-label="Open cart menu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2l2.2 10.2a2 2 0 0 0 2 1.6h7.8a2 2 0 0 0 1.9-1.4L21 8H7"></path><circle cx="10" cy="20" r="1.4"></circle><circle cx="18" cy="20" r="1.4"></circle></svg>
+        <span class="header-cart-label">Cart</span>
+        <span class="header-cart-count" data-cart-count>0</span>
+      </button>
+      <div class="cart-popover" id="cart-popover" aria-hidden="true">
+        <div class="cart-popover-head">
+          <strong>Your Cart</strong>
+          <span><span data-cart-count>0</span> item(s)</span>
+        </div>
+        <div class="cart-popover-items" id="cart-popover-items"></div>
+        <div class="cart-popover-empty" id="cart-popover-empty">No cars added yet.</div>
+        <a class="cart-popover-link" href="https://www.carchope.com/cart" target="_blank" rel="noopener">View Cart</a>
+      </div>
+    </div>
     <a class="header-cta" href="https://www.carchope.com/contact-us" target="_blank" rel="noopener">Contact Us</a>
     <button class="menu-toggle" id="menu-toggle" aria-label="Open navigation" aria-expanded="false"><span></span><span></span><span></span></button>
   </div>
