@@ -4906,3 +4906,22 @@ body{
     font-size:15px!important;
   }
 }
+
+
+/* Lighter manifesto video overlay */
+.manifesto-video{
+  filter:saturate(.86) contrast(1.04) brightness(.82)!important;
+}
+.manifesto-video-section::after{
+  background:
+    linear-gradient(90deg,rgba(8,10,12,.62) 0%,rgba(8,10,12,.34) 48%,rgba(8,10,12,.12) 100%),
+    linear-gradient(0deg,rgba(8,10,12,.16),rgba(8,10,12,.02))!important;
+}
+@media(max-width:860px){
+  .manifesto-video{
+    filter:saturate(.82) contrast(1.04) brightness(.76)!important;
+  }
+  .manifesto-video-section::after{
+    background:linear-gradient(90deg,rgba(8,10,12,.68) 0%,rgba(8,10,12,.44) 70%,rgba(8,10,12,.20) 100%)!important;
+  }
+}
