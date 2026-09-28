@@ -148,6 +148,28 @@
     });
   });
 
+
+  var floatingActions=document.getElementById('floating-actions');
+  var scrollTopBtn=document.getElementById('scroll-top-btn');
+
+  function updateFloatingActions(){
+    if(!floatingActions) return;
+    var threshold=Math.max(window.innerHeight*0.8,520);
+    var show=window.scrollY>threshold;
+    floatingActions.classList.toggle('visible',show);
+    floatingActions.setAttribute('aria-hidden',show?'false':'true');
+  }
+
+  window.addEventListener('scroll',updateFloatingActions,{passive:true});
+  window.addEventListener('resize',updateFloatingActions);
+  updateFloatingActions();
+
+  if(scrollTopBtn){
+    scrollTopBtn.addEventListener('click',function(){
+      window.scrollTo({top:0,behavior:'smooth'});
+    });
+  }
+
   var grid=document.getElementById('inventory-grid');
   if(!grid) return;
 
@@ -182,22 +204,24 @@
 
   var search=document.getElementById('car-search');
   var type=document.getElementById('car-type');
-  var budget=document.getElementById('car-budget');
+  var budgetRange=document.getElementById('car-budget-range');
+  var budgetValue=document.getElementById('car-budget-value');
   var sort=document.getElementById('car-sort');
   var count=document.getElementById('car-count');
+  var rangeText=document.getElementById('car-range');
   var empty=document.getElementById('inventory-empty');
   var brandSelect=document.getElementById('brand-select');
   var brandTrigger=document.getElementById('brand-trigger');
   var brandCurrent=document.getElementById('brand-current');
   var brandMenu=document.getElementById('brand-menu');
   var searchBtn=document.getElementById('car-search-btn');
+  var pagination=document.getElementById('pagination');
+  var currentPage=1;
+  var pageSize=9;
 
   var queryBrand='';
   try{ queryBrand=(new URLSearchParams(window.location.search)).get('brand')||''; }catch(e){}
   var selectedBrand=brandById[queryBrand]?queryBrand:'all';
-  var currentPage=1;
-  var pageSize=9;
-  var pagination=document.getElementById('pagination');
 
   Array.from(new Set(cars.map(function(c){return c.type;}))).sort().forEach(function(t){
     var o=document.createElement('option');
@@ -315,6 +339,22 @@
   function money(n){return n==null?'Sold':('$'+n.toLocaleString('en-SG'));}
   function brandName(id){return brandById[id]?brandById[id].name:id;}
 
+  function updateBudgetLabel(){
+    if(!budgetRange||!budgetValue) return;
+    var max=Number(budgetRange.max);
+    var value=Number(budgetRange.value);
+    budgetValue.textContent=value>=max?'Any budget':'Up to $'+value.toLocaleString('en-SG');
+    var progress=max?Math.max(0,Math.min(100,(value/max)*100)):100;
+    budgetRange.style.setProperty('--budget-progress',progress+'%');
+  }
+
+  function statusRank(c,mode){
+    var available=c.status==='Available';
+    if(mode==='sold-first') return available?1:0;
+    if(mode==='stock-first') return available?0:1;
+    return 0;
+  }
+
   function renderPagination(totalItems){
     if(!pagination) return;
     pagination.innerHTML='';
@@ -332,7 +372,7 @@
     var prev=document.createElement('button');
     prev.type='button';
     prev.className='pagination-prev';
-    prev.textContent='← Previous';
+    prev.textContent='Previous';
     prev.disabled=currentPage===1;
     prev.addEventListener('click',function(){
       if(currentPage>1){
@@ -365,7 +405,7 @@
     var next=document.createElement('button');
     next.type='button';
     next.className='pagination-next';
-    next.textContent='Next →';
+    next.textContent='Next';
     next.disabled=currentPage===totalPages;
     next.addEventListener('click',function(){
       if(currentPage<totalPages){
@@ -384,26 +424,24 @@
 
   function render(){
     var q=(search&&search.value||'').toLowerCase().trim();
+    var maxBudget=budgetRange?Number(budgetRange.value):400000;
+    var budgetMax=budgetRange?Number(budgetRange.max):400000;
 
     var data=cars.filter(function(c){
       var qok=!q||(c.name+' '+c.type+' '+brandName(c.brand)).toLowerCase().indexOf(q)>-1;
       var brandOk=selectedBrand==='all'||c.brand===selectedBrand;
       var tok=!type||type.value==='all'||c.type===type.value;
-      var bok=true;
-
-      if(budget){
-        if(budget.value==='u50') bok=c.price!=null&&c.price<50000;
-        if(budget.value==='50to100') bok=c.price!=null&&c.price>=50000&&c.price<=100000;
-        if(budget.value==='o100') bok=c.price!=null&&c.price>100000;
-      }
-
+      var bok=maxBudget>=budgetMax || (c.price!=null && c.price<=maxBudget);
       return qok&&brandOk&&tok&&bok;
     });
 
     if(sort){
-      if(sort.value==='low') data.sort(function(a,b){return (a.price==null?Number.MAX_SAFE_INTEGER:a.price)-(b.price==null?Number.MAX_SAFE_INTEGER:b.price);});
-      if(sort.value==='high') data.sort(function(a,b){return (b.price==null?-1:b.price)-(a.price==null?-1:a.price);});
-      if(sort.value==='new') data.sort(function(a,b){return b.year-a.year;});
+      if(sort.value==='name-asc') data.sort(function(a,b){return a.name.localeCompare(b.name);});
+      if(sort.value==='name-desc') data.sort(function(a,b){return b.name.localeCompare(a.name);});
+      if(sort.value==='price-low') data.sort(function(a,b){return (a.price==null?Number.MAX_SAFE_INTEGER:a.price)-(b.price==null?Number.MAX_SAFE_INTEGER:b.price);});
+      if(sort.value==='price-high') data.sort(function(a,b){return (b.price==null?-1:b.price)-(a.price==null?-1:a.price);});
+      if(sort.value==='sold-first') data.sort(function(a,b){return statusRank(a,'sold-first')-statusRank(b,'sold-first');});
+      if(sort.value==='stock-first') data.sort(function(a,b){return statusRank(a,'stock-first')-statusRank(b,'stock-first');});
     }
 
     var totalPages=Math.max(1,Math.ceil(data.length/pageSize));
@@ -411,6 +449,7 @@
 
     var start=(currentPage-1)*pageSize;
     var pageData=data.slice(start,start+pageSize);
+    var end=Math.min(start+pageSize,data.length);
 
     grid.innerHTML='';
 
@@ -425,7 +464,7 @@
 
       a.innerHTML=
         '<div class="inventory-top"><span class="inventory-brand">'+brandName(c.brand)+'</span><b>'+c.type+statusLabel+'</b></div>'+
-        '<div class="inventory-photo"><img src="'+c.img+'" alt="'+c.name+'" loading="lazy"><span class="view">View car ↗</span></div>'+
+        '<div class="inventory-photo"><img src="'+c.img+'" alt="'+c.name+'" loading="lazy"><span class="view">View car</span></div>'+
         '<div class="inventory-copy"><h3>'+c.name+'</h3><div class="inventory-price">'+money(c.price)+'</div>'+
         '<div class="inventory-specs"><div class="inventory-spec"><span>Registered</span><strong>'+c.reg+'</strong></div>'+
         '<div class="inventory-spec"><span>Mileage</span><strong>'+c.km+'</strong></div>'+
@@ -435,16 +474,26 @@
     });
 
     if(count) count.textContent=data.length;
+    if(rangeText) rangeText.textContent=data.length?(start+1)+'–'+end:'0';
     if(empty) empty.style.display=data.length?'none':'block';
     renderPagination(data.length);
   }
 
-  [search,type,budget,sort].forEach(function(el){
+  [search,type,sort].forEach(function(el){
     if(el) el.addEventListener('input',function(){
       currentPage=1;
       render();
     });
   });
+
+  if(budgetRange){
+    budgetRange.addEventListener('input',function(){
+      updateBudgetLabel();
+      currentPage=1;
+      render();
+    });
+    updateBudgetLabel();
+  }
 
   if(searchBtn){
     searchBtn.addEventListener('click',function(){
