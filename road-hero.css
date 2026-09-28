@@ -1,254 +1,261 @@
 
 /* =========================================================
    CARCHOPE ROAD EXPERIENCE
-   Alternate homepage: exact homepage content with a scroll-
-   scrub driving video replacing only the original hero image.
+   The Mixkit road video is the background for the ENTIRE page.
+   Homepage markup/content remains the same as index.html.
    ========================================================= */
 
-.road-experience-page .site-header{
-  position:fixed;
-  top:0;
-  left:0;
-  right:0;
-  width:100%;
-  z-index:80;
-  color:#fff;
-  background:linear-gradient(180deg,rgba(7,8,10,.56),rgba(7,8,10,.05));
-  border-bottom:1px solid rgba(255,255,255,.13);
-  backdrop-filter:none;
-  transition:
-    background .35s ease,
-    color .35s ease,
-    border-color .35s ease,
-    backdrop-filter .35s ease,
-    box-shadow .35s ease;
+html{
+  background:#08090b;
 }
 
-.road-experience-page .site-header .desktop-nav a,
-.road-experience-page .site-header .header-cart{
-  color:rgba(255,255,255,.92);
-}
-.road-experience-page .site-header .logo{color:#fff}
-.road-experience-page .site-header .menu-toggle span{background:currentColor}
-
-.road-experience-page.road-header-solid .site-header{
-  color:var(--ink);
-  background:rgba(255,255,255,.94);
-  border-bottom-color:rgba(17,18,20,.07);
-  backdrop-filter:blur(18px);
-  box-shadow:0 10px 32px rgba(17,18,20,.05);
-}
-.road-experience-page.road-header-solid .site-header .desktop-nav a,
-.road-experience-page.road-header-solid .site-header .header-cart{
-  color:#2f3337;
-}
-.road-experience-page.road-header-solid .site-header .logo{color:var(--ink)}
-
-/* Long scroll track. The stage remains in the viewport while
-   scroll position scrubs the Mixkit driving video. */
-.road-story{
+body.road-experience-page{
   position:relative;
-  height:430svh;
-  min-height:2800px;
-  color:#fff;
+  min-height:100%;
+  overflow-x:hidden;
   background:#08090b;
 }
-.road-stage{
-  position:sticky;
-  top:0;
-  height:100svh;
-  min-height:640px;
+
+/* ---------- fixed whole-page background ---------- */
+.road-page-background{
+  position:fixed;
+  inset:0;
+  z-index:0;
   overflow:hidden;
-  isolation:isolate;
+  pointer-events:none;
   background:#08090b;
 }
-.road-video-wrap,
-.road-scroll-video,
-.road-video-grade,
-.road-video-vignette{
+
+.road-page-video,
+.road-page-video-grade,
+.road-page-video-vignette{
   position:absolute;
   inset:0;
   width:100%;
   height:100%;
 }
-.road-video-wrap{
-  z-index:-4;
-  overflow:hidden;
-  background:#08090b;
-}
-.road-scroll-video{
+
+.road-page-video{
   display:block;
   object-fit:cover;
   object-position:center center;
-  transform:scale(1.01);
+  transform:scale(1.015);
   filter:saturate(.92) contrast(1.06) brightness(.82);
+  will-change:transform;
 }
-.road-video-grade{
+
+.road-page-video-grade{
   z-index:1;
-  pointer-events:none;
   background:
-    linear-gradient(90deg,
-      rgba(5,6,8,.67) 0%,
-      rgba(5,6,8,.40) 35%,
-      rgba(5,6,8,.11) 64%,
-      rgba(5,6,8,.22) 100%),
     linear-gradient(180deg,
-      rgba(5,6,8,.30) 0%,
-      rgba(5,6,8,.02) 36%,
-      rgba(5,6,8,.09) 66%,
-      rgba(5,6,8,.60) 100%);
+      rgba(6,7,9,.16) 0%,
+      rgba(6,7,9,.02) 34%,
+      rgba(6,7,9,.05) 62%,
+      rgba(6,7,9,.22) 100%),
+    linear-gradient(90deg,
+      rgba(6,7,9,.10) 0%,
+      rgba(6,7,9,.01) 48%,
+      rgba(6,7,9,.10) 100%);
 }
-.road-video-vignette{
+
+.road-page-video-vignette{
   z-index:2;
-  pointer-events:none;
-  box-shadow:inset 0 0 170px rgba(0,0,0,.48);
+  box-shadow:inset 0 0 150px rgba(0,0,0,.32);
 }
-.road-video-loading{
+
+.road-page-video-loading{
   position:absolute;
-  z-index:4;
+  z-index:3;
   left:50%;
   top:50%;
+  transform:translate(-50%,-50%);
   display:flex;
   align-items:center;
   gap:10px;
-  transform:translate(-50%,-50%);
-  color:rgba(255,255,255,.65);
+  color:rgba(255,255,255,.72);
   font-size:9px;
   font-weight:800;
   letter-spacing:.16em;
   text-transform:uppercase;
   transition:opacity .35s ease,visibility .35s ease;
 }
-.road-video-loading.is-hidden{
+
+.road-page-video-loading.is-hidden{
   opacity:0;
   visibility:hidden;
 }
-.road-video-loading span{
+
+.road-page-video-loading span{
   width:8px;
   height:8px;
   border-radius:50%;
   background:var(--orange);
-  box-shadow:0 0 18px rgba(255,90,0,.85);
-  animation:roadVideoLoad 1.1s ease-in-out infinite;
+  box-shadow:0 0 18px rgba(255,90,0,.86);
+  animation:roadPageLoad 1.1s ease-in-out infinite;
 }
-@keyframes roadVideoLoad{
+
+@keyframes roadPageLoad{
   0%,100%{opacity:.35;transform:scale(.72)}
   50%{opacity:1;transform:scale(1)}
 }
 
-/* Reuse the homepage hero content and exact layout, adapted only
-   for readability on top of the road video. */
-.road-home-hero-inner{
-  height:100%;
-  min-height:100svh!important;
-  padding-top:calc(74px + 64px)!important;
-  padding-bottom:44px!important;
-  color:#fff;
-}
-.road-home-hero-inner .hero-top{
-  top:calc(74px + 52px);
-}
-.road-home-hero-inner .hero-top .label,
-.road-home-hero-inner .hero-title,
-.road-home-hero-inner .display,
-.road-home-hero-inner .lead{
-  color:#fff;
-}
-.road-home-hero-inner .hero-rule{
-  background:rgba(255,255,255,.46);
-}
-.road-home-hero-inner .hero-top .muted{
-  color:rgba(255,255,255,.62);
-}
-.road-home-hero-inner .hero-copy{
-  color:rgba(255,255,255,.78);
-  text-shadow:0 3px 18px rgba(0,0,0,.34);
-}
-.road-home-hero-inner .hero-title h1{
-  text-shadow:0 8px 34px rgba(0,0,0,.26);
-}
-.road-home-hero-inner .hero-vertical-nav a{
-  color:rgba(255,255,255,.82);
-}
-.road-home-hero-inner .hero-vertical-nav a:hover{
-  color:var(--orange);
-}
-.road-home-hero-inner .text-link{
-  color:#fff;
-}
-.road-home-hero-inner .hero-scroll{
-  color:rgba(255,255,255,.65);
+/* Everything on the homepage sits in front of the fixed video. */
+.road-experience-page .site-header,
+.road-experience-page .mobile-panel,
+.road-experience-page main,
+.road-experience-page .site-footer,
+.road-experience-page .floating-actions{
+  position:relative;
 }
 
-/* Everything after the hero is the homepage itself and uses
-   styles.css without road-specific layout changes. */
-.road-experience-page .journey-rail,
-.road-experience-page .brand-marquee-section,
-.road-experience-page .section{
-  position:relative;
+.road-experience-page main{
   z-index:2;
 }
 
-/* Tablet */
-@media(max-width:1100px){
-  .road-story{height:400svh}
-  .road-home-hero-inner{
-    padding-top:calc(74px + 54px)!important;
-  }
+.road-experience-page .site-header{
+  z-index:50;
+  background:rgba(255,255,255,.78);
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
 }
 
-/* Mobile */
+.road-experience-page .mobile-panel{
+  z-index:49;
+  background:rgba(255,255,255,.94);
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+}
+
+/* ---------- original homepage hero over the road ---------- */
+.road-experience-page .hero{
+  background:transparent!important;
+}
+
+.road-experience-page .hero-media{
+  display:none!important;
+}
+
+/*
+  Keep the homepage's original light-to-transparent hero treatment.
+  The road video is visible through it, especially on the right.
+*/
+.road-experience-page .hero::after{
+  background:
+    linear-gradient(90deg,
+      rgba(247,247,246,.95) 0%,
+      rgba(247,247,246,.82) 31%,
+      rgba(247,247,246,.13) 58%,
+      rgba(0,0,0,.18) 100%),
+    linear-gradient(0deg,rgba(0,0,0,.16),transparent 38%);
+}
+
+/* ---------- homepage sections become translucent ----------
+   This preserves the homepage content/layout while keeping the
+   road visible behind every section from top to footer.
+*/
+.road-experience-page .journey-rail{
+  background:rgba(255,255,255,.76)!important;
+  border-bottom-color:rgba(255,255,255,.42)!important;
+  backdrop-filter:blur(9px);
+  -webkit-backdrop-filter:blur(9px);
+}
+
+.road-experience-page .journey-item{
+  border-color:rgba(17,18,20,.16)!important;
+}
+
+.road-experience-page .brand-marquee-section{
+  background:rgba(255,255,255,.72)!important;
+  border-bottom-color:rgba(17,18,20,.12)!important;
+  backdrop-filter:blur(9px);
+  -webkit-backdrop-filter:blur(9px);
+}
+
+.road-experience-page .brand-marquee-item{
+  background:rgba(255,255,255,.86)!important;
+  backdrop-filter:blur(7px);
+  -webkit-backdrop-filter:blur(7px);
+}
+
+/* The road replaces the manifesto's separate background video. */
+.road-experience-page .manifesto-video{
+  display:none!important;
+}
+
+.road-experience-page .manifesto-video-section{
+  background:rgba(10,12,14,.56)!important;
+  backdrop-filter:blur(3px);
+  -webkit-backdrop-filter:blur(3px);
+}
+
+.road-experience-page .manifesto-video-section::after{
+  background:
+    linear-gradient(90deg,
+      rgba(8,10,12,.77) 0%,
+      rgba(8,10,12,.53) 48%,
+      rgba(8,10,12,.30) 100%),
+    linear-gradient(0deg,rgba(8,10,12,.18),rgba(8,10,12,.03))!important;
+}
+
+/* Featured Cars section */
+.road-experience-page .section.section-line{
+  background:rgba(255,255,255,.78)!important;
+  backdrop-filter:blur(9px);
+  -webkit-backdrop-filter:blur(9px);
+  border-color:rgba(17,18,20,.12)!important;
+}
+
+/* Ownership support keeps its image, with the road visible behind its copy. */
+.road-experience-page .partner-band{
+  background:rgba(17,17,17,.68)!important;
+  backdrop-filter:blur(7px);
+  -webkit-backdrop-filter:blur(7px);
+}
+
+/* Footer remains readable but the same road continues behind it. */
+.road-experience-page .site-footer{
+  z-index:2;
+  background:rgba(17,17,17,.84)!important;
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+}
+
+/* Slightly reveal more video on hover-free mobile layouts. */
 @media(max-width:860px){
-  .road-experience-page .site-header{height:64px}
-
-  .road-story{
-    height:360svh;
-    min-height:2350px;
-  }
-  .road-stage{min-height:650px}
-
-  .road-scroll-video{
+  .road-page-video{
     object-position:center center;
-    transform:scale(1.035);
+    transform:scale(1.04);
   }
 
-  .road-video-grade{
+  .road-page-video-grade{
     background:
       linear-gradient(180deg,
-        rgba(5,6,8,.34) 0%,
-        rgba(5,6,8,.07) 30%,
-        rgba(5,6,8,.12) 55%,
-        rgba(5,6,8,.74) 100%),
-      linear-gradient(90deg,rgba(5,6,8,.48),rgba(5,6,8,.08));
+        rgba(6,7,9,.12) 0%,
+        rgba(6,7,9,.02) 42%,
+        rgba(6,7,9,.18) 100%);
   }
 
-  .road-home-hero-inner{
-    min-height:650px!important;
-    height:100%;
-    padding-top:98px!important;
-    padding-bottom:38px!important;
+  .road-experience-page .journey-rail,
+  .road-experience-page .brand-marquee-section,
+  .road-experience-page .section.section-line{
+    background:rgba(255,255,255,.82)!important;
   }
-  .road-home-hero-inner .hero-top{
-    top:98px;
-  }
-  .road-home-hero-inner .hero-actions{
-    align-items:flex-start;
-    flex-direction:column;
-  }
-  .road-home-hero-inner .hero-scroll{
-    display:none;
-  }
-}
 
-@media(max-width:580px){
-  .road-home-hero-inner{
-    padding-top:90px!important;
+  .road-experience-page .manifesto-video-section{
+    background:rgba(9,11,13,.64)!important;
   }
-  .road-home-hero-inner .hero-top{
-    top:90px;
+
+  .road-experience-page .partner-band{
+    background:rgba(17,17,17,.76)!important;
+  }
+
+  .road-experience-page .site-footer{
+    background:rgba(17,17,17,.88)!important;
   }
 }
 
 @media(prefers-reduced-motion:reduce){
-  .road-video-loading span{animation:none}
+  .road-page-video-loading span{
+    animation:none;
+  }
 }

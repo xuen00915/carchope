@@ -1,136 +1,80 @@
 
-/* Carchope scroll-controlled Mixkit driving video */
+/* Carchope whole-page scroll-scrub road background */
 (function(){
   "use strict";
 
-  var story=document.getElementById("road-story");
-  var stage=document.getElementById("road-stage");
   var video=document.getElementById("road-scroll-video");
   var loading=document.getElementById("road-video-loading");
-  var chapters=Array.prototype.slice.call(document.querySelectorAll("[data-road-chapter]"));
-  var counter=document.getElementById("road-chapter-count");
-  var currentLabel=document.getElementById("road-video-current");
-  var durationLabel=document.getElementById("road-video-duration");
-  var root=document.documentElement;
-  var body=document.body;
 
-  if(!story||!stage||!video) return;
+  if(!video) return;
 
-  var targetProgress=0;
-  var smoothProgress=0;
-  var targetTime=0;
   var duration=0;
-  var videoReady=false;
+  var ready=false;
+  var targetTime=0;
+  var targetProgress=0;
   var rafId=0;
 
-  function clamp(value,min,max){
-    return Math.min(max,Math.max(min,value));
+  function clamp(v,min,max){
+    return Math.min(max,Math.max(min,v));
   }
 
-  function smoothstep(edge0,edge1,x){
-    var t=clamp((x-edge0)/(edge1-edge0),0,1);
-    return t*t*(3-2*t);
+  function getDocumentProgress(){
+    var doc=document.documentElement;
+    var body=document.body;
+    var scrollTop=window.pageYOffset||doc.scrollTop||body.scrollTop||0;
+    var fullHeight=Math.max(
+      body.scrollHeight,
+      body.offsetHeight,
+      doc.clientHeight,
+      doc.scrollHeight,
+      doc.offsetHeight
+    );
+    var total=Math.max(1,fullHeight-window.innerHeight);
+    return clamp(scrollTop/total,0,1);
   }
 
-  function formatTime(seconds){
-    if(!isFinite(seconds)||seconds<0) seconds=0;
-    var total=Math.floor(seconds);
-    var min=Math.floor(total/60);
-    var sec=total%60;
-    return String(min).padStart(2,"0")+":"+String(sec).padStart(2,"0");
-  }
+  function updateTarget(){
+    targetProgress=getDocumentProgress();
 
-  function getProgress(){
-    var rect=story.getBoundingClientRect();
-    var total=Math.max(1,story.offsetHeight-window.innerHeight);
-    return clamp((-rect.top)/total,0,1);
-  }
-
-  function chapterOpacity(index,p){
-    if(index===0){
-      if(p<=.17) return 1;
-      return 1-smoothstep(.17,.30,p);
-    }
-
-    if(index===1){
-      return smoothstep(.23,.35,p)*(1-smoothstep(.54,.66,p));
-    }
-
-    return smoothstep(.60,.72,p);
-  }
-
-  function updateContent(p){
-    chapters.forEach(function(chapter,index){
-      var opacity=chapterOpacity(index,p);
-      var y=(1-opacity)*34;
-
-      chapter.style.setProperty("--chapter-opacity",opacity.toFixed(3));
-      chapter.style.setProperty("--chapter-y",y.toFixed(1)+"px");
-      chapter.classList.toggle("is-visible",opacity>.025);
-      chapter.setAttribute("aria-hidden",opacity>.025?"false":"true");
-    });
-
-    var active=p<.29?1:(p<.65?2:3);
-    if(counter){
-      counter.textContent=("0"+active).slice(-2)+" / 03";
-    }
-
-    root.style.setProperty("--road-progress",p.toFixed(4));
-
-    var rect=story.getBoundingClientRect();
-    var heroDone=rect.bottom<=window.innerHeight*.22;
-    body.classList.toggle("road-header-solid",heroDone);
-  }
-
-  function setTargetFromScroll(){
-    targetProgress=getProgress();
-    updateContent(targetProgress);
-
-    if(videoReady&&duration>0){
+    if(ready&&duration>0){
       /*
-        Scroll position maps directly to video time:
-        top of story = first frame
-        bottom of story = final frame
-        Scrolling upward naturally reverses the video.
+        The entire page controls the video:
+        page top    -> video first frame
+        page footer -> video final frame
       */
-      targetTime=clamp(targetProgress*duration,0,Math.max(0,duration-.035));
-    }
-  }
-
-  function setStoryLength(){
-    /*
-      Give longer clips more scrolling distance so frame movement stays smooth,
-      but cap the hero so it never becomes excessively long.
-    */
-    if(duration>0){
-      var vh=clamp(duration*25,360,560);
-      story.style.height=vh.toFixed(0)+"svh";
+      targetTime=clamp(
+        targetProgress*duration,
+        0,
+        Math.max(0,duration-.04)
+      );
     }
   }
 
   function markReady(){
-    if(videoReady) return;
-    videoReady=true;
+    if(ready) return;
+
+    ready=true;
     duration=isFinite(video.duration)?video.duration:0;
 
     /*
-      The video must never autoplay. The page's scroll position is the only
-      playback controller.
+      Never free-run/autoplay. The video's frame is controlled only
+      by the user's page scroll position.
     */
     video.pause();
+    video.muted=true;
+    video.playsInline=true;
+
+    updateTarget();
 
     if(duration>0){
-      durationLabel.textContent=formatTime(duration);
-      setStoryLength();
-      targetTime=getProgress()*duration;
-
       try{
-        video.currentTime=clamp(targetTime,0,Math.max(0,duration-.035));
+        video.currentTime=targetTime;
       }catch(e){}
     }
 
-    if(loading) loading.classList.add("is-hidden");
-    setTargetFromScroll();
+    if(loading){
+      loading.classList.add("is-hidden");
+    }
   }
 
   video.muted=true;
@@ -146,43 +90,47 @@
     video.load();
   }
 
-  window.addEventListener("scroll",setTargetFromScroll,{passive:true});
-  window.addEventListener("resize",setTargetFromScroll,{passive:true});
+  window.addEventListener("scroll",updateTarget,{passive:true});
+  window.addEventListener("resize",updateTarget,{passive:true});
+  window.addEventListener("load",updateTarget,{once:true});
 
-  setTargetFromScroll();
+  /*
+    Images, marquee content and responsive changes can alter the page's
+    total scroll height. Recalculate when the document geometry changes.
+  */
+  if("ResizeObserver" in window){
+    var ro=new ResizeObserver(function(){
+      updateTarget();
+    });
+    ro.observe(document.body);
+  }
+
+  updateTarget();
 
   function render(){
     rafId=requestAnimationFrame(render);
 
-    smoothProgress+=(targetProgress-smoothProgress)*.11;
+    if(!ready||!duration) return;
 
-    if(!videoReady||!duration) return;
-
-    /*
-      Smoothly chase the desired frame. It feels like playback while scrolling,
-      but freezes naturally when the user stops because targetTime stops moving.
-    */
     var now=video.currentTime||0;
     var diff=targetTime-now;
 
-    if(Math.abs(diff)>.018){
-      var step=diff*.20;
+    if(Math.abs(diff)>.012){
+      var step=diff*.22;
 
-      /*
-        Large scroll jumps can otherwise take too long to catch up.
-      */
-      if(Math.abs(diff)>.70) step=diff*.42;
-      if(Math.abs(diff)>2.2) step=diff*.72;
+      /* Catch up quickly after a large trackpad/page jump. */
+      if(Math.abs(diff)>.65) step=diff*.42;
+      if(Math.abs(diff)>2.0) step=diff*.70;
 
-      var next=clamp(now+step,0,Math.max(0,duration-.035));
+      var next=clamp(
+        now+step,
+        0,
+        Math.max(0,duration-.04)
+      );
 
       try{
         video.currentTime=next;
       }catch(e){}
-    }
-
-    if(currentLabel){
-      currentLabel.textContent=formatTime(video.currentTime||0);
     }
   }
 
