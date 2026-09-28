@@ -871,3 +871,122 @@
   refreshTypeOptions();
   render();
 })();
+
+/* Global wheel + speed dashboard */
+(function(){
+  if(document.getElementById('global-wheel-scroll')) return;
+
+  var indicator=document.createElement('div');
+  indicator.className='global-wheel-scroll';
+  indicator.id='global-wheel-scroll';
+  indicator.setAttribute('aria-hidden','true');
+  indicator.innerHTML=
+    '<div class="global-wheel-track"></div>'+
+    '<div class="global-wheel-thumb" id="global-wheel-thumb">'+
+      '<span class="global-wheel-rim"></span>'+
+      '<span class="global-wheel-spoke global-wheel-spoke-a"></span>'+
+      '<span class="global-wheel-spoke global-wheel-spoke-b"></span>'+
+      '<span class="global-wheel-spoke global-wheel-spoke-c"></span>'+
+      '<span class="global-wheel-hub"></span>'+
+    '</div>';
+
+  var speedDash=document.createElement('div');
+  speedDash.className='global-speed-dashboard';
+  speedDash.id='global-speed-dashboard';
+  speedDash.setAttribute('aria-hidden','true');
+  speedDash.innerHTML=
+    '<div class="global-speed-top">'+
+      '<span class="global-speed-label">Speed</span>'+
+      '<span class="global-speed-value-wrap">'+
+        '<strong class="global-speed-value" id="global-speed-value">000</strong>'+
+        '<span class="global-speed-unit">km/h</span>'+
+      '</span>'+
+    '</div>'+
+    '<div class="global-speed-meter"><span class="global-speed-ticks"></span></div>';
+
+  document.body.appendChild(indicator);
+  document.body.appendChild(speedDash);
+
+  var thumb=document.getElementById('global-wheel-thumb');
+  var speedValue=document.getElementById('global-speed-value');
+
+  var lastY=window.pageYOffset||document.documentElement.scrollTop||0;
+  var lastTime=performance.now();
+  var targetSpeed=0;
+  var shownSpeed=0;
+  var progress=0;
+  var rafId=0;
+
+  function clamp(v,min,max){
+    return Math.min(max,Math.max(min,v));
+  }
+
+  function measureScroll(){
+    var now=performance.now();
+    var y=window.pageYOffset||document.documentElement.scrollTop||document.body.scrollTop||0;
+    var dt=Math.max(16,now-lastTime);
+    var dy=y-lastY;
+
+    /*
+      Visual speedometer only:
+      scroll velocity is mapped to a car-like 0–220 km/h range.
+    */
+    var pxPerMs=Math.abs(dy)/dt;
+    targetSpeed=clamp(pxPerMs*105,0,220);
+
+    lastY=y;
+    lastTime=now;
+
+    var doc=document.documentElement;
+    var body=document.body;
+    var fullHeight=Math.max(
+      body.scrollHeight,
+      body.offsetHeight,
+      doc.clientHeight,
+      doc.scrollHeight,
+      doc.offsetHeight
+    );
+    var total=Math.max(1,fullHeight-window.innerHeight);
+    progress=clamp(y/total,0,1);
+  }
+
+  function renderWidgets(){
+    rafId=requestAnimationFrame(renderWidgets);
+
+    /*
+      Give the speed a little inertia, then decay naturally to zero when
+      the user stops scrolling.
+    */
+    shownSpeed+=(targetSpeed-shownSpeed)*.22;
+    targetSpeed*=.90;
+
+    if(targetSpeed<.18) targetSpeed=0;
+    if(shownSpeed<.18) shownSpeed=0;
+
+    var wheelSize=thumb.offsetHeight||46;
+    var travel=Math.max(0,indicator.clientHeight-wheelSize);
+    var y=progress*travel;
+    var rotation=progress*1080;
+
+    indicator.style.setProperty('--gws-progress',progress.toFixed(4));
+    thumb.style.setProperty('--gws-y',y.toFixed(2)+'px');
+    thumb.style.setProperty('--gws-rotation',rotation.toFixed(2)+'deg');
+
+    var speed=Math.round(shownSpeed);
+    speedValue.textContent=String(speed).padStart(3,'0');
+    speedDash.style.setProperty('--speed-pct',(speed/220).toFixed(4));
+  }
+
+  window.addEventListener('scroll',measureScroll,{passive:true});
+  window.addEventListener('resize',measureScroll,{passive:true});
+  window.addEventListener('load',measureScroll,{once:true});
+
+  if('ResizeObserver' in window){
+    var ro=new ResizeObserver(measureScroll);
+    ro.observe(document.body);
+  }
+
+  measureScroll();
+  renderWidgets();
+})();
+
