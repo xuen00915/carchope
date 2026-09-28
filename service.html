@@ -28,8 +28,11 @@
       </button>
       <div class="cart-popover" id="cart-popover" aria-hidden="true">
         <div class="cart-popover-head">
-          <strong>Your Cart</strong>
-          <span><span data-cart-count>0</span> item(s)</span>
+          <div>
+            <strong>Your Cart</strong>
+            <span><span data-cart-count>0</span> item(s)</span>
+          </div>
+          <button class="cart-clear-btn" id="cart-clear-btn" type="button">Clear Cart</button>
         </div>
         <div class="cart-popover-items" id="cart-popover-items"></div>
         <div class="cart-popover-empty" id="cart-popover-empty">No cars added yet.</div>
@@ -176,12 +179,12 @@
         <div class="footer-title">Contact</div>
 
         <div class="footer-contact-list">
-          <div class="footer-contact-item">
+          <a class="footer-contact-item" href="https://www.google.com/maps/search/?api=1&amp;query=37+Jalan+Pemimpin+%2303-03+Mapex+Singapore+577177" target="_blank" rel="noopener">
             <span class="footer-contact-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24"><path d="M12 21s6-5.2 6-11a6 6 0 1 0-12 0c0 5.8 6 11 6 11Z"></path><circle cx="12" cy="10" r="2.2"></circle></svg>
             </span>
             <span>37 Jalan Pemimpin #03-03<br>Mapex, Singapore 577177</span>
-          </div>
+          </a>
 
           <a class="footer-contact-item" href="tel:+6596268890">
             <span class="footer-contact-icon" aria-hidden="true">
@@ -208,11 +211,15 @@
         <div class="footer-subtitle">Follow Us</div>
         <div class="footer-social-icons">
           <a href="https://m.facebook.com/carchope/" target="_blank" rel="noopener" aria-label="Follow Carchope on Facebook">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/b/b8/2021_Facebook_icon.svg" alt="">
+            <span class="footer-social-vector" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M14.2 8H17V4h-3.4C10.5 4 9 5.9 9 9v2H6v4h3v5h4v-5h3.2l.8-4H13V9.3c0-.9.3-1.3 1.2-1.3Z"></path></svg>
+            </span>
             <span>Facebook</span>
           </a>
           <a href="https://www.instagram.com/invites/contact/?i=u53lhditdk3o&amp;utm_content=n6bo93j" target="_blank" rel="noopener" aria-label="Follow Carchope on Instagram">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Instagram_logo_2016.svg" alt="">
+            <span class="footer-social-vector" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="4"></rect><circle cx="12" cy="12" r="3.6"></circle><circle cx="17.3" cy="6.8" r=".9" class="fill-dot"></circle></svg>
+            </span>
             <span>Instagram</span>
           </a>
         </div>
