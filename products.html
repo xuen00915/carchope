@@ -40,28 +40,44 @@
         <h1 class="display-md reveal" data-delay="1">Quality Cars.<br>For A Brighter Tomorrow.</h1>
         <p class="lead reveal" data-delay="2">Browse Carchope’s pre-owned selection with the important ownership details surfaced first.</p>
 
-        <div class="inventory-search reveal" data-delay="3">
-          <div class="filter-field"><label>Keyword</label><input id="car-search" placeholder="Search model"></div>
-          <div class="filter-field"><label>Body type</label><select id="car-type"><option value="all">Any type</option></select></div>
-          <div class="filter-field"><label>Budget</label><select id="car-budget"><option value="all">Any budget</option><option value="u50">Under $50k</option><option value="50to100">$50k–$100k</option><option value="o100">$100k+</option></select></div>
-          <div class="filter-field"><label>Sort</label><select id="car-sort"><option value="featured">Featured</option><option value="low">Price: low to high</option><option value="high">Price: high to low</option><option value="new">Newest registration</option></select></div>
-          <button class="search-btn" type="button" aria-label="Search cars">⌕</button>
-        </div>
-      </div>
+              </div>
     </div>
   </section>
 
-
-  <section class="brand-filter-section" aria-label="Filter cars by brand">
+  <section class="product-filter-section" aria-label="Filter pre-owned cars">
     <div class="container">
-      <div class="brand-filter-head">
-        <div>
-          <div class="eyebrow orange-line">Browse by brand</div>
-          <h2>Choose a make</h2>
+      <div class="inventory-search inventory-search-below">
+        <div class="filter-field brand-field">
+          <label>Brand</label>
+          <div class="brand-select" id="brand-select">
+            <button class="brand-select-trigger" id="brand-trigger" type="button" aria-haspopup="listbox" aria-expanded="false">
+              <span class="brand-select-current" id="brand-current">
+                <span class="brand-current-mark">ALL</span>
+                <span>Any brand</span>
+              </span>
+              <span class="brand-chevron" aria-hidden="true">⌄</span>
+            </button>
+            <div class="brand-select-menu" id="brand-menu" role="listbox" aria-label="Vehicle brand"></div>
+          </div>
         </div>
-        <button class="brand-reset" id="brand-reset" type="button">All brands</button>
+        <div class="filter-field">
+          <label for="car-search">Keyword</label>
+          <input id="car-search" placeholder="Search model">
+        </div>
+        <div class="filter-field">
+          <label for="car-type">Body type</label>
+          <select id="car-type"><option value="all">Any type</option></select>
+        </div>
+        <div class="filter-field">
+          <label for="car-budget">Budget</label>
+          <select id="car-budget"><option value="all">Any budget</option><option value="u50">Under $50k</option><option value="50to100">$50k–$100k</option><option value="o100">$100k+</option></select>
+        </div>
+        <div class="filter-field">
+          <label for="car-sort">Sort</label>
+          <select id="car-sort"><option value="featured">Featured</option><option value="low">Price: low to high</option><option value="high">Price: high to low</option><option value="new">Newest registration</option></select>
+        </div>
+        <button class="search-btn" id="car-search-btn" type="button" aria-label="Apply car filters">⌕</button>
       </div>
-      <div class="brand-filter-scroll" id="brand-filter" role="list" aria-label="Vehicle brands"></div>
     </div>
   </section>
 
