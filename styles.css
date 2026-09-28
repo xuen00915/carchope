@@ -3489,3 +3489,20 @@ a.footer-contact-item:hover{color:#fff}
     font-size:21px!important;
   }
 }
+
+
+/* Supplied WhatsApp logo refinement */
+.whatsapp-clip{
+  overflow:hidden!important;
+  background:#fff!important;
+}
+.whatsapp-clip svg{
+  display:none!important;
+}
+.whatsapp-clip img{
+  width:100%!important;
+  height:100%!important;
+  display:block!important;
+  object-fit:cover!important;
+  border-radius:50%!important;
+}
