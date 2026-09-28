@@ -1,0 +1,4 @@
+Standalone road experience video source:
+https://assets.mixkit.co/videos/48489/48489-720.mp4
+
+Used by road-experience.html for scroll-controlled playback.
