@@ -47,9 +47,6 @@
     });
   }
 
-  var grid=document.getElementById('inventory-grid');
-  if(!grid) return;
-
   var brands=[
     {id:'aion',name:'AION',domain:'aionauto.com'},
     {id:'audi',name:'Audi',domain:'audi.com'},
@@ -62,6 +59,7 @@
     {id:'infiniti',name:'INFINITI',domain:'infiniti.com'},
     {id:'kia',name:'Kia',domain:'kia.com'},
     {id:'lexus',name:'Lexus',domain:'lexus.com'},
+    {id:'lotus',name:'Lotus',domain:'lotuscars.com'},
     {id:'mazda',name:'Mazda',domain:'mazda.com'},
     {id:'mercedes',name:'Mercedes-Benz',domain:'mercedes-benz.com'},
     {id:'mg',name:'MG',domain:'mgmotor.com'},
@@ -78,6 +76,65 @@
     {id:'volvo',name:'Volvo',domain:'volvocars.com'},
     {id:'xpeng',name:'XPENG',domain:'xpeng.com'}
   ];
+
+  var brandById={};
+  brands.forEach(function(b){brandById[b.id]=b;});
+
+  function initials(name){
+    return name.replace(/[^A-Za-z0-9]/g,'').slice(0,3).toUpperCase();
+  }
+
+  function makeLogoNode(brand,className){
+    var wrap=document.createElement('span');
+    wrap.className=className||'brand-option-logo';
+
+    var img=document.createElement('img');
+    img.alt=brand.name+' logo';
+    img.loading='lazy';
+    var step=0;
+
+    img.addEventListener('error',function(){
+      if(step===0){
+        step=1;
+        img.src='https://www.google.com/s2/favicons?sz=128&domain_url=https://'+brand.domain;
+      }else{
+        img.remove();
+        wrap.classList.add('fallback');
+        wrap.textContent=initials(brand.name);
+      }
+    });
+
+    img.src='https://logo.clearbit.com/'+brand.domain+'?size=128';
+    wrap.appendChild(img);
+    return wrap;
+  }
+
+  var marqueeTrack=document.getElementById('brand-marquee-track');
+  if(marqueeTrack){
+    function makeMarqueeGroup(){
+      var group=document.createElement('div');
+      group.className='brand-marquee-group';
+      brands.forEach(function(brand){
+        var link=document.createElement('a');
+        link.className='brand-marquee-item';
+        link.href='products.html?brand='+encodeURIComponent(brand.id);
+        link.setAttribute('aria-label','Browse '+brand.name+' cars');
+        link.appendChild(makeLogoNode(brand,'brand-marquee-logo'));
+        var label=document.createElement('span');
+        label.className='brand-marquee-name';
+        label.textContent=brand.name;
+        link.appendChild(label);
+        group.appendChild(link);
+      });
+      return group;
+    }
+    marqueeTrack.appendChild(makeMarqueeGroup());
+    marqueeTrack.appendChild(makeMarqueeGroup());
+  }
+
+
+  var grid=document.getElementById('inventory-grid');
+  if(!grid) return;
 
   var cars=[
     {brand:'xpeng',name:'XPENG G6 Electric',type:'SUV',price:201705,reg:'27 Mar 2025',dep:'$21,010/yr',km:'7,000 km',year:2025,status:'Available',img:'https://images.unsplash.com/photo-1619767886558-efdc259cde1a?auto=format&fit=crop&w=1600&q=88'},
@@ -114,12 +171,15 @@
   var sort=document.getElementById('car-sort');
   var count=document.getElementById('car-count');
   var empty=document.getElementById('inventory-empty');
-  var brandFilter=document.getElementById('brand-filter');
-  var brandReset=document.getElementById('brand-reset');
-  var selectedBrand='all';
+  var brandSelect=document.getElementById('brand-select');
+  var brandTrigger=document.getElementById('brand-trigger');
+  var brandCurrent=document.getElementById('brand-current');
+  var brandMenu=document.getElementById('brand-menu');
+  var searchBtn=document.getElementById('car-search-btn');
 
-  var brandById={};
-  brands.forEach(function(b){brandById[b.id]=b;});
+  var queryBrand='';
+  try{ queryBrand=(new URLSearchParams(window.location.search)).get('brand')||''; }catch(e){}
+  var selectedBrand=brandById[queryBrand]?queryBrand:'all';
 
   Array.from(new Set(cars.map(function(c){return c.type;}))).sort().forEach(function(t){
     var o=document.createElement('option');
@@ -128,82 +188,110 @@
     if(type) type.appendChild(o);
   });
 
-  function buildBrandLogo(brand){
-    var wrap=document.createElement('span');
-    wrap.className='brand-logo-wrap';
-
-    if(!brand){
-      wrap.classList.add('fallback');
-      wrap.textContent='ALL';
-      return wrap;
+  function renderBrandCurrent(){
+    if(!brandCurrent) return;
+    brandCurrent.innerHTML='';
+    if(selectedBrand==='all'){
+      var allMark=document.createElement('span');
+      allMark.className='brand-current-mark';
+      allMark.textContent='ALL';
+      var allName=document.createElement('span');
+      allName.textContent='Any brand';
+      brandCurrent.appendChild(allMark);
+      brandCurrent.appendChild(allName);
+      return;
     }
-
-    var img=document.createElement('img');
-    img.alt=brand.name+' logo';
-    img.loading='lazy';
-    var step=0;
-
-    img.addEventListener('error',function(){
-      if(step===0){
-        step=1;
-        img.src='https://www.google.com/s2/favicons?sz=128&domain_url=https://'+brand.domain;
-      }else{
-        img.remove();
-        wrap.classList.add('fallback');
-        wrap.textContent=brand.name.replace(/[^A-Za-z0-9]/g,'').slice(0,3).toUpperCase();
-      }
-    });
-
-    img.src='https://logo.clearbit.com/'+brand.domain+'?size=128';
-    wrap.appendChild(img);
-    return wrap;
+    var brand=brandById[selectedBrand];
+    var logo=makeLogoNode(brand,'brand-option-logo');
+    var img=logo.querySelector('img');
+    if(img) img.className='brand-current-logo';
+    brandCurrent.appendChild(logo);
+    var name=document.createElement('span');
+    name.textContent=brand.name;
+    brandCurrent.appendChild(name);
   }
 
-  function makeBrandButton(brand){
+  function syncBrandUrl(){
+    if(!window.history||!window.history.replaceState) return;
+    try{
+      var url=new URL(window.location.href);
+      if(selectedBrand==='all') url.searchParams.delete('brand');
+      else url.searchParams.set('brand',selectedBrand);
+      window.history.replaceState({},'',url.pathname+url.search+url.hash);
+    }catch(e){}
+  }
+
+  function selectBrand(id){
+    selectedBrand=id;
+    renderBrandCurrent();
+    if(brandMenu){
+      brandMenu.querySelectorAll('.brand-option').forEach(function(btn){
+        var active=btn.dataset.brand===selectedBrand;
+        btn.classList.toggle('active',active);
+        btn.setAttribute('aria-selected',active?'true':'false');
+      });
+    }
+    if(brandSelect) brandSelect.classList.remove('open');
+    if(brandTrigger) brandTrigger.setAttribute('aria-expanded','false');
+    syncBrandUrl();
+    render();
+  }
+
+  function makeBrandOption(brand){
     var btn=document.createElement('button');
     btn.type='button';
-    btn.className='brand-filter-btn'+(!brand?' all active':'');
-    btn.setAttribute('role','listitem');
+    btn.className='brand-option';
     btn.dataset.brand=brand?brand.id:'all';
-    btn.appendChild(buildBrandLogo(brand));
+    btn.setAttribute('role','option');
+
+    if(brand){
+      btn.appendChild(makeLogoNode(brand,'brand-option-logo'));
+    }else{
+      var mark=document.createElement('span');
+      mark.className='brand-option-logo fallback';
+      mark.textContent='ALL';
+      btn.appendChild(mark);
+    }
 
     var label=document.createElement('span');
-    label.className='brand-filter-name';
-    label.textContent=brand?brand.name:'All makes';
+    label.className='brand-option-name';
+    label.textContent=brand?brand.name:'Any brand';
     btn.appendChild(label);
 
-    btn.addEventListener('click',function(){
-      selectedBrand=btn.dataset.brand;
-      updateBrandState();
-      render();
-    });
+    btn.addEventListener('click',function(){selectBrand(btn.dataset.brand);});
     return btn;
   }
 
-  function updateBrandState(){
-    if(!brandFilter) return;
-    brandFilter.querySelectorAll('.brand-filter-btn').forEach(function(btn){
-      var active=btn.dataset.brand===selectedBrand;
-      btn.classList.toggle('active',active);
-      btn.setAttribute('aria-pressed',active?'true':'false');
+  if(brandMenu){
+    brandMenu.appendChild(makeBrandOption(null));
+    brands.forEach(function(brand){brandMenu.appendChild(makeBrandOption(brand));});
+  }
+
+  if(brandTrigger&&brandSelect){
+    brandTrigger.addEventListener('click',function(){
+      var open=brandSelect.classList.toggle('open');
+      brandTrigger.setAttribute('aria-expanded',open?'true':'false');
     });
   }
 
-  if(brandFilter){
-    brandFilter.appendChild(makeBrandButton(null));
-    brands.forEach(function(b){brandFilter.appendChild(makeBrandButton(b));});
-  }
+  document.addEventListener('click',function(e){
+    if(brandSelect&&!brandSelect.contains(e.target)){
+      brandSelect.classList.remove('open');
+      if(brandTrigger) brandTrigger.setAttribute('aria-expanded','false');
+    }
+  });
 
-  if(brandReset){
-    brandReset.addEventListener('click',function(){
-      selectedBrand='all';
-      updateBrandState();
-      render();
-      if(brandFilter&&brandFilter.scrollTo){
-        brandFilter.scrollTo({left:0,behavior:'smooth'});
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape'&&brandSelect){
+      brandSelect.classList.remove('open');
+      if(brandTrigger){
+        brandTrigger.setAttribute('aria-expanded','false');
+        brandTrigger.focus();
       }
-    });
-  }
+    }
+  });
+
+  renderBrandCurrent();
 
   function money(n){return n==null?'Sold':('$'+n.toLocaleString('en-SG'));}
   function brandName(id){return brandById[id]?brandById[id].name:id;}
@@ -227,19 +315,9 @@
     });
 
     if(sort){
-      if(sort.value==='low'){
-        data.sort(function(a,b){
-          return (a.price==null?Number.MAX_SAFE_INTEGER:a.price)-(b.price==null?Number.MAX_SAFE_INTEGER:b.price);
-        });
-      }
-      if(sort.value==='high'){
-        data.sort(function(a,b){
-          return (b.price==null?-1:b.price)-(a.price==null?-1:a.price);
-        });
-      }
-      if(sort.value==='new'){
-        data.sort(function(a,b){return b.year-a.year;});
-      }
+      if(sort.value==='low') data.sort(function(a,b){return (a.price==null?Number.MAX_SAFE_INTEGER:a.price)-(b.price==null?Number.MAX_SAFE_INTEGER:b.price);});
+      if(sort.value==='high') data.sort(function(a,b){return (b.price==null?-1:b.price)-(a.price==null?-1:a.price);});
+      if(sort.value==='new') data.sort(function(a,b){return b.year-a.year;});
     }
 
     grid.innerHTML='';
@@ -272,5 +350,13 @@
     if(el) el.addEventListener('input',render);
   });
 
-  render();
+  if(searchBtn){
+    searchBtn.addEventListener('click',function(){
+      render();
+      var toolbar=document.querySelector('.inventory-toolbar');
+      if(toolbar) toolbar.scrollIntoView({behavior:'smooth',block:'start'});
+    });
+  }
+
+  selectBrand(selectedBrand);
 })();
