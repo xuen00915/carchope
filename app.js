@@ -401,6 +401,9 @@
   var typeMenu=document.getElementById('type-menu');
   var searchBtn=document.getElementById('car-search-btn');
   var pagination=document.getElementById('pagination');
+  var mobileFilterToggle=document.getElementById('mobile-filter-toggle');
+  var mobileFilterSummary=document.getElementById('mobile-filter-summary');
+  var productFilterSection=document.querySelector('.product-filter-section');
   var currentPage=1;
   var pageSize=9;
 
@@ -422,6 +425,17 @@
     check.className='multi-option-check';
     check.innerHTML='<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m3.5 8.2 2.7 2.7 6.2-6.1"></path></svg>';
     return check;
+  }
+
+  function updateMobileFilterSummary(){
+    if(!mobileFilterSummary) return;
+    var parts=[];
+    if(selectedBrands.size) parts.push(selectedBrands.size+' brand'+(selectedBrands.size>1?'s':''));
+    if(selectedTypes.size) parts.push(selectedTypes.size+' type'+(selectedTypes.size>1?'s':''));
+    if(budgetRange && Number(budgetRange.value)<Number(budgetRange.max)){
+      parts.push('≤ $'+Number(budgetRange.value).toLocaleString('en-SG'));
+    }
+    mobileFilterSummary.textContent=parts.length?parts.join(' · '):'Brand, type, budget, sort';
   }
 
   function renderBrandCurrent(){
@@ -492,6 +506,7 @@
       selectedBrands.add(id);
     }
     renderBrandCurrent();
+    updateMobileFilterSummary();
     refreshBrandOptions();
     syncBrandUrl();
     currentPage=1;
@@ -507,6 +522,7 @@
       selectedTypes.add(value);
     }
     renderTypeCurrent();
+    updateMobileFilterSummary();
     refreshTypeOptions();
     currentPage=1;
     render();
@@ -794,10 +810,18 @@
   if(budgetRange){
     budgetRange.addEventListener('input',function(){
       updateBudgetLabel();
+      updateMobileFilterSummary();
       currentPage=1;
       render();
     });
     updateBudgetLabel();
+  }
+
+  if(mobileFilterToggle&&productFilterSection){
+    mobileFilterToggle.addEventListener('click',function(){
+      var open=productFilterSection.classList.toggle('mobile-filters-open');
+      mobileFilterToggle.setAttribute('aria-expanded',open?'true':'false');
+    });
   }
 
   if(searchBtn){
@@ -810,6 +834,7 @@
 
   renderBrandCurrent();
   renderTypeCurrent();
+  updateMobileFilterSummary();
   refreshBrandOptions();
   refreshTypeOptions();
   render();
