@@ -100,19 +100,15 @@ body.road-experience-page{
 }
 
 /* Everything on the homepage sits in front of the fixed video. */
-.road-experience-page .site-header,
-.road-experience-page .mobile-panel,
 .road-experience-page main,
-.road-experience-page .site-footer,
-.road-experience-page .floating-actions{
+.road-experience-page .site-footer{
   position:relative;
-}
-
-.road-experience-page main{
   z-index:2;
 }
 
 .road-experience-page .site-header{
+  position:sticky;
+  top:0;
   z-index:50;
   background:rgba(255,255,255,.78);
   backdrop-filter:blur(16px);
