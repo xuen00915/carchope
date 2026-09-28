@@ -7,7 +7,7 @@
   <meta name="description" content="Carchope roadside driving experience — homepage content transformed into roadside billboards, sky messages and approaching car panels.">
   <title>Carchope — Roadside Experience</title>
   <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="roadside-experience-v2.css">
+  <link rel="stylesheet" href="roadside-experience-v3.css">
 </head>
 <body class="roadside-page">
 
@@ -178,47 +178,92 @@
     </div>
   </section>
 
+  
   <section class="road-section road-featured-section" id="road-featured" data-road-section>
     <div class="road-section-inner">
       <div class="road-section-heading road-section-heading-light">
         <span class="road-section-label">Featured Cars</span>
-        <h2>Cars that come into view.</h2>
+        <h2>They pass us — then lead the way.</h2>
       </div>
 
-      <div class="road-window-band road-window-band-cars">
-        <a class="premium-car-board premium-car-board-left" href="products.html" data-road-object="car" data-side="left">
-          <img src="https://images.unsplash.com/photo-1619767886558-efdc259cde1a?auto=format&fit=crop&w=1200&q=90" alt="XPENG G6 Electric">
-          <div>
+      <div class="overtake-stage" aria-label="Featured cars overtaking and merging ahead">
+        <a class="overtake-car overtake-left" href="products.html"
+           data-road-object="overtake" data-side="left" data-delay="0">
+          <div class="road-car road-car-orange" aria-hidden="true">
+            <div class="road-car-shadow"></div>
+            <div class="road-car-roof"></div>
+            <div class="road-car-glass"></div>
+            <div class="road-car-trunk"></div>
+            <div class="road-car-light road-car-light-left"></div>
+            <div class="road-car-light road-car-light-right"></div>
+            <div class="road-car-plate">G6</div>
+            <div class="road-car-bumper"></div>
+            <div class="road-car-wheel road-car-wheel-left"></div>
+            <div class="road-car-wheel road-car-wheel-right"></div>
+          </div>
+          <div class="overtake-label">
             <small>2025 · 7,000 km · SUV</small>
-            <h3>XPENG G6 Electric</h3>
-            <strong>$201,705</strong>
+            <strong>XPENG G6 Electric</strong>
+            <b>$201,705</b>
           </div>
         </a>
 
-        <a class="premium-car-board premium-car-board-right" href="products.html" data-road-object="car" data-side="right" data-delay=".18">
-          <img src="https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&w=1000&q=90" alt="Volkswagen Golf SV">
-          <div>
+        <a class="overtake-car overtake-right" href="products.html"
+           data-road-object="overtake" data-side="right" data-delay=".30">
+          <div class="road-car road-car-silver" aria-hidden="true">
+            <div class="road-car-shadow"></div>
+            <div class="road-car-roof"></div>
+            <div class="road-car-glass"></div>
+            <div class="road-car-trunk"></div>
+            <div class="road-car-light road-car-light-left"></div>
+            <div class="road-car-light road-car-light-right"></div>
+            <div class="road-car-plate">GOLF</div>
+            <div class="road-car-bumper"></div>
+            <div class="road-car-wheel road-car-wheel-left"></div>
+            <div class="road-car-wheel road-car-wheel-right"></div>
+          </div>
+          <div class="overtake-label">
             <small>2018 · 50,000 km</small>
-            <h3>Volkswagen Golf SV</h3>
-            <strong>$55,988</strong>
+            <strong>Volkswagen Golf SV</strong>
+            <b>$55,988</b>
           </div>
         </a>
 
-        <a class="premium-car-board premium-car-board-left premium-car-board-third" href="products.html" data-road-object="car" data-side="left" data-delay=".34">
-          <img src="https://images.unsplash.com/photo-1542362567-b07e54358753?auto=format&fit=crop&w=1000&q=90" alt="Toyota Prius Plus Hybrid">
-          <div>
+        <a class="overtake-car overtake-left" href="products.html"
+           data-road-object="overtake" data-side="left" data-delay=".60">
+          <div class="road-car road-car-white" aria-hidden="true">
+            <div class="road-car-shadow"></div>
+            <div class="road-car-roof"></div>
+            <div class="road-car-glass"></div>
+            <div class="road-car-trunk"></div>
+            <div class="road-car-light road-car-light-left"></div>
+            <div class="road-car-light road-car-light-right"></div>
+            <div class="road-car-plate">PRIUS</div>
+            <div class="road-car-bumper"></div>
+            <div class="road-car-wheel road-car-wheel-left"></div>
+            <div class="road-car-wheel road-car-wheel-right"></div>
+          </div>
+          <div class="overtake-label">
             <small>2020 · 89,000 km</small>
-            <h3>Toyota Prius Plus Hybrid</h3>
-            <strong>$98,888</strong>
+            <strong>Toyota Prius Plus Hybrid</strong>
+            <b>$98,888</b>
           </div>
         </a>
+      </div>
+
+      <div class="overtake-caption">
+        <span>Rear window</span>
+        <i></i>
+        <span>Overtake</span>
+        <i></i>
+        <span>Merge ahead</span>
       </div>
 
       <a class="road-next-link" href="#road-support">Ownership support <span>↓</span></a>
     </div>
   </section>
 
-  <section class="road-section road-support-section" id="road-support" data-road-section>
+<section class="road-section road-support-section" id="road-support" data-road-section>
     <div class="road-section-inner">
       <div class="road-window-band">
         <a class="premium-board premium-board-right premium-board-support" href="service.html" data-road-object="board" data-side="right">
@@ -273,7 +318,7 @@
   </button>
 </div>
 
-<script src="roadside-experience-v2.js"></script>
+<script src="roadside-experience-v3.js"></script>
 <script src="app.js"></script>
 </body>
 </html>
