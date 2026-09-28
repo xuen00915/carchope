@@ -3894,3 +3894,288 @@ a.footer-contact-item:hover{color:#fff}
     font-size:11.5px!important;
   }
 }
+
+
+/* Global non-title typography enlargement */
+
+/* Slower homepage brand marquee */
+.brand-marquee-track{
+  animation-duration:150s!important;
+}
+@media(max-width:860px){
+  .brand-marquee-track{animation-duration:140s!important}
+}
+@media(max-width:580px){
+  .brand-marquee-track{animation-duration:130s!important}
+}
+
+/* Keep headings/titles unchanged; increase supporting UI/body text */
+body{
+  font-size:17px;
+}
+
+.desktop-nav a{
+  font-size:16px!important;
+}
+.header-cta{
+  font-size:13px!important;
+}
+.header-cart,
+.mobile-panel a{
+  font-size:15px!important;
+}
+.header-cart-count{
+  font-size:11px!important;
+}
+
+.lead{
+  font-size:19px!important;
+  line-height:1.7!important;
+}
+.eyebrow{
+  font-size:11.5px!important;
+}
+.label{
+  font-size:12.5px!important;
+}
+.text-link{
+  font-size:14px!important;
+}
+.btn-orange,
+.btn-outline{
+  font-size:12.5px!important;
+}
+.hero-scroll,
+.hero-vertical-nav a{
+  font-size:12.5px!important;
+}
+.journey-item p{
+  font-size:15px!important;
+}
+.manifesto-kicker{
+  font-size:16px!important;
+}
+.play-link{
+  font-size:13px!important;
+}
+.section-heading p{
+  font-size:17px!important;
+}
+
+.feature-meta{
+  font-size:13px!important;
+}
+.partner-services strong{
+  font-size:15px!important;
+}
+.partner-services span{
+  font-size:14px!important;
+}
+.metric span{
+  font-size:12.5px!important;
+}
+.story-fact span{
+  font-size:12px!important;
+}
+.quote-copy p{
+  font-size:16px!important;
+}
+.service-pill p{
+  font-size:15px!important;
+}
+.partner-cloud span{
+  font-size:13px!important;
+}
+.why-item p{
+  font-size:15px!important;
+}
+.field label{
+  font-size:12px!important;
+}
+.field input,
+.field select,
+.field textarea{
+  font-size:16px!important;
+}
+.form-note{
+  font-size:13px!important;
+}
+
+/* Product filters and product metadata */
+.inventory-search .filter-field label{
+  font-size:11px!important;
+}
+.inventory-search input,
+.inventory-search select,
+.brand-select-current,
+#type-current{
+  font-size:15px!important;
+}
+.budget-range-head span{
+  font-size:12px!important;
+}
+.search-btn{
+  font-size:14px!important;
+}
+.brand-option-name,
+.type-option-name{
+  font-size:15px!important;
+}
+.inventory-toolbar p{
+  font-size:15px!important;
+}
+.inventory-top{
+  font-size:11.5px!important;
+}
+.inventory-spec span{
+  font-size:10.5px!important;
+}
+.inventory-spec strong{
+  font-size:14px!important;
+}
+.preview-caption{
+  font-size:14px!important;
+  line-height:1.7!important;
+}
+.inventory-view-btn,
+.inventory-cart-btn{
+  font-size:11px!important;
+}
+.pagination button{
+  font-size:14px!important;
+}
+
+/* Featured / marquee supporting copy */
+.brand-marquee-head .label{
+  font-size:14px!important;
+}
+.brand-marquee-note{
+  font-size:13px!important;
+}
+.brand-marquee-name{
+  font-size:14px!important;
+}
+.product-featured-head p{
+  font-size:15px!important;
+}
+.product-featured-meta{
+  font-size:11px!important;
+}
+.product-featured-bottom span{
+  font-size:13px!important;
+}
+
+/* Cart popover */
+.cart-popover-head span{
+  font-size:12px!important;
+}
+.cart-clear-btn{
+  font-size:11px!important;
+}
+.cart-item-name{
+  font-size:13px!important;
+}
+.cart-item-price,
+.cart-popover-more,
+.cart-popover-empty{
+  font-size:12px!important;
+}
+.cart-popover-link{
+  font-size:12px!important;
+}
+.cart-qty-value{
+  font-size:12px!important;
+}
+
+/* Footer */
+.footer-brand-copy{
+  font-size:15.5px!important;
+}
+.footer-title,
+.footer-subtitle,
+.footer-newsletter-title{
+  font-size:13px!important;
+}
+.footer-links a{
+  font-size:16px!important;
+}
+.footer-contact-item{
+  font-size:15px!important;
+}
+.footer-social-icons a{
+  font-size:13px!important;
+}
+.footer-newsletter-compact input{
+  font-size:14px!important;
+}
+.footer-newsletter-compact button{
+  font-size:12px!important;
+}
+.footer-newsletter-note{
+  font-size:13px!important;
+}
+.footer-bottom{
+  font-size:12px!important;
+}
+
+/* Mobile: still larger, without breaking layouts */
+@media(max-width:860px){
+  .lead{
+    font-size:18px!important;
+  }
+  .section-heading p{
+    font-size:16px!important;
+  }
+  .mobile-panel a{
+    font-size:16px!important;
+  }
+}
+
+@media(max-width:580px){
+  body{
+    font-size:16px;
+  }
+  .lead{
+    font-size:17px!important;
+  }
+  .eyebrow{
+    font-size:11px!important;
+  }
+  .label{
+    font-size:12px!important;
+  }
+  .journey-item p,
+  .service-pill p,
+  .why-item p{
+    font-size:14px!important;
+  }
+  .brand-marquee-head .label{
+    font-size:12px!important;
+  }
+  .brand-marquee-note{
+    font-size:11px!important;
+  }
+  .brand-marquee-name{
+    font-size:12px!important;
+  }
+  .footer-title,
+  .footer-subtitle,
+  .footer-newsletter-title{
+    font-size:11.5px!important;
+  }
+  .footer-brand-copy{
+    font-size:13.5px!important;
+  }
+  .footer-links a{
+    font-size:13.5px!important;
+  }
+  .footer-contact-item{
+    font-size:13px!important;
+  }
+  .footer-social-icons a{
+    font-size:12px!important;
+  }
+  .footer-bottom{
+    font-size:10.5px!important;
+  }
+}
