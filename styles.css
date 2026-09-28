@@ -2372,3 +2372,11 @@ button{cursor:pointer}
   .whatsapp-core img{width:28px;height:28px}
   .floating-top{width:46px;height:46px;font-size:20px}
 }
+
+
+/* Ensure cursor-led zoom wins over the base card hover scale */
+@media(hover:hover) and (pointer:fine){
+  .inventory-card .inventory-photo.is-zooming img{
+    transform:scale(1.7);
+  }
+}
