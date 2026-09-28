@@ -618,3 +618,113 @@ body.road-experience-page{
     font-size:clamp(46px,13vw,62px)!important;
   }
 }
+
+
+/* Road Experience ownership section sync fix */
+.road-experience-page .home-closing-section{
+  display:block!important;
+  width:100%!important;
+  min-height:0!important;
+  padding:0!important;
+}
+
+.road-experience-page .home-closing-section .partner-shell{
+  width:min(1400px,calc(100% - 48px))!important;
+  max-width:1400px!important;
+  margin:0 auto!important;
+  min-height:0!important;
+  display:grid!important;
+  grid-template-columns:32% 68%!important;
+  align-items:center!important;
+}
+
+.road-experience-page .home-closing-section .partner-image{
+  width:100%!important;
+  height:360px!important;
+  min-height:0!important;
+  overflow:hidden!important;
+  clip-path:none!important;
+}
+
+.road-experience-page .home-closing-section .partner-image img{
+  width:100%!important;
+  height:100%!important;
+  object-fit:cover!important;
+  object-position:center!important;
+}
+
+.road-experience-page .home-closing-section .partner-copy{
+  min-width:0!important;
+  padding:40px 0 40px 48px!important;
+}
+
+.road-experience-page .home-closing-section .partner-copy::before{
+  inset:0 -48px 0 0!important;
+}
+
+.road-experience-page .home-closing-section .partner-copy h2{
+  width:auto!important;
+  max-width:none!important;
+  white-space:normal!important;
+}
+
+.road-experience-page .home-closing-section .partner-actions{
+  margin-top:22px!important;
+}
+
+.road-experience-page .home-closing-section .partner-services{
+  margin-top:22px!important;
+  grid-template-columns:repeat(4,minmax(0,1fr))!important;
+}
+
+.road-experience-page .home-closing-section .partner-services a{
+  min-height:82px!important;
+  padding:14px!important;
+}
+
+@media(max-width:1180px){
+  .road-experience-page .home-closing-section .partner-shell{
+    width:calc(100% - 40px)!important;
+    grid-template-columns:34% 66%!important;
+  }
+  .road-experience-page .home-closing-section .partner-image{
+    height:330px!important;
+  }
+  .road-experience-page .home-closing-section .partner-copy{
+    padding:34px 0 34px 38px!important;
+  }
+  .road-experience-page .home-closing-section .partner-services{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  }
+}
+
+@media(max-width:860px){
+  .road-experience-page .home-closing-section .partner-shell{
+    width:calc(100% - 32px)!important;
+    grid-template-columns:1fr!important;
+  }
+  .road-experience-page .home-closing-section .partner-image{
+    height:280px!important;
+  }
+  .road-experience-page .home-closing-section .partner-copy{
+    padding:32px 0!important;
+  }
+  .road-experience-page .home-closing-section .partner-copy::before{
+    inset:0 -16px!important;
+  }
+}
+
+@media(max-width:580px){
+  .road-experience-page .home-closing-section .partner-shell{
+    width:calc(100% - 24px)!important;
+  }
+  .road-experience-page .home-closing-section .partner-image{
+    height:230px!important;
+  }
+  .road-experience-page .home-closing-section .partner-services{
+    grid-template-columns:1fr!important;
+  }
+  .road-experience-page .home-closing-section .partner-services a{
+    min-height:72px!important;
+  }
+}
