@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="description" content="Browse Carchope pre-owned cars in the premium frontend redesign preview.">
   <title>Pre-Owned Cars — Carchope</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css">\n  <link rel="stylesheet" href="road-hero.css">
 </head>
-<body>
+<body class="products-road-page">
 
 <a class="skip-link" href="#main">Skip to content</a>
 <header class="site-header">
@@ -51,20 +51,69 @@
   <a href="service.html">Services</a>
   <a href="about-us.html">About Us</a>
 </div>
-<main id="main">
-  <section class="page-hero inventory-hero">
-    <div class="page-hero-media"><img src="https://images.unsplash.com/photo-1542282088-72c9c27ed0cd?auto=format&fit=crop&w=2200&q=90" alt="Pre-owned car in modern architecture"></div>
-    <div class="container page-hero-inner">
-      <div class="page-hero-copy" style="max-width:860px">
-        <div class="eyebrow orange-line reveal">Pre-Owned Cars</div>
-        <h1 class="display-md reveal" data-delay="1">Quality Cars.<br>For A Brighter Tomorrow.</h1>
-        <p class="lead reveal" data-delay="2">Browse Carchope’s pre-owned selection with the important ownership details surfaced first.</p>
+<main id="main">\n
+  <section class="road-story" id="road-story" aria-label="Carchope road journey">
+    <div class="road-stage" id="road-stage">
+      <div class="road-scene" aria-hidden="true">
+        <img class="road-scene-fallback" id="road-fallback" alt="">
+        <canvas class="road-webgl" id="road-webgl"></canvas>
+        <div class="road-scene-grade"></div>
+        <div class="road-scene-vignette"></div>
+      </div>
 
-              </div>
+      <div class="road-cockpit" aria-hidden="true">
+        <div class="road-pillar road-pillar-left"></div>
+        <div class="road-pillar road-pillar-right"></div>
+        <div class="road-rearview"></div>
+        <div class="road-dashboard"></div>
+        <div class="road-steering"></div>
+      </div>
+
+      <div class="container road-story-content">
+        <article class="road-chapter is-visible" data-road-chapter="0" style="--chapter-opacity:1;--chapter-y:0px">
+          <div class="road-chapter-kicker">Pre-Owned Cars</div>
+          <h1>Quality Cars.<br><span class="road-orange">For A Brighter Tomorrow.</span></h1>
+          <p>Browse Carchope’s pre-owned selection with the important ownership details surfaced first.</p>
+        </article>
+
+        <article class="road-chapter" data-road-chapter="1" aria-hidden="true">
+          <div class="road-chapter-kicker">A clearer way to buy</div>
+          <h2>The road ahead should feel this clear.</h2>
+          <p>Less noise, fewer surprises. See the details that matter and move through the buying journey with more confidence.</p>
+          <div class="road-mini-points" aria-label="Carchope buying highlights">
+            <span>Clear details</span>
+            <span>Curated selection</span>
+            <span>Practical support</span>
+          </div>
+        </article>
+
+        <article class="road-chapter" data-road-chapter="2" aria-hidden="true">
+          <div class="road-chapter-kicker">Your next chapter</div>
+          <h2>Find the car that fits where you’re going.</h2>
+          <p>Continue down the road to explore featured cars and the full pre-owned inventory.</p>
+          <a class="road-story-cta" href="#featured-cars">
+            Explore the cars
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 7l5 5-5 5"></path></svg>
+          </a>
+        </article>
+      </div>
+
+      <div class="road-story-hud" aria-hidden="true">
+        <div class="road-story-hud-copy">
+          <span>Journey</span>
+          <strong id="road-chapter-count">01 / 03</strong>
+        </div>
+        <div class="road-story-track"><i></i></div>
+      </div>
+
+      <a class="road-scroll-hint" href="#featured-cars" aria-label="Scroll through the road story">
+        <span>Scroll to drive</span>
+        <i></i>
+      </a>
     </div>
   </section>
 
-  <section class="product-featured-section">
+<section class="product-featured-section" id="featured-cars">
     <div class="container">
       <div class="product-featured-head">
         <div>
@@ -298,6 +347,6 @@
     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m7 14 5-5 5 5"></path></svg>
   </button>
 </div>
-<script src="app.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.160.1/build/three.min.js"></script>\n<script src="road-hero.js"></script>\n<script src="app.js"></script>
 </body>
 </html>
