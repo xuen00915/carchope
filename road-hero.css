@@ -503,3 +503,23 @@
   .road-webgl{display:none}
   .road-scene-fallback{transform:none}
 }
+
+
+/* Forward-driving feedback: cockpit suspension + acceleration vignette. */
+.road-cockpit{
+  transform:translate3d(0,var(--drive-bob,0px),0) rotate(var(--drive-roll,0deg));
+  transform-origin:50% 88%;
+  will-change:transform;
+}
+.road-stage::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:3;
+  pointer-events:none;
+  opacity:calc(var(--drive-speed,0) * .34);
+  background:
+    radial-gradient(circle at 53.5% 55.5%,transparent 0 26%,rgba(255,255,255,.025) 48%,rgba(255,255,255,.07) 78%,rgba(255,255,255,.12) 100%);
+  mix-blend-mode:screen;
+  transition:opacity .08s linear;
+}
