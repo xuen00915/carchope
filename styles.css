@@ -3834,3 +3834,63 @@ a.footer-contact-item:hover{color:#fff}
     height:22px!important;
   }
 }
+
+
+/* Homepage brand marquee speed and logo clarity */
+.brand-marquee{
+  -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 2.5%,#000 97.5%,transparent 100%)!important;
+  mask-image:linear-gradient(90deg,transparent 0,#000 2.5%,#000 97.5%,transparent 100%)!important;
+}
+.brand-marquee-track{
+  animation-duration:86s!important;
+}
+.brand-marquee-item{
+  color:#31363a!important;
+  background:#fff;
+}
+.brand-marquee-logo{
+  width:58px!important;
+  height:52px!important;
+}
+.brand-marquee-logo img{
+  width:100%!important;
+  height:100%!important;
+  object-fit:contain!important;
+  filter:none!important;
+  opacity:1!important;
+  image-rendering:auto;
+}
+.brand-marquee-name{
+  color:#2c3135!important;
+  font-size:13px!important;
+  font-weight:800!important;
+}
+.brand-marquee-item:hover{
+  background:#f7f8f8!important;
+}
+.brand-marquee-item:hover .brand-marquee-logo img{
+  filter:none!important;
+  opacity:1!important;
+}
+
+@media(max-width:860px){
+  .brand-marquee-track{
+    animation-duration:80s!important;
+  }
+  .brand-marquee-logo{
+    width:52px!important;
+    height:47px!important;
+  }
+}
+@media(max-width:580px){
+  .brand-marquee-track{
+    animation-duration:74s!important;
+  }
+  .brand-marquee-logo{
+    width:46px!important;
+    height:42px!important;
+  }
+  .brand-marquee-name{
+    font-size:11.5px!important;
+  }
+}
