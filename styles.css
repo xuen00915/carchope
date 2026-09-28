@@ -1470,3 +1470,550 @@ button{cursor:pointer}
     font-size:9px;
   }
 }
+
+
+/* Final responsive refinement batch */
+.logo-text{
+  color:var(--orange);
+  font-size:26px;
+  font-weight:900;
+  letter-spacing:-.055em;
+  line-height:1;
+}
+.logo-text:hover{color:#e95000}
+.logo img{display:none}
+.text-link::after{display:none!important;content:none!important}
+.service-pill::after{display:none!important;content:none!important}
+
+/* Home closing section separated from footer */
+.home-closing-section{
+  background:#eef0f1!important;
+  color:var(--ink)!important;
+  border-top:1px solid var(--line);
+  border-bottom:1px solid #d7dadd;
+}
+.home-closing-section .partner-copy .lead{color:#555b60!important}
+.home-closing-section .partner-services{border-top-color:rgba(17,18,20,.14)!important}
+.home-closing-section .partner-services a{border-right-color:rgba(17,18,20,.14)!important}
+.home-closing-section .partner-services span{color:#697075!important}
+.home-closing-section .eyebrow{color:var(--orange)}
+.home-closing-section .partner-image img{filter:saturate(.72) contrast(1.02)}
+
+/* About car: show the entire vehicle */
+.quote-panel-car{
+  min-height:0;
+  background:#f0f2f2;
+}
+.quote-panel-car::after{display:none}
+.quote-car-grid{
+  min-height:440px;
+  display:grid;
+  grid-template-columns:.92fr 1.08fr;
+  align-items:stretch;
+}
+.quote-panel-car .quote-copy{
+  max-width:650px;
+  padding:76px 50px 76px 0;
+  align-self:center;
+}
+.quote-car-media{
+  min-height:440px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+  background:#e7eaeb;
+  padding:24px;
+}
+.quote-car-media img{
+  position:static!important;
+  width:100%!important;
+  height:100%!important;
+  max-height:390px;
+  object-fit:contain!important;
+  object-position:center!important;
+  opacity:1!important;
+  filter:saturate(.74) contrast(1.02)!important;
+}
+
+/* Product featured cars */
+.product-featured-section{
+  padding:68px 0 72px;
+  background:#fff;
+  border-bottom:1px solid var(--line);
+}
+.product-featured-head{
+  display:flex;
+  align-items:end;
+  justify-content:space-between;
+  gap:36px;
+  margin-bottom:26px;
+}
+.product-featured-head .eyebrow{margin-bottom:12px}
+.product-featured-head h2{
+  margin:0;
+  font-size:clamp(32px,3.4vw,50px);
+  line-height:.96;
+  letter-spacing:-.045em;
+}
+.product-featured-head p{
+  max-width:360px;
+  margin:0;
+  color:#73787c;
+  font-size:14px;
+  line-height:1.6;
+  text-align:right;
+}
+.product-featured-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:18px;
+}
+.product-featured-card{
+  display:grid;
+  grid-template-columns:1.25fr .75fr;
+  min-height:315px;
+  border-top:1px solid #17191c;
+  background:#f3f4f4;
+  overflow:hidden;
+}
+.product-featured-image{
+  min-height:315px;
+  overflow:hidden;
+}
+.product-featured-image img{
+  height:100%;
+  object-fit:cover;
+  filter:saturate(.75);
+  transition:transform .5s var(--ease);
+}
+.product-featured-card:hover .product-featured-image img{transform:scale(1.025)}
+.product-featured-copy{
+  padding:30px 28px;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+}
+.product-featured-meta{
+  margin-bottom:auto;
+  color:#7c8185;
+  font-size:10px;
+  font-weight:750;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+.product-featured-copy h3{
+  margin:22px 0 20px;
+  font-size:24px;
+  line-height:1.08;
+  letter-spacing:-.035em;
+}
+.product-featured-bottom{
+  display:flex;
+  align-items:end;
+  justify-content:space-between;
+  gap:18px;
+  border-top:1px solid #d6d9da;
+  padding-top:15px;
+}
+.product-featured-bottom strong{
+  font-size:26px;
+  letter-spacing:-.035em;
+  font-variant-numeric:tabular-nums;
+}
+.product-featured-bottom span{font-size:12px;color:#72777b}
+
+/* Product filters */
+.product-filter-section{
+  padding:28px 0;
+  background:#f7f8f8;
+}
+.inventory-search.inventory-search-below{
+  grid-template-columns:1.16fr 1.08fr .8fr 1.3fr 1.04fr auto;
+  align-items:stretch;
+}
+.inventory-search .filter-field{
+  min-width:0;
+  padding:13px 15px;
+}
+.inventory-search .filter-field label{
+  font-size:10.5px;
+}
+.inventory-search input,
+.inventory-search select{
+  font-size:14px;
+}
+.search-btn{
+  min-width:88px;
+  padding:0 16px;
+  font-size:13px;
+  font-weight:800;
+  letter-spacing:.03em;
+  text-transform:uppercase;
+}
+
+/* Larger brand menu */
+.brand-select-trigger{min-height:34px}
+.brand-select-current{
+  gap:11px;
+  font-size:15px;
+  font-weight:750;
+}
+.brand-current-mark{
+  width:38px;
+  height:31px;
+  font-size:8px;
+}
+.brand-current-logo{
+  width:42px;
+  height:34px;
+}
+.brand-menu-plus{
+  font-size:19px;
+  line-height:1;
+  color:#5d6266;
+  transition:transform .2s var(--ease);
+}
+.brand-select.open .brand-menu-plus{transform:rotate(45deg)}
+.brand-select-menu{
+  width:min(540px,80vw);
+  max-height:390px;
+  padding:10px;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:5px;
+}
+.brand-option{
+  min-height:62px;
+  padding:10px 12px;
+  gap:13px;
+}
+.brand-option-logo{
+  width:45px;
+  height:38px;
+}
+.brand-option-logo.fallback{font-size:9px}
+.brand-option-name{
+  font-size:14px;
+  font-weight:760;
+}
+
+/* Budget range slider */
+.budget-range-field{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+.budget-range-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom:7px;
+}
+.budget-range-head label{margin:0!important}
+.budget-range-head span{
+  color:#51565a;
+  font-size:11px;
+  font-weight:750;
+  white-space:nowrap;
+}
+.budget-range{
+  width:100%;
+  height:18px;
+  margin:0;
+  padding:0!important;
+  appearance:none;
+  -webkit-appearance:none;
+  background:transparent!important;
+  cursor:pointer;
+}
+.budget-range::-webkit-slider-runnable-track{
+  height:4px;
+  border-radius:0;
+  background:linear-gradient(90deg,var(--orange) 0,var(--orange) var(--budget-progress,100%),#d8dbdc var(--budget-progress,100%),#d8dbdc 100%);
+}
+.budget-range::-moz-range-track{
+  height:4px;
+  background:#d8dbdc;
+}
+.budget-range::-moz-range-progress{
+  height:4px;
+  background:var(--orange);
+}
+.budget-range::-webkit-slider-thumb{
+  appearance:none;
+  -webkit-appearance:none;
+  width:18px;
+  height:18px;
+  margin-top:-7px;
+  border:3px solid #fff;
+  border-radius:50%;
+  background:var(--orange);
+  box-shadow:0 0 0 1px #b7bbbd;
+}
+.budget-range::-moz-range-thumb{
+  width:14px;
+  height:14px;
+  border:3px solid #fff;
+  border-radius:50%;
+  background:var(--orange);
+  box-shadow:0 0 0 1px #b7bbbd;
+}
+
+/* Standard 3 x 3 listing, magnifier on mouse hover */
+.inventory-card:first-child{grid-column:auto!important}
+.inventory-card:first-child .inventory-photo{aspect-ratio:1.5/1!important}
+.inventory-card:first-child .inventory-copy h3{font-size:18px!important}
+.inventory-card:first-child .inventory-price{font-size:24px!important}
+.inventory-photo{
+  cursor:zoom-in;
+}
+.inventory-photo::before,
+.inventory-photo::after{
+  content:"";
+  position:absolute;
+  z-index:3;
+  pointer-events:none;
+  opacity:0;
+  transition:opacity .2s var(--ease),transform .2s var(--ease);
+}
+.inventory-photo::before{
+  left:50%;
+  top:50%;
+  width:44px;
+  height:44px;
+  border:2px solid #111;
+  border-radius:50%;
+  background:rgba(255,255,255,.88);
+  transform:translate(-50%,-50%) scale(.86);
+}
+.inventory-photo::after{
+  left:calc(50% + 14px);
+  top:calc(50% + 15px);
+  width:17px;
+  height:2px;
+  background:#111;
+  transform:rotate(45deg) scale(.86);
+  transform-origin:left center;
+}
+@media(hover:hover) and (pointer:fine){
+  .inventory-photo:hover::before,
+  .inventory-photo:hover::after{opacity:1}
+  .inventory-photo:hover::before{transform:translate(-50%,-50%) scale(1)}
+  .inventory-photo:hover::after{transform:rotate(45deg) scale(1)}
+}
+.inventory-photo .view{
+  right:12px;
+  bottom:12px;
+  font-size:9px;
+}
+
+/* Pagination no arrows */
+.pagination .pagination-prev,
+.pagination .pagination-next{
+  min-width:92px;
+}
+
+/* Footer: 4 columns */
+.footer-grid-four{
+  display:grid;
+  grid-template-columns:1.25fr .82fr .82fr 1.45fr;
+  gap:54px;
+  align-items:start;
+}
+.footer-logo{
+  display:inline-flex;
+  align-items:center;
+  margin-bottom:24px;
+}
+.footer-logo img{
+  display:block;
+  width:auto;
+  height:44px;
+  max-width:220px;
+  object-fit:contain;
+}
+.footer-brand-copy{
+  max-width:36ch;
+  margin:0;
+  color:#c0c3c5;
+  font-size:15px;
+  line-height:1.75;
+}
+.footer-contact-copy{
+  font-size:15px;
+  line-height:1.75;
+}
+.footer-social-row{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px 18px;
+  margin-top:18px;
+}
+.footer-social-row a{
+  color:#c7c9cb;
+  font-size:14px;
+}
+.footer-social-row a:hover{color:#fff}
+.footer-newsletter-title{
+  margin:25px 0 10px;
+  color:var(--orange);
+  font-size:12.5px;
+  font-weight:800;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+}
+.footer-newsletter input{font-size:15px}
+.footer-newsletter button{font-size:13px}
+
+/* Floating controls appear after first screen */
+.floating-actions{
+  position:fixed;
+  right:22px;
+  bottom:22px;
+  z-index:46;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  opacity:0;
+  visibility:hidden;
+  transform:translateY(12px);
+  transition:opacity .25s var(--ease),transform .25s var(--ease),visibility .25s;
+}
+.floating-actions.visible{
+  opacity:1;
+  visibility:visible;
+  transform:none;
+}
+.floating-btn{
+  width:54px;
+  height:54px;
+  display:grid;
+  place-items:center;
+  border:0;
+  border-radius:50%;
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:.03em;
+  box-shadow:0 12px 30px rgba(10,14,18,.18);
+  transition:transform .2s var(--ease),background .2s,color .2s;
+}
+.floating-btn:hover{transform:translateY(-2px)}
+.floating-btn:active{transform:scale(.97)}
+.floating-whatsapp{
+  background:var(--orange);
+  color:#fff;
+}
+.floating-top{
+  background:#fff;
+  color:#111;
+  border:1px solid #d6d8d9;
+}
+
+/* Laptop refinement: 1180–1366 */
+@media(max-width:1366px){
+  .container{width:min(var(--max),calc(100% - 44px))}
+  .desktop-nav{gap:24px}
+  .product-featured-copy{padding:25px 22px}
+  .inventory-search.inventory-search-below{
+    grid-template-columns:1.08fr 1fr .78fr 1.15fr 1fr auto;
+  }
+  .footer-grid-four{gap:38px}
+}
+@media(max-width:1180px){
+  .desktop-nav{gap:18px}
+  .inventory-search.inventory-search-below{
+    grid-template-columns:repeat(3,1fr);
+  }
+  .inventory-search.inventory-search-below .filter-field{
+    border-bottom:1px solid var(--line);
+  }
+  .search-btn{min-height:58px}
+  .footer-grid-four{
+    grid-template-columns:1.15fr .85fr .85fr;
+    gap:42px 34px;
+  }
+  .footer-contact-col{grid-column:1/-1}
+}
+@media(max-width:860px){
+  .quote-car-grid{
+    grid-template-columns:1fr;
+  }
+  .quote-panel-car .quote-copy{
+    padding:58px 0 32px;
+  }
+  .quote-car-media{
+    min-height:340px;
+    padding:18px;
+  }
+  .quote-car-media img{max-height:310px}
+  .product-featured-head{
+    align-items:flex-start;
+    flex-direction:column;
+  }
+  .product-featured-head p{text-align:left}
+  .product-featured-grid{
+    grid-template-columns:1fr;
+  }
+  .product-featured-card{
+    grid-template-columns:1.15fr .85fr;
+  }
+  .inventory-search.inventory-search-below{
+    grid-template-columns:1fr 1fr;
+  }
+  .search-btn{min-height:58px}
+  .brand-select-menu{
+    width:min(560px,92vw);
+  }
+  .footer-grid-four{
+    grid-template-columns:1fr 1fr;
+    gap:40px 28px;
+  }
+  .footer-contact-col{grid-column:auto}
+}
+@media(max-width:580px){
+  .logo-text{font-size:23px}
+  .product-featured-section{padding:52px 0 56px}
+  .product-featured-card{
+    grid-template-columns:1fr;
+  }
+  .product-featured-image{min-height:230px}
+  .product-featured-copy{padding:22px 18px}
+  .product-featured-copy h3{font-size:22px}
+  .product-featured-bottom strong{font-size:23px}
+  .inventory-search.inventory-search-below{
+    grid-template-columns:1fr;
+  }
+  .inventory-search .filter-field{
+    border-right:0!important;
+    border-bottom:1px solid var(--line);
+  }
+  .brand-select-menu{
+    left:0;
+    width:100%;
+    grid-template-columns:1fr;
+  }
+  .brand-option{
+    min-height:58px;
+  }
+  .brand-option-logo{
+    width:42px;
+    height:35px;
+  }
+  .brand-option-name{font-size:14px}
+  .inventory-grid{grid-template-columns:1fr}
+  .footer-grid-four{
+    grid-template-columns:1fr;
+    gap:34px;
+  }
+  .footer-logo img{height:40px}
+  .footer-brand-copy{font-size:14px}
+  .floating-actions{
+    right:14px;
+    bottom:14px;
+  }
+  .floating-btn{
+    width:50px;
+    height:50px;
+  }
+}
