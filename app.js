@@ -170,6 +170,33 @@
     });
   }
 
+  var cartStorageKey='carchopePreviewCart';
+
+  function getPreviewCart(){
+    try{
+      var parsed=JSON.parse(localStorage.getItem(cartStorageKey)||'[]');
+      return Array.isArray(parsed)?parsed:[];
+    }catch(e){
+      return [];
+    }
+  }
+
+  function updateCartCount(){
+    var total=getPreviewCart().length;
+    document.querySelectorAll('[data-cart-count]').forEach(function(el){
+      el.textContent=String(total);
+    });
+  }
+
+  function addPreviewCartItem(car){
+    var items=getPreviewCart();
+    items.push({name:car.name,brand:car.brand,price:car.price});
+    try{localStorage.setItem(cartStorageKey,JSON.stringify(items));}catch(e){}
+    updateCartCount();
+  }
+
+  updateCartCount();
+
   var grid=document.getElementById('inventory-grid');
   if(!grid) return;
 
@@ -454,23 +481,57 @@
     grid.innerHTML='';
 
     pageData.forEach(function(c){
-      var a=document.createElement('a');
-      a.className='inventory-card reveal in';
-      a.href='https://www.carchope.com/products';
-      a.target='_blank';
-      a.rel='noopener';
+      var article=document.createElement('article');
+      article.className='inventory-card reveal in';
 
       var statusLabel=c.status&&c.status!=='Available'?' · '+c.status:'';
+      var canAdd=c.status==='Available'&&c.price!=null;
 
-      a.innerHTML=
+      article.innerHTML=
         '<div class="inventory-top"><span class="inventory-brand">'+brandName(c.brand)+'</span><b>'+c.type+statusLabel+'</b></div>'+
-        '<div class="inventory-photo"><img src="'+c.img+'" alt="'+c.name+'" loading="lazy"><span class="view">View car</span></div>'+
-        '<div class="inventory-copy"><h3>'+c.name+'</h3><div class="inventory-price">'+money(c.price)+'</div>'+
+        '<div class="inventory-photo" data-zoom-photo><img src="'+c.img+'" alt="'+c.name+'" loading="lazy"></div>'+
+        '<div class="inventory-copy"><h3>'+c.name+'</h3>'+
+        '<div class="inventory-price-actions">'+
+          '<div class="inventory-price">'+money(c.price)+'</div>'+
+          '<div class="inventory-actions">'+
+            '<a class="inventory-view-btn" href="https://www.carchope.com/products" target="_blank" rel="noopener">View Car</a>'+
+            '<button class="inventory-cart-btn" type="button" data-add-cart aria-label="Add '+c.name+' to cart" '+(canAdd?'':'disabled')+'>'+
+              '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2l2.2 10.2a2 2 0 0 0 2 1.6h7.8a2 2 0 0 0 1.9-1.4L21 8H7"></path><circle cx="10" cy="20" r="1.4"></circle><circle cx="18" cy="20" r="1.4"></circle></svg>'+
+            '</button>'+
+          '</div>'+
+        '</div>'+
         '<div class="inventory-specs"><div class="inventory-spec"><span>Registered</span><strong>'+c.reg+'</strong></div>'+
         '<div class="inventory-spec"><span>Mileage</span><strong>'+c.km+'</strong></div>'+
         '<div class="inventory-spec"><span>Depreciation</span><strong>'+c.dep+'</strong></div></div></div>';
 
-      grid.appendChild(a);
+      var photo=article.querySelector('[data-zoom-photo]');
+      var photoImg=photo&&photo.querySelector('img');
+      if(photo&&photoImg){
+        photo.addEventListener('mouseenter',function(){
+          photo.classList.add('is-zooming');
+        });
+        photo.addEventListener('mousemove',function(e){
+          var rect=photo.getBoundingClientRect();
+          var x=((e.clientX-rect.left)/rect.width)*100;
+          var y=((e.clientY-rect.top)/rect.height)*100;
+          photoImg.style.transformOrigin=x+'% '+y+'%';
+        });
+        photo.addEventListener('mouseleave',function(){
+          photo.classList.remove('is-zooming');
+          photoImg.style.transformOrigin='50% 50%';
+        });
+      }
+
+      var addBtn=article.querySelector('[data-add-cart]');
+      if(addBtn&&canAdd){
+        addBtn.addEventListener('click',function(){
+          addPreviewCartItem(c);
+          addBtn.classList.add('added');
+          window.setTimeout(function(){addBtn.classList.remove('added');},650);
+        });
+      }
+
+      grid.appendChild(article);
     });
 
     if(count) count.textContent=data.length;
