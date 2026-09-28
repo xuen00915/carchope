@@ -133,6 +133,21 @@
   }
 
 
+
+  document.querySelectorAll('[data-footer-newsletter]').forEach(function(form){
+    form.addEventListener('submit',function(e){
+      e.preventDefault();
+      var input=form.querySelector('input[type="email"]');
+      var note=form.parentElement.querySelector('.footer-newsletter-note');
+      if(input && !input.checkValidity()){
+        if(note) note.textContent='Enter a valid email address.';
+        input.focus();
+        return;
+      }
+      if(note) note.textContent='Preview only — newsletter signup will connect to Carchope’s mailing system during implementation.';
+    });
+  });
+
   var grid=document.getElementById('inventory-grid');
   if(!grid) return;
 
