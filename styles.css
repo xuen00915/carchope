@@ -2958,7 +2958,7 @@ a.footer-contact-item:hover{color:#fff}
 .brand-option-logo{
   width:50px!important;
   height:40px!important;
-  flex:0 0 50px!important;
+  flex:0 0 230px!important;
   background:#fff;
 }
 .brand-option-logo img{
@@ -5130,7 +5130,7 @@ body{
   position:relative!important;
   align-self:flex-start!important;
   flex:0 0 190px!important;
-  width:190px!important;
+  width:230px!important;
   height:74px!important;
   margin:0 10px 0 0!important;
   overflow:visible!important;
@@ -5139,10 +5139,10 @@ body{
 
 .site-header .header-logo .header-brand-logo{
   position:absolute!important;
-  top:8px!important;
+  top:0!important;
   left:0!important;
   width:auto!important;
-  height:88px!important;
+  height:116px!important;
   max-width:none!important;
   object-fit:contain!important;
   object-position:left top!important;
@@ -5165,12 +5165,12 @@ body{
 
 @media(max-width:1180px){
   .site-header .header-logo{
-    flex-basis:168px!important;
-    width:168px!important;
+    flex-basis:155px!important;
+    width:155px!important;
   }
   .site-header .header-logo .header-brand-logo{
-    height:80px!important;
-    top:9px!important;
+    height:82px!important;
+    top:0!important;
   }
 }
 
@@ -5179,14 +5179,14 @@ body{
     height:64px!important;
   }
   .site-header .header-logo{
-    flex-basis:142px!important;
-    width:142px!important;
+    flex-basis:175px!important;
+    width:175px!important;
     height:64px!important;
     margin-right:0!important;
   }
   .site-header .header-logo .header-brand-logo{
-    height:72px!important;
-    top:7px!important;
+    height:92px!important;
+    top:0!important;
   }
   .mobile-panel{
     top:64px!important;
