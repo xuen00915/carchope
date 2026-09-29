@@ -5271,3 +5271,64 @@ body{
   }
 }
 
+/* Exact square Carchope header logo */
+.site-header .header-logo{
+  position:relative!important;
+  align-self:flex-start!important;
+  flex:0 0 132px!important;
+  width:132px!important;
+  height:74px!important;
+  margin:0 18px 0 0!important;
+  overflow:visible!important;
+  z-index:5!important;
+}
+
+.site-header .header-logo .header-brand-logo{
+  position:absolute!important;
+  top:0!important;
+  left:0!important;
+  display:block!important;
+  width:auto!important;
+  height:138px!important;
+  max-width:none!important;
+  object-fit:contain!important;
+  object-position:left top!important;
+  border-radius:0!important;
+  background:none!important;
+  filter:drop-shadow(0 10px 18px rgba(15,23,42,.18))!important;
+}
+
+@media(max-width:1180px){
+  .site-header .header-logo{
+    flex-basis:120px!important;
+    width:120px!important;
+    margin-right:14px!important;
+  }
+  .site-header .header-logo .header-brand-logo{
+    height:126px!important;
+  }
+}
+
+@media(max-width:860px){
+  .site-header .header-logo{
+    flex-basis:106px!important;
+    width:106px!important;
+    height:64px!important;
+    margin-right:10px!important;
+  }
+  .site-header .header-logo .header-brand-logo{
+    height:112px!important;
+  }
+}
+
+@media(max-width:580px){
+  .site-header .header-logo{
+    flex-basis:94px!important;
+    width:94px!important;
+    margin-right:8px!important;
+  }
+  .site-header .header-logo .header-brand-logo{
+    height:100px!important;
+  }
+}
+
