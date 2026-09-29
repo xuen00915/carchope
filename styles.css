@@ -7556,3 +7556,23 @@ body:has(.page-hero:not(.inventory-hero):not(.dark)) .site-header:not(.is-scroll
   }
 }
 
+/* White start point + redline only at high-speed end */
+.dashboard-gauge-start{
+  fill:#ffffff!important;
+  stroke:rgba(16,20,24,.72)!important;
+  stroke-width:1.2!important;
+  vector-effect:non-scaling-stroke;
+  filter:
+    drop-shadow(0 0 1px rgba(255,255,255,.95))
+    drop-shadow(0 0 3px rgba(255,255,255,.30))!important;
+}
+
+/* Red belongs only to the final high-speed segment. */
+.dashboard-gauge-redline{
+  stroke:#ff4236!important;
+  stroke-width:4.6!important;
+  stroke-linecap:round!important;
+  stroke-dasharray:none!important;
+  stroke-dashoffset:0!important;
+}
+

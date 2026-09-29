@@ -376,14 +376,25 @@
     live.setAttribute('pathLength','100');
     live.style.strokeDasharray='0 100';
 
+    /* White zero-speed marker at the lower-left start of the gauge. */
+    var startPoint=document.createElementNS(ns,'circle');
+    startPoint.setAttribute('class','dashboard-gauge-start');
+    startPoint.setAttribute('cx','18.18');
+    startPoint.setAttribute('cy','81.82');
+    startPoint.setAttribute('r','2.7');
+
+    /*
+      Redline is a separate short path at the HIGH-SPEED end only.
+      This prevents any red marker from appearing at the starting point.
+    */
     var redline=document.createElementNS(ns,'path');
     redline.setAttribute('class','dashboard-gauge-redline');
-    redline.setAttribute('d',pathData);
-    redline.setAttribute('pathLength','100');
+    redline.setAttribute('d','M 93.37 61.86 A 45 45 0 0 1 81.82 81.82');
 
     svg.appendChild(track);
     svg.appendChild(live);
     svg.appendChild(redline);
+    svg.appendChild(startPoint);
 
     button.insertBefore(svg,button.firstChild);
     dashboardGaugeLivePaths.push(live);
