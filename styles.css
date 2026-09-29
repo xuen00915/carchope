@@ -5080,3 +5080,132 @@ body{
   .global-wheel-hub{width:10px;height:10px;border-width:2px}
 }
 
+/* Liquid-glass global header + overflowing Carchope logo */
+
+/* Keep the bar compact while the real logo intentionally hangs below it. */
+.site-header{
+  height:74px!important;
+  overflow:visible!important;
+  background:
+    linear-gradient(135deg,
+      rgba(255,255,255,.68) 0%,
+      rgba(255,255,255,.44) 42%,
+      rgba(255,255,255,.28) 100%)!important;
+  -webkit-backdrop-filter:blur(26px) saturate(185%) contrast(104%)!important;
+  backdrop-filter:blur(26px) saturate(185%) contrast(104%)!important;
+  border-bottom:1px solid rgba(255,255,255,.52)!important;
+  box-shadow:
+    0 10px 32px rgba(15,23,42,.10),
+    inset 0 1px 0 rgba(255,255,255,.88),
+    inset 0 -1px 0 rgba(255,255,255,.24)!important;
+}
+
+/* Glass highlight/refraction layer. */
+.site-header::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+  background:
+    linear-gradient(115deg,
+      rgba(255,255,255,.46) 0%,
+      rgba(255,255,255,.08) 31%,
+      rgba(255,255,255,.24) 52%,
+      rgba(255,255,255,.04) 72%,
+      rgba(255,255,255,.30) 100%);
+  opacity:.64;
+  mask-image:linear-gradient(#000,rgba(0,0,0,.72));
+  -webkit-mask-image:linear-gradient(#000,rgba(0,0,0,.72));
+}
+
+.header-inner{
+  position:relative!important;
+  z-index:2!important;
+  overflow:visible!important;
+}
+
+/* Replace the text wordmark with the official image logo. */
+.site-header .header-logo{
+  position:relative!important;
+  align-self:flex-start!important;
+  flex:0 0 190px!important;
+  width:190px!important;
+  height:74px!important;
+  margin:0 10px 0 0!important;
+  overflow:visible!important;
+  z-index:4!important;
+}
+
+.site-header .header-logo .header-brand-logo{
+  position:absolute!important;
+  top:8px!important;
+  left:0!important;
+  width:auto!important;
+  height:88px!important;
+  max-width:none!important;
+  object-fit:contain!important;
+  object-position:left top!important;
+  filter:drop-shadow(0 8px 14px rgba(15,23,42,.14));
+  transform:none!important;
+}
+
+/* Make sure nav and actions remain vertically centred inside the glass bar. */
+.site-header .desktop-nav,
+.site-header .header-cart-wrap,
+.site-header .header-cta,
+.site-header .menu-toggle{
+  position:relative;
+  z-index:3;
+}
+
+.site-header .desktop-nav{
+  margin-left:auto!important;
+}
+
+@media(max-width:1180px){
+  .site-header .header-logo{
+    flex-basis:168px!important;
+    width:168px!important;
+  }
+  .site-header .header-logo .header-brand-logo{
+    height:80px!important;
+    top:9px!important;
+  }
+}
+
+@media(max-width:860px){
+  .site-header{
+    height:64px!important;
+  }
+  .site-header .header-logo{
+    flex-basis:142px!important;
+    width:142px!important;
+    height:64px!important;
+    margin-right:0!important;
+  }
+  .site-header .header-logo .header-brand-logo{
+    height:72px!important;
+    top:7px!important;
+  }
+  .mobile-panel{
+    top:64px!important;
+    background:rgba(255,255,255,.86)!important;
+    -webkit-backdrop-filter:blur(24px) saturate(175%)!important;
+    backdrop-filter:blur(24px) saturate(175%)!important;
+    border-bottom:1px solid rgba(255,255,255,.58)!important;
+    box-shadow:0 14px 30px rgba(15,23,42,.10)!important;
+  }
+}
+
+@media(max-width:580px){
+  .site-header .header-logo{
+    flex-basis:126px!important;
+    width:126px!important;
+  }
+  .site-header .header-logo .header-brand-logo{
+    height:66px!important;
+    top:8px!important;
+  }
+}
+
