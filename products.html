@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="description" content="Browse Carchope pre-owned cars in the premium frontend redesign preview.">
   <title>Pre-Owned Cars — Carchope</title>
-  <link rel="stylesheet" href="styles.css?v=product-lens-1">
+  <link rel="stylesheet" href="styles.css?v=filter-ui-2">
 </head>
 <body>
 
@@ -151,16 +151,23 @@
           <input id="car-budget-range" class="budget-range" type="range" min="0" max="400000" step="10000" value="400000">
         </div>
 
-        <div class="filter-field">
-          <label for="car-sort">Sort By</label>
-          <select id="car-sort">
-            <option value="name-asc">Name (A - Z)</option>
-            <option value="name-desc">Name (Z - A)</option>
-            <option value="price-low">Price (Low → High)</option>
-            <option value="price-high">Price (High → Low)</option>
-            <option value="sold-first">Sold Out First</option>
-            <option value="stock-first" selected>In Stock First</option>
-          </select>
+        <div class="filter-field sort-field">
+          <label>Sort By</label>
+          <div class="sort-select multi-filter" id="sort-select">
+            <button class="sort-select-trigger multi-filter-trigger" id="sort-trigger" type="button" aria-haspopup="listbox" aria-expanded="false">
+              <span id="sort-current">In Stock First</span>
+              <svg class="filter-chevron" viewBox="0 0 20 20" aria-hidden="true"><path d="m5 7 5 5 5-5"></path></svg>
+            </button>
+            <div class="sort-select-menu premium-filter-menu" id="sort-menu" role="listbox" aria-label="Sort cars"></div>
+            <select id="car-sort" class="sort-native-select" tabindex="-1" aria-hidden="true">
+              <option value="name-asc">Name (A - Z)</option>
+              <option value="name-desc">Name (Z - A)</option>
+              <option value="price-low">Price (Low → High)</option>
+              <option value="price-high">Price (High → Low)</option>
+              <option value="sold-first">Sold Out First</option>
+              <option value="stock-first" selected>In Stock First</option>
+            </select>
+          </div>
         </div>
 
         <button class="search-btn" id="car-search-btn" type="button">Search</button>
@@ -298,6 +305,6 @@
     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m7 14 5-5 5 5"></path></svg>
   </button>
 </div>
-<script src="app.js?v=product-lens-1"></script>
+<script src="app.js?v=filter-ui-2"></script>
 </body>
 </html>
