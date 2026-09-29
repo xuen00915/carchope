@@ -1,4 +1,17 @@
 (function(){
+
+
+  /* Header blends into hero at top and becomes glass after scroll */
+  var siteHeader=document.querySelector('.site-header');
+  if(siteHeader){
+    function syncHeaderGlass(){
+      siteHeader.classList.toggle('is-scrolled',(window.scrollY||window.pageYOffset||0)>24);
+    }
+    window.addEventListener('scroll',syncHeaderGlass,{passive:true});
+    window.addEventListener('load',syncHeaderGlass,{once:true});
+    syncHeaderGlass();
+  }
+
   var menu=document.getElementById('menu-toggle');
   var panel=document.getElementById('mobile-panel');
 

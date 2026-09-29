@@ -5475,3 +5475,65 @@ body{
   }
 }
 
+/* Hero-integrated header: invisible at top, glass after scroll */
+.site-header{
+  transition:
+    background .32s ease,
+    backdrop-filter .32s ease,
+    -webkit-backdrop-filter .32s ease,
+    border-color .32s ease,
+    box-shadow .32s ease!important;
+}
+
+/* At page top: there should be no visible 'header bar'. */
+.site-header:not(.is-scrolled){
+  background:transparent!important;
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
+  border-bottom-color:transparent!important;
+  box-shadow:none!important;
+}
+
+.site-header:not(.is-scrolled)::before{
+  opacity:0!important;
+  background:transparent!important;
+}
+
+/* Road Experience must behave exactly the same at the top. */
+.road-experience-page .site-header:not(.is-scrolled){
+  background:transparent!important;
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
+  border-bottom-color:transparent!important;
+  box-shadow:none!important;
+}
+
+/* After leaving the hero top, fade the liquid glass back in. */
+.site-header.is-scrolled{
+  background:rgba(255,255,255,.18)!important;
+  -webkit-backdrop-filter:blur(22px) saturate(165%)!important;
+  backdrop-filter:blur(22px) saturate(165%)!important;
+  border-bottom:1px solid rgba(255,255,255,.34)!important;
+  box-shadow:
+    0 10px 28px rgba(15,23,42,.08),
+    inset 0 1px 0 rgba(255,255,255,.34)!important;
+}
+
+.site-header.is-scrolled::before{
+  opacity:.55!important;
+  background:
+    linear-gradient(115deg,
+      rgba(255,255,255,.18) 0%,
+      rgba(255,255,255,.035) 34%,
+      rgba(255,255,255,.11) 56%,
+      rgba(255,255,255,.025) 78%,
+      rgba(255,255,255,.13) 100%)!important;
+}
+
+/* Keep first-screen media physically behind the floating header controls. */
+.hero,
+.page-hero,
+.road-experience-page .hero{
+  position:relative;
+}
+
