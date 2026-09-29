@@ -6255,3 +6255,261 @@ body:has(.page-hero:not(.inventory-hero):not(.dark)) .site-header:not(.is-scroll
     0 0 22px rgba(255,90,0,.28)!important;
 }
 
+/* Reference-faithful speedometer floating controls */
+.floating-actions{
+  --gauge-sweep:0deg;
+  right:18px!important;
+  bottom:18px!important;
+  gap:8px!important;
+  align-items:center!important;
+}
+
+/* Base gauge body */
+.floating-whatsapp,
+.floating-top{
+  position:relative!important;
+  border-radius:50%!important;
+  overflow:visible!important;
+  border:3px solid #dfe4e7!important;
+  background:
+    radial-gradient(circle at 50% 50%,
+      #111922 0 53%,
+      #070c11 54% 60%,
+      #1f2a33 61% 66%,
+      #080c10 67% 100%)!important;
+  box-shadow:
+    inset 0 0 0 1px rgba(0,0,0,.85),
+    inset 0 0 0 4px rgba(255,255,255,.035),
+    0 10px 22px rgba(0,0,0,.24)!important;
+  isolation:isolate!important;
+}
+
+/* Top gauge is visibly larger like the reference. */
+.floating-whatsapp{
+  width:82px!important;
+  height:82px!important;
+  min-width:82px!important;
+  min-height:82px!important;
+  --gauge-accent:#35f58b;
+  box-shadow:
+    inset 0 0 0 1px rgba(0,0,0,.85),
+    inset 0 0 0 4px rgba(255,255,255,.035),
+    0 10px 24px rgba(0,0,0,.25),
+    0 0 20px rgba(53,245,139,.18)!important;
+}
+
+/* Bottom gauge is slightly smaller. */
+.floating-top{
+  width:72px!important;
+  height:72px!important;
+  min-width:72px!important;
+  min-height:72px!important;
+  --gauge-accent:#ffffff;
+}
+
+/* Tick ring + static reference arcs + dynamic scroll-speed highlight. */
+.floating-whatsapp::before,
+.floating-top::before{
+  content:""!important;
+  display:block!important;
+  position:absolute!important;
+  inset:7px!important;
+  z-index:1!important;
+  border-radius:50%!important;
+  pointer-events:none!important;
+  background:
+    repeating-conic-gradient(
+      from 207deg,
+      rgba(255,255,255,.94) 0deg 1.4deg,
+      transparent 1.4deg 11.25deg
+    ),
+    conic-gradient(
+      from 207deg,
+      rgba(255,255,255,.12) 0deg 18deg,
+      var(--gauge-base-arc) 18deg 190deg,
+      rgba(255,255,255,.08) 190deg 229deg,
+      #ff2d20 229deg 263deg,
+      rgba(255,255,255,.06) 263deg 270deg,
+      transparent 270deg 360deg
+    ),
+    conic-gradient(
+      from 207deg,
+      var(--gauge-live-arc) 0deg var(--gauge-sweep),
+      transparent var(--gauge-sweep) 360deg
+    )!important;
+  -webkit-mask:
+    radial-gradient(circle,
+      transparent 0 62%,
+      #000 63% 80%,
+      transparent 81% 100%)!important;
+  mask:
+    radial-gradient(circle,
+      transparent 0 62%,
+      #000 63% 80%,
+      transparent 81% 100%)!important;
+  opacity:1!important;
+  filter:none!important;
+  transform:none!important;
+}
+
+.floating-whatsapp{
+  --gauge-base-arc:#33f38a;
+  --gauge-live-arc:rgba(92,255,166,.92);
+}
+.floating-top{
+  --gauge-base-arc:#f5f7f8;
+  --gauge-live-arc:rgba(255,255,255,.96);
+}
+
+/* Remove the old needle completely — reference uses illuminated arcs, not a needle. */
+.floating-whatsapp::after,
+.floating-top::after{
+  display:none!important;
+  content:none!important;
+}
+
+/* Recessed central disc. */
+.floating-whatsapp .whatsapp-round-icon{
+  position:absolute!important;
+  left:50%!important;
+  top:50%!important;
+  z-index:4!important;
+  width:40px!important;
+  height:40px!important;
+  transform:translate(-50%,-50%)!important;
+  border-radius:50%!important;
+  display:grid!important;
+  place-items:center!important;
+  background:
+    radial-gradient(circle at 42% 36%,
+      #17cf68 0 48%,
+      #0ca84e 70%,
+      #08773a 100%)!important;
+  box-shadow:
+    0 0 0 2px rgba(255,255,255,.92),
+    0 0 14px rgba(53,245,139,.78),
+    0 0 26px rgba(53,245,139,.28)!important;
+}
+
+.floating-whatsapp .whatsapp-round-icon img{
+  width:25px!important;
+  height:25px!important;
+  display:block!important;
+  object-fit:contain!important;
+  filter:drop-shadow(0 0 4px rgba(255,255,255,.38))!important;
+}
+
+/* Bottom arrow sits on the recessed black center. */
+.floating-top svg{
+  position:absolute!important;
+  left:50%!important;
+  top:50%!important;
+  z-index:4!important;
+  width:24px!important;
+  height:24px!important;
+  transform:translate(-50%,-50%)!important;
+  fill:none!important;
+  stroke:#fff!important;
+  stroke-width:2.6!important;
+  stroke-linecap:round!important;
+  stroke-linejoin:round!important;
+  filter:drop-shadow(0 2px 4px rgba(0,0,0,.48))!important;
+}
+
+/* Silver rim highlight, closer to a machined gauge bezel. */
+.floating-whatsapp{
+  outline:1px solid rgba(72,82,90,.70)!important;
+  outline-offset:-1px!important;
+}
+.floating-top{
+  outline:1px solid rgba(72,82,90,.70)!important;
+  outline-offset:-1px!important;
+}
+
+/* Acceleration: keep the reference look, only boost illumination/glow. */
+.floating-actions.is-accelerating .floating-whatsapp{
+  box-shadow:
+    inset 0 0 0 1px rgba(0,0,0,.85),
+    inset 0 0 0 4px rgba(255,255,255,.035),
+    0 10px 25px rgba(0,0,0,.26),
+    0 0 28px rgba(53,245,139,.36)!important;
+}
+.floating-actions.is-accelerating .floating-whatsapp .whatsapp-round-icon{
+  box-shadow:
+    0 0 0 2px rgba(255,255,255,.95),
+    0 0 19px rgba(53,245,139,.92),
+    0 0 34px rgba(53,245,139,.40)!important;
+}
+.floating-actions.is-accelerating .floating-top{
+  box-shadow:
+    inset 0 0 0 1px rgba(0,0,0,.85),
+    inset 0 0 0 4px rgba(255,255,255,.035),
+    0 10px 24px rgba(0,0,0,.26),
+    0 0 16px rgba(255,255,255,.12)!important;
+}
+
+/* Keep hover restrained so it still looks like a gauge, not a floating app button. */
+.floating-whatsapp:hover,
+.floating-top:hover{
+  transform:translateY(-2px)!important;
+}
+
+@media(max-width:900px){
+  .floating-whatsapp{
+    width:76px!important;
+    height:76px!important;
+    min-width:76px!important;
+    min-height:76px!important;
+  }
+  .floating-top{
+    width:67px!important;
+    height:67px!important;
+    min-width:67px!important;
+    min-height:67px!important;
+  }
+  .floating-whatsapp .whatsapp-round-icon{
+    width:37px!important;
+    height:37px!important;
+  }
+  .floating-whatsapp .whatsapp-round-icon img{
+    width:23px!important;
+    height:23px!important;
+  }
+}
+
+@media(max-width:580px){
+  .floating-actions{
+    right:9px!important;
+    bottom:9px!important;
+    gap:7px!important;
+  }
+  .floating-whatsapp{
+    width:68px!important;
+    height:68px!important;
+    min-width:68px!important;
+    min-height:68px!important;
+  }
+  .floating-top{
+    width:60px!important;
+    height:60px!important;
+    min-width:60px!important;
+    min-height:60px!important;
+  }
+  .floating-whatsapp::before,
+  .floating-top::before{
+    inset:6px!important;
+  }
+  .floating-whatsapp .whatsapp-round-icon{
+    width:34px!important;
+    height:34px!important;
+  }
+  .floating-whatsapp .whatsapp-round-icon img{
+    width:21px!important;
+    height:21px!important;
+  }
+  .floating-top svg{
+    width:21px!important;
+    height:21px!important;
+  }
+}
+
