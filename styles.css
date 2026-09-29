@@ -5100,7 +5100,6 @@ body{
     inset 0 -1px 0 rgba(255,255,255,.24)!important;
 }
 
-/* Glass highlight/refraction layer. */
 .site-header::before{
   content:"";
   position:absolute;
@@ -5115,8 +5114,6 @@ body{
       rgba(255,255,255,.04) 72%,
       rgba(255,255,255,.30) 100%);
   opacity:.64;
-  mask-image:linear-gradient(#000,rgba(0,0,0,.72));
-  -webkit-mask-image:linear-gradient(#000,rgba(0,0,0,.72));
 }
 
 .header-inner{
@@ -5125,11 +5122,10 @@ body{
   overflow:visible!important;
 }
 
-/* Replace the text wordmark with the official image logo. */
 .site-header .header-logo{
   position:relative!important;
   align-self:flex-start!important;
-  flex:0 0 190px!important;
+  flex:0 0 230px!important;
   width:230px!important;
   height:74px!important;
   margin:0 10px 0 0!important;
@@ -5147,10 +5143,8 @@ body{
   object-fit:contain!important;
   object-position:left top!important;
   filter:drop-shadow(0 8px 14px rgba(15,23,42,.14));
-  transform:none!important;
 }
 
-/* Make sure nav and actions remain vertically centred inside the glass bar. */
 .site-header .desktop-nav,
 .site-header .header-cart-wrap,
 .site-header .header-cta,
@@ -5165,11 +5159,11 @@ body{
 
 @media(max-width:1180px){
   .site-header .header-logo{
-    flex-basis:155px!important;
-    width:155px!important;
+    flex-basis:205px!important;
+    width:205px!important;
   }
   .site-header .header-logo .header-brand-logo{
-    height:82px!important;
+    height:104px!important;
     top:0!important;
   }
 }
@@ -5200,12 +5194,12 @@ body{
 
 @media(max-width:580px){
   .site-header .header-logo{
-    flex-basis:126px!important;
-    width:126px!important;
+    flex-basis:145px!important;
+    width:145px!important;
   }
   .site-header .header-logo .header-brand-logo{
-    height:66px!important;
-    top:8px!important;
+    height:78px!important;
+    top:0!important;
   }
 }
 
