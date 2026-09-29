@@ -728,3 +728,97 @@ body.road-experience-page{
     min-height:72px!important;
   }
 }
+
+
+/* Road Experience clearer-video transparency pass */
+.road-experience-page .hero::after{
+  background:
+    linear-gradient(90deg,
+      rgba(247,247,246,.72) 0%,
+      rgba(247,247,246,.50) 31%,
+      rgba(247,247,246,.05) 58%,
+      rgba(0,0,0,.10) 100%),
+    linear-gradient(0deg,rgba(0,0,0,.08),transparent 42%)!important;
+}
+
+.road-experience-page .journey-rail{
+  background:rgba(255,255,255,.62)!important;
+  backdrop-filter:blur(6px) saturate(1.03)!important;
+  -webkit-backdrop-filter:blur(6px) saturate(1.03)!important;
+}
+
+.road-experience-page .brand-marquee-section{
+  background:rgba(255,255,255,.58)!important;
+  backdrop-filter:blur(6px) saturate(1.03)!important;
+  -webkit-backdrop-filter:blur(6px) saturate(1.03)!important;
+}
+
+.road-experience-page .brand-marquee-item{
+  background:rgba(255,255,255,.72)!important;
+  box-shadow:0 8px 22px rgba(17,18,20,.06)!important;
+}
+
+.road-experience-page .section.section-line{
+  background:rgba(255,255,255,.62)!important;
+  backdrop-filter:blur(6px) saturate(1.03)!important;
+  -webkit-backdrop-filter:blur(6px) saturate(1.03)!important;
+}
+
+.road-experience-page .manifesto-video-section{
+  background:rgba(7,9,11,.46)!important;
+  backdrop-filter:blur(2px)!important;
+  -webkit-backdrop-filter:blur(2px)!important;
+}
+
+.road-experience-page .manifesto-video-section::after{
+  background:
+    linear-gradient(90deg,
+      rgba(7,9,11,.62) 0%,
+      rgba(7,9,11,.42) 48%,
+      rgba(7,9,11,.18) 100%),
+    linear-gradient(0deg,rgba(7,9,11,.18),rgba(7,9,11,.04))!important;
+}
+
+.road-experience-page .partner-band{
+  background:rgba(9,11,13,.56)!important;
+  backdrop-filter:blur(5px)!important;
+  -webkit-backdrop-filter:blur(5px)!important;
+}
+
+.road-experience-page .partner-copy::before{
+  background:
+    linear-gradient(90deg,
+      rgba(9,11,13,.66) 0%,
+      rgba(9,11,13,.54) 58%,
+      rgba(9,11,13,.36) 100%)!important;
+}
+
+.road-experience-page .site-footer{
+  background:rgba(12,13,15,.82)!important;
+  backdrop-filter:blur(8px)!important;
+  -webkit-backdrop-filter:blur(8px)!important;
+}
+
+@media(max-width:860px){
+  .road-experience-page .hero::after{
+    background:
+      linear-gradient(90deg,
+        rgba(247,247,246,.78) 0%,
+        rgba(247,247,246,.58) 56%,
+        rgba(247,247,246,.08) 100%)!important;
+  }
+
+  .road-experience-page .journey-rail,
+  .road-experience-page .brand-marquee-section,
+  .road-experience-page .section.section-line{
+    background:rgba(255,255,255,.70)!important;
+  }
+
+  .road-experience-page .manifesto-video-section{
+    background:rgba(7,9,11,.54)!important;
+  }
+
+  .road-experience-page .partner-band{
+    background:rgba(9,11,13,.64)!important;
+  }
+}
