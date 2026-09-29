@@ -6928,3 +6928,85 @@ body:has(.page-hero:not(.inventory-hero):not(.dark)) .site-header:not(.is-scroll
       #090d11 77% 100%)!important;
 }
 
+/* Exact border-line speed growth */
+/*
+  The speed line now lives exactly on the button bezel.
+  No interior ticks, no inner progress ring.
+*/
+.floating-whatsapp::before,
+.floating-top::before{
+  content:""!important;
+  display:block!important;
+  position:absolute!important;
+  inset:-2px!important;
+  z-index:6!important;
+  border-radius:50%!important;
+  pointer-events:none!important;
+
+  background:
+    conic-gradient(
+      from 214deg,
+      var(--gauge-live-color) 0deg var(--gauge-sweep),
+      transparent var(--gauge-sweep) 360deg
+    )!important;
+
+  /* Thin illuminated line exactly at the outside edge. */
+  -webkit-mask:
+    radial-gradient(
+      circle,
+      transparent 0 91%,
+      #000 92% 100%
+    )!important;
+  mask:
+    radial-gradient(
+      circle,
+      transparent 0 91%,
+      #000 92% 100%
+    )!important;
+
+  opacity:1!important;
+  transform:none!important;
+}
+
+/* Neutral metallic bezel remains visible where the speed line has not reached. */
+.floating-whatsapp,
+.floating-top{
+  border:2px solid #aeb8be!important;
+  outline:1px solid rgba(42,50,57,.78)!important;
+  outline-offset:-1px!important;
+}
+
+/* WhatsApp = green live border. */
+.floating-whatsapp{
+  --gauge-live-color:#42ff98!important;
+}
+.floating-whatsapp::before{
+  filter:
+    drop-shadow(0 0 2px rgba(66,255,152,.88))
+    drop-shadow(0 0 5px rgba(66,255,152,.28))!important;
+}
+
+/* Scroll-to-top = white live border. */
+.floating-top{
+  --gauge-live-color:#ffffff!important;
+}
+.floating-top::before{
+  filter:
+    drop-shadow(0 0 2px rgba(255,255,255,.82))
+    drop-shadow(0 0 4px rgba(255,255,255,.18))!important;
+}
+
+/* Faster scrolling increases light intensity, while JS controls line length. */
+.floating-actions.is-accelerating .floating-whatsapp::before{
+  filter:
+    drop-shadow(0 0 2px rgba(66,255,152,1))
+    drop-shadow(0 0 7px rgba(66,255,152,.56))
+    drop-shadow(0 0 12px rgba(66,255,152,.18))!important;
+}
+
+.floating-actions.is-accelerating .floating-top::before{
+  filter:
+    drop-shadow(0 0 2px rgba(255,255,255,1))
+    drop-shadow(0 0 6px rgba(255,255,255,.32))!important;
+}
+
