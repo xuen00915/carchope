@@ -1,1 +1,0 @@
-3D vehicle base used by roadside-experience.html\n\nFerrari 458 Italia GLB from the official Three.js example assets:\nhttps://threejs.org/examples/models/gltf/ferrari.glb\n\nOriginal model credited by the Three.js example to vicent091036 on Sketchfab.\nThe model is used as a realistic motion/lighting base and recoloured for the Carchope concept.\n
