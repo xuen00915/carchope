@@ -6513,3 +6513,210 @@ body:has(.page-hero:not(.inventory-hero):not(.dark)) .site-header:not(.is-scroll
   }
 }
 
+/* Cleaner speed-indicator gauges */
+.floating-actions{
+  --gauge-sweep:0deg;
+  --gauge-speed:0;
+  right:16px!important;
+  bottom:16px!important;
+  gap:7px!important;
+}
+
+/* Cleaner, less bulky housings */
+.floating-whatsapp{
+  width:76px!important;
+  height:76px!important;
+  min-width:76px!important;
+  min-height:76px!important;
+}
+
+.floating-top{
+  width:66px!important;
+  height:66px!important;
+  min-width:66px!important;
+  min-height:66px!important;
+}
+
+.floating-whatsapp,
+.floating-top{
+  border:2px solid #d7dde0!important;
+  outline:1px solid rgba(55,64,72,.72)!important;
+  outline-offset:-1px!important;
+  background:
+    radial-gradient(circle at 50% 47%,
+      #121a22 0 52%,
+      #080d12 53% 62%,
+      #202b34 63% 67%,
+      #090d11 68% 100%)!important;
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.04),
+    0 8px 18px rgba(0,0,0,.22)!important;
+}
+
+/*
+  Tick marks stay visible.
+  The active green/white line starts at zero and grows with scroll speed.
+  Redline stays fixed on the right.
+*/
+.floating-whatsapp::before,
+.floating-top::before{
+  inset:6px!important;
+  background:
+    repeating-conic-gradient(
+      from 214deg,
+      rgba(255,255,255,.86) 0deg 1deg,
+      transparent 1deg 12deg
+    ),
+    conic-gradient(
+      from 214deg,
+      transparent 0deg 220deg,
+      #ff3128 220deg 249deg,
+      transparent 249deg 360deg
+    ),
+    conic-gradient(
+      from 214deg,
+      var(--gauge-live-color) 0deg var(--gauge-sweep),
+      rgba(255,255,255,.055) var(--gauge-sweep) 258deg,
+      transparent 258deg 360deg
+    )!important;
+  -webkit-mask:
+    radial-gradient(circle,
+      transparent 0 63%,
+      #000 64% 78%,
+      transparent 79% 100%)!important;
+  mask:
+    radial-gradient(circle,
+      transparent 0 63%,
+      #000 64% 78%,
+      transparent 79% 100%)!important;
+  filter:none!important;
+  opacity:.98!important;
+}
+
+.floating-whatsapp{
+  --gauge-live-color:#3cff91;
+}
+.floating-top{
+  --gauge-live-color:#ffffff;
+}
+
+/* No needle — only the speed arc moves, like the reference. */
+.floating-whatsapp::after,
+.floating-top::after{
+  display:none!important;
+  content:none!important;
+}
+
+/* Cleaner center discs */
+.floating-whatsapp .whatsapp-round-icon{
+  width:36px!important;
+  height:36px!important;
+  background:#13ad55!important;
+  box-shadow:
+    0 0 0 2px rgba(255,255,255,.90),
+    0 0 10px rgba(60,255,145,.46)!important;
+}
+
+.floating-whatsapp .whatsapp-round-icon img{
+  width:22px!important;
+  height:22px!important;
+}
+
+.floating-top svg{
+  width:21px!important;
+  height:21px!important;
+  stroke-width:2.4!important;
+}
+
+/* Resting state: almost no halo. */
+.floating-whatsapp{
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.04),
+    0 8px 18px rgba(0,0,0,.22),
+    0 0 7px rgba(60,255,145,.08)!important;
+}
+
+/* Moving state: arc/glow behaves like acceleration. */
+.floating-actions.is-accelerating .floating-whatsapp{
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.04),
+    0 8px 18px rgba(0,0,0,.23),
+    0 0 20px rgba(60,255,145,.28)!important;
+}
+
+.floating-actions.is-accelerating .floating-whatsapp .whatsapp-round-icon{
+  box-shadow:
+    0 0 0 2px rgba(255,255,255,.94),
+    0 0 15px rgba(60,255,145,.66)!important;
+}
+
+.floating-actions.is-accelerating .floating-top{
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.04),
+    0 8px 18px rgba(0,0,0,.23),
+    0 0 11px rgba(255,255,255,.10)!important;
+}
+
+/* No pulse/scale: cleaner dashboard behavior. */
+.floating-actions.is-accelerating .floating-btn,
+.floating-actions.is-accelerating .floating-whatsapp,
+.floating-actions.is-accelerating .floating-top{
+  transform:none!important;
+}
+
+.floating-whatsapp:hover,
+.floating-top:hover{
+  transform:translateY(-1px)!important;
+}
+
+@media(max-width:900px){
+  .floating-whatsapp{
+    width:70px!important;
+    height:70px!important;
+    min-width:70px!important;
+    min-height:70px!important;
+  }
+  .floating-top{
+    width:62px!important;
+    height:62px!important;
+    min-width:62px!important;
+    min-height:62px!important;
+  }
+}
+
+@media(max-width:580px){
+  .floating-actions{
+    right:8px!important;
+    bottom:8px!important;
+    gap:6px!important;
+  }
+  .floating-whatsapp{
+    width:64px!important;
+    height:64px!important;
+    min-width:64px!important;
+    min-height:64px!important;
+  }
+  .floating-top{
+    width:56px!important;
+    height:56px!important;
+    min-width:56px!important;
+    min-height:56px!important;
+  }
+  .floating-whatsapp::before,
+  .floating-top::before{
+    inset:5px!important;
+  }
+  .floating-whatsapp .whatsapp-round-icon{
+    width:31px!important;
+    height:31px!important;
+  }
+  .floating-whatsapp .whatsapp-round-icon img{
+    width:19px!important;
+    height:19px!important;
+  }
+  .floating-top svg{
+    width:19px!important;
+    height:19px!important;
+  }
+}
+

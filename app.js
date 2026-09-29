@@ -379,11 +379,14 @@
       var dy=Math.abs(y-gaugeLastY);
 
       /*
-        Map scroll velocity to a dashboard-style 0..1 gauge.
-        Trackpad/flick scrolls climb rapidly; slow wheel scrolls sit lower.
+        Real speed-indicator behavior:
+        - both scroll directions count as speed
+        - slow scroll = short arc
+        - fast scroll = long arc
+        - stop = decay back toward zero
       */
-      var velocity=dy/dt;
-      gaugeTarget=Math.min(1,velocity/2.25);
+      var pxPerMs=dy/dt;
+      gaugeTarget=Math.min(1,pxPerMs/5.5);
 
       gaugeLastY=y;
       gaugeLastTime=now;
@@ -392,25 +395,27 @@
     function animateGauge(){
       gaugeRaf=requestAnimationFrame(animateGauge);
 
-      var accel=gaugeTarget>gaugeShown?.25:.10;
-      gaugeShown+=(gaugeTarget-gaugeShown)*accel;
-      gaugeTarget*=.88;
+      var response=gaugeTarget>gaugeShown?.20:.085;
+      gaugeShown+=(gaugeTarget-gaugeShown)*response;
+      gaugeTarget*=.91;
 
-      if(gaugeTarget<.003) gaugeTarget=0;
-      if(gaugeShown<.003) gaugeShown=0;
+      if(gaugeTarget<.0025) gaugeTarget=0;
+      if(gaugeShown<.0025) gaugeShown=0;
 
-      var angle=-128+(gaugeShown*256);
-      var sweep=gaugeShown*258;
+      /* 12deg idle hint, up to ~248deg at full scroll speed. */
+      var sweep=gaugeShown>0 ? 12+(gaugeShown*236) : 0;
 
       floatingActions.style.setProperty('--gauge-speed',gaugeShown.toFixed(4));
-      floatingActions.style.setProperty('--gauge-angle',angle.toFixed(2)+'deg');
       floatingActions.style.setProperty('--gauge-sweep',sweep.toFixed(2)+'deg');
-      floatingActions.classList.toggle('is-accelerating',gaugeShown>.16);
+      floatingActions.classList.toggle('is-accelerating',gaugeShown>.08);
     }
 
     window.addEventListener('scroll',measureGaugeSpeed,{passive:true});
-    window.addEventListener('wheel',measureGaugeSpeed,{passive:true});
-    window.addEventListener('touchmove',measureGaugeSpeed,{passive:true});
+    window.addEventListener('resize',function(){
+      gaugeLastY=window.scrollY||window.pageYOffset||0;
+      gaugeLastTime=performance.now();
+    },{passive:true});
+
     measureGaugeSpeed();
     animateGauge();
   }
