@@ -1,0 +1,78 @@
+{
+  "pipeline": "img2threejs-inspired procedural reconstruction",
+  "generatedAt": "2026-09-29",
+  "coordinateSystem": "X width, Y height, Z length; rear +Z, front -Z",
+  "cars": [
+    {
+      "name": "XPENG G6",
+      "modelYear": 2025,
+      "dimensionsM": {
+        "length": 4.758,
+        "width": 1.92,
+        "height": 1.65,
+        "wheelbase": 2.89
+      },
+      "identityFeatures": [
+        "coupe-SUV fastback greenhouse",
+        "wide rear shoulders",
+        "full-width rear LED light bar",
+        "dark lower diffuser",
+        "ducktail / rear spoiler",
+        "flush modern surfacing"
+      ],
+      "references": [
+        "https://www.xpeng.com/model/g6",
+        "https://xpeng.com.my/brochure/XPENG-G6-Brochure.pdf",
+        "https://cdn.prod.website-files.com/6654c9eb254a19b776f424c5/66a94b133cc952b3f57ccdd2_getImage%20%282%29.jpg",
+        "https://bilinord.no/getfile.php/1313085-1712671350/02%20Nye%20biler/03%20Xpeng/G6%20Album/BiliNord-XPeng-G6-04.jpg%20%28optimized_original%29.jpg"
+      ]
+    },
+    {
+      "name": "Volkswagen Golf SV",
+      "modelYear": 2018,
+      "dimensionsM": {
+        "length": 4.351,
+        "width": 1.807,
+        "height": 1.578,
+        "wheelbase": 2.67
+      },
+      "identityFeatures": [
+        "upright compact-MPV greenhouse",
+        "near-vertical rear hatch",
+        "split horizontal tail lamps",
+        "roof rails",
+        "restrained lower bumper",
+        "short compact overhangs"
+      ],
+      "references": [
+        "https://www.volkswagen-newsroom.com/en/press-releases/golf-sportsvan-the-update-599",
+        "https://car-images.bauersecure.com/wp-images/12424/golf_sv_2017_05.jpg",
+        "https://autos.yahoo.com.tw/y/r/w1200/iw/MMT/car/d6a3b44299ddd15ade4012c2522a055c_1200.jpg"
+      ]
+    },
+    {
+      "name": "Toyota Prius+",
+      "modelYear": 2020,
+      "dimensionsM": {
+        "length": 4.645,
+        "width": 1.775,
+        "height": 1.575,
+        "wheelbase": 2.78
+      },
+      "identityFeatures": [
+        "long high-roof seven-seat MPV silhouette",
+        "upright rear hatch",
+        "tall vertical rear lamp towers",
+        "roof spoiler",
+        "black lower bumper",
+        "hybrid-family wedge profile"
+      ],
+      "references": [
+        "https://media.toyota.co.uk/wp-content/uploads/sites/5/2021/03/1599224530200312MPriusfullreleaseWLTP.pdf",
+        "https://cdn.images.autoexposure.co.uk/AETA19222/AETV41939341_4.jpg",
+        "https://assets.autoweek.nl/m/w7my9dobrqkz_800.jpg"
+      ]
+    }
+  ],
+  "note": "Single-view and limited-view reconstruction cannot guarantee hidden-side exactness. Geometry is built to preserve real dimensions, rear/side silhouette, major glazing, lamps, trim, wheels and bumper identity at the roadside viewing distances used by this page."
+}
