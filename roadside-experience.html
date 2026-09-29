@@ -7,7 +7,7 @@
   <meta name="description" content="Carchope roadside driving experience — homepage content transformed into roadside billboards, sky messages and approaching car panels.">
   <title>Carchope — Roadside Experience</title>
   <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="roadside-experience-v11.css">
+  <link rel="stylesheet" href="roadside-experience-v12.css">
 </head>
 <body class="roadside-page">
 
@@ -76,13 +76,45 @@
     preload="auto"
     disablepictureinpicture
     tabindex="-1">
-    <source src="https://assets.mixkit.co/videos/48489/48489-720.mp4" type="video/mp4">
+    <source src="https://assets.mixkit.co/videos/2022/2022-720.mp4" type="video/mp4">
   </video>
-  <canvas class="road-webgl" id="road-webgl" aria-hidden="true"></canvas>
   <div class="roadside-grade"></div>
   <div class="roadside-vignette"></div>
   <div class="roadside-horizon-glow"></div>
   <div class="roadside-loading" id="roadside-loading"><span></span>Loading road</div>
+
+  <div class="video-car-content-layer" id="video-car-content-layer">
+    <a class="video-car-callout" data-car-callout="0" href="products.html">
+      <span>01</span><strong>Buy a Car</strong><small>Browse our pre-owned inventory</small><i></i>
+    </a>
+
+    <a class="video-car-callout" data-car-callout="1"
+       href="https://www.carchope.com/sell-your-cars" target="_blank" rel="noopener">
+      <span>02</span><strong>Sell Your Car</strong><small>Get an instant quote</small><i></i>
+    </a>
+
+    <a class="video-car-callout" data-car-callout="2"
+       href="https://www.carchope.com/consignment" target="_blank" rel="noopener">
+      <span>03</span><strong>Consign Your Car</strong><small>We handle the sale</small><i></i>
+    </a>
+
+    <a class="video-car-callout" data-car-callout="3" href="service.html">
+      <span>04</span><strong>Ownership Support</strong><small>Insurance · Financing · Rental</small><i></i>
+    </a>
+
+    <a class="video-car-callout" data-car-callout="4" href="products.html">
+      <span>05</span><strong>More Choice</strong><small>Everyday favourites to premium marques</small><i></i>
+    </a>
+
+    <a class="video-car-callout" data-car-callout="5" href="about-us.html">
+      <span>06</span><strong>Simple. Honest. Better Cars.</strong><small>A more direct way to move forward</small><i></i>
+    </a>
+
+    <a class="video-car-callout" data-car-callout="6"
+       href="https://www.carchope.com/contact-us" target="_blank" rel="noopener">
+      <span>07</span><strong>Your Next Road Starts Here</strong><small>Talk to Carchope</small><i></i>
+    </a>
+  </div>
 </div><main id="roadside-experience" class="roadside-experience">
 
   <section class="road-section road-intro-section" id="road-intro" data-road-section>
@@ -114,14 +146,7 @@
         <h2>Buy, sell or consign.</h2>
         <p class="road-section-intro">Straightforward options for the next step in your car journey.</p>
       </div>
-
-      <div class="road-action-strip road-action-strip-left">
-        <a href="products.html"><span>01</span><strong>Buy a Car</strong><small>Browse Inventory</small></a>
-        <a href="https://www.carchope.com/sell-your-cars" target="_blank" rel="noopener"><span>02</span><strong>Sell Your Car</strong><small>Instant Quote</small></a>
-        <a href="https://www.carchope.com/consignment" target="_blank" rel="noopener"><span>03</span><strong>Consign</strong><small>We Handle It</small></a>
-      </div>
-
-      <a class="road-next-link" href="#road-story">Skip to our story <span>↓</span></a>
+<a class="road-next-link" href="#road-story">Skip to our story <span>↓</span></a>
     </div>
   </section>
 
@@ -150,29 +175,12 @@
   <section class="road-section road-featured-section" id="road-featured" data-road-section>
     <div class="road-section-inner">
       <div class="road-section-heading road-section-heading-light">
-        <span class="road-section-label">Featured Cars</span>
-        <h2>A closer look at a few standouts.</h2>
-        <p class="road-section-intro">Selected cars from the Carchope inventory, seen naturally on the road ahead.</p>
+        <span class="road-section-label">Cars in Motion</span>
+        <h2>The cars are already part of the road.</h2>
+        <p class="road-section-intro">Each passing car carries one Carchope message. No added vehicle graphics — just the real cars in the footage.</p>
       </div>
 
-      <div class="car-ahead-hud" aria-live="polite">
-        <a class="car-ahead-chip" href="products.html" data-car-hud="0">
-          <small>Now ahead</small>
-          <strong>XPENG G6 Electric</strong>
-          <span>2025 · 7,000 km · $201,705</span>
-        </a>
-        <a class="car-ahead-chip" href="products.html" data-car-hud="1">
-          <small>Now ahead</small>
-          <strong>Volkswagen Golf SV</strong>
-          <span>2018 · 50,000 km · $55,988</span>
-        </a>
-        <a class="car-ahead-chip" href="products.html" data-car-hud="2">
-          <small>Now ahead</small>
-          <strong>Toyota Prius Plus Hybrid</strong>
-          <span>2020 · 89,000 km · $98,888</span>
-        </a>
-      </div>
-<a class="road-next-link" href="#road-support">Ownership support <span>↓</span></a>
+      <a class="road-next-link" href="#road-support">Ownership support <span>↓</span></a>
     </div>
   </section>
 
@@ -183,15 +191,7 @@
         <h2>Your partner on every mile.</h2>
         <p class="road-section-intro">Insurance, financing, rental and consignment support around your ownership journey.</p>
       </div>
-
-      <div class="road-action-strip road-action-strip-right">
-        <a href="service.html"><strong>Insurance</strong><small>Drive with confidence</small></a>
-        <a href="service.html"><strong>Financing</strong><small>Flexible loan support</small></a>
-        <a href="service.html"><strong>Rental</strong><small>Short or long term</small></a>
-        <a href="https://www.carchope.com/consignment" target="_blank" rel="noopener"><strong>Consignment</strong><small>Let us handle it</small></a>
-      </div>
-
-      <a class="road-next-link" href="#road-finish">Final stop <span>↓</span></a>
+<a class="road-next-link" href="#road-finish">Final stop <span>↓</span></a>
     </div>
   </section>
 
@@ -224,16 +224,7 @@
     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m7 14 5-5 5 5"></path></svg>
   </button>
 </div>
-
-<script type="importmap">
-{
-  "imports": {
-    "three": "https://cdn.jsdelivr.net/npm/three@0.160.1/build/three.module.js",
-    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.1/examples/jsm/"
-  }
-}
-</script>
-<script type="module" src="roadside-experience-v11.js"></script>
+<script src="roadside-experience-v12.js"></script>
 <script src="app.js"></script>
 </body>
 </html>
