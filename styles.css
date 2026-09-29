@@ -6720,3 +6720,56 @@ body:has(.page-hero:not(.inventory-hero):not(.dark)) .site-header:not(.is-scroll
   }
 }
 
+/* Reference WhatsApp center ring */
+.floating-whatsapp .whatsapp-round-icon{
+  width:40px!important;
+  height:40px!important;
+  background:rgba(5,24,18,.30)!important;
+  border:2px solid #39f28b!important;
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,.10),
+    inset 0 0 10px rgba(57,242,139,.18),
+    0 0 10px rgba(57,242,139,.70),
+    0 0 20px rgba(57,242,139,.28)!important;
+}
+
+.floating-whatsapp .whatsapp-round-icon img{
+  width:25px!important;
+  height:25px!important;
+  filter:
+    brightness(0) invert(1)
+    drop-shadow(0 0 3px rgba(255,255,255,.45))
+    drop-shadow(0 0 6px rgba(57,242,139,.40))!important;
+}
+
+.floating-actions.is-accelerating .floating-whatsapp .whatsapp-round-icon{
+  border-color:#67ffac!important;
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,.14),
+    inset 0 0 12px rgba(57,242,139,.24),
+    0 0 14px rgba(57,242,139,.90),
+    0 0 28px rgba(57,242,139,.38)!important;
+}
+
+@media(max-width:900px){
+  .floating-whatsapp .whatsapp-round-icon{
+    width:37px!important;
+    height:37px!important;
+  }
+  .floating-whatsapp .whatsapp-round-icon img{
+    width:23px!important;
+    height:23px!important;
+  }
+}
+
+@media(max-width:580px){
+  .floating-whatsapp .whatsapp-round-icon{
+    width:33px!important;
+    height:33px!important;
+  }
+  .floating-whatsapp .whatsapp-round-icon img{
+    width:20px!important;
+    height:20px!important;
+  }
+}
+
