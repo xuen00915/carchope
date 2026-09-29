@@ -6053,7 +6053,7 @@ body:has(.page-hero:not(.inventory-hero):not(.dark)) .site-header:not(.is-scroll
   box-shadow:
     0 11px 26px rgba(7,11,15,.28),
     inset 0 0 0 1px rgba(255,255,255,.08),
-    0 0 calc(10px + (var(--gauge-speed) * 16px)) rgba(33,216,121,calc(.10 + (var(--gauge-speed) * .20)))!important;
+    0 0 12px rgba(33,216,121,.12)!important;
   isolation:isolate;
   transition:
     transform .18s ease,
@@ -6090,7 +6090,7 @@ body:has(.page-hero:not(.inventory-hero):not(.dark)) .site-header:not(.is-scroll
       transparent 0 61%,
       #000 62% 78%,
       transparent 79% 100%);
-  filter:drop-shadow(0 0 calc(3px + (var(--gauge-speed) * 8px)) var(--gauge-accent));
+  filter:drop-shadow(0 0 5px var(--gauge-accent));
   opacity:.95;
 }
 
@@ -6129,7 +6129,7 @@ body:has(.page-hero:not(.inventory-hero):not(.dark)) .site-header:not(.is-scroll
   background:#10a84f!important;
   box-shadow:
     0 0 0 2px rgba(255,255,255,.86),
-    0 0 calc(8px + (var(--gauge-speed) * 16px)) rgba(33,216,121,.58)!important;
+    0 0 10px rgba(33,216,121,.58)!important;
 }
 
 .floating-whatsapp .whatsapp-round-icon img{
@@ -6154,13 +6154,17 @@ body:has(.page-hero:not(.inventory-hero):not(.dark)) .site-header:not(.is-scroll
     ),
     conic-gradient(
       from 225deg,
-      #fff 0deg calc(var(--gauge-sweep) * .58),
-      #ffb000 calc(var(--gauge-sweep) * .58) calc(var(--gauge-sweep) * .78),
-      #ff3b18 calc(var(--gauge-sweep) * .78) var(--gauge-sweep),
+      transparent 0deg 216deg,
+      rgba(255,59,24,.92) 216deg 258deg,
+      transparent 258deg 360deg
+    ),
+    conic-gradient(
+      from 225deg,
+      #ffb000 0deg var(--gauge-sweep),
       rgba(255,255,255,.10) var(--gauge-sweep) 270deg,
       transparent 270deg 360deg
     );
-  filter:drop-shadow(0 0 calc(3px + (var(--gauge-speed) * 7px)) rgba(255,90,0,.8));
+  filter:drop-shadow(0 0 5px rgba(255,90,0,.8));
 }
 
 .floating-top svg{
@@ -6174,7 +6178,7 @@ body:has(.page-hero:not(.inventory-hero):not(.dark)) .site-header:not(.is-scroll
 
 /* Slight punch while the user is actively accelerating the scroll. */
 .floating-actions.is-accelerating .floating-btn{
-  transform:scale(calc(1 + (var(--gauge-speed) * .035)))!important;
+  transform:scale(1.035)!important;
 }
 
 .floating-btn:hover{
@@ -6235,5 +6239,19 @@ body:has(.page-hero:not(.inventory-hero):not(.dark)) .site-header:not(.is-scroll
     transition:none!important;
     transform:none!important;
   }
+}
+
+/* Speedometer active glow compatibility */
+.floating-actions.is-accelerating .floating-whatsapp{
+  box-shadow:
+    0 11px 28px rgba(7,11,15,.30),
+    inset 0 0 0 1px rgba(255,255,255,.08),
+    0 0 24px rgba(33,216,121,.30)!important;
+}
+.floating-actions.is-accelerating .floating-top{
+  box-shadow:
+    0 11px 28px rgba(7,11,15,.30),
+    inset 0 0 0 1px rgba(255,255,255,.08),
+    0 0 22px rgba(255,90,0,.28)!important;
 }
 
