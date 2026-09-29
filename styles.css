@@ -7105,3 +7105,95 @@ body:has(.page-hero:not(.inventory-hero):not(.dark)) .site-header:not(.is-scroll
   }
 }
 
+
+
+/* Hard equal visual footprint for both floating gauges */
+.floating-actions > .floating-btn,
+.floating-actions > .floating-whatsapp,
+.floating-actions > .floating-top{
+  box-sizing:border-box!important;
+  flex:0 0 68px!important;
+  width:68px!important;
+  height:68px!important;
+  min-width:68px!important;
+  min-height:68px!important;
+  max-width:68px!important;
+  max-height:68px!important;
+  aspect-ratio:1/1!important;
+  padding:0!important;
+  margin:0!important;
+  border-width:2px!important;
+  border-radius:50%!important;
+  transform:none!important;
+}
+
+/* Same exact live-border geometry */
+.floating-actions > .floating-whatsapp::before,
+.floating-actions > .floating-top::before{
+  inset:-2px!important;
+  border-radius:50%!important;
+}
+
+/* Same outer shadow footprint; color is the only difference */
+.floating-actions > .floating-whatsapp{
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.04),
+    0 8px 18px rgba(0,0,0,.22),
+    0 0 6px rgba(66,255,152,.10)!important;
+}
+
+.floating-actions > .floating-top{
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.04),
+    0 8px 18px rgba(0,0,0,.22),
+    0 0 6px rgba(255,255,255,.08)!important;
+}
+
+.floating-actions.is-accelerating > .floating-whatsapp{
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.04),
+    0 8px 18px rgba(0,0,0,.22),
+    0 0 10px rgba(66,255,152,.22)!important;
+}
+
+.floating-actions.is-accelerating > .floating-top{
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.04),
+    0 8px 18px rgba(0,0,0,.22),
+    0 0 10px rgba(255,255,255,.16)!important;
+}
+
+/* Same hover movement */
+.floating-actions > .floating-whatsapp:hover,
+.floating-actions > .floating-top:hover{
+  transform:translateY(-1px)!important;
+}
+
+@media(max-width:900px){
+  .floating-actions > .floating-btn,
+  .floating-actions > .floating-whatsapp,
+  .floating-actions > .floating-top{
+    flex-basis:64px!important;
+    width:64px!important;
+    height:64px!important;
+    min-width:64px!important;
+    min-height:64px!important;
+    max-width:64px!important;
+    max-height:64px!important;
+  }
+}
+
+@media(max-width:580px){
+  .floating-actions > .floating-btn,
+  .floating-actions > .floating-whatsapp,
+  .floating-actions > .floating-top{
+    flex-basis:58px!important;
+    width:58px!important;
+    height:58px!important;
+    min-width:58px!important;
+    min-height:58px!important;
+    max-width:58px!important;
+    max-height:58px!important;
+  }
+}
+
