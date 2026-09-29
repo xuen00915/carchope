@@ -886,18 +886,57 @@
       var photo=article.querySelector('[data-zoom-photo]');
       var photoImg=photo&&photo.querySelector('img');
       if(photo&&photoImg){
-        photo.addEventListener('mouseenter',function(){
-          photo.classList.add('is-zooming');
-        });
-        photo.addEventListener('mousemove',function(e){
+        photo.setAttribute('tabindex','0');
+        photo.setAttribute('role','region');
+        photo.setAttribute('aria-label','Magnify '+c.name+' image');
+
+        var lens=document.createElement('span');
+        lens.className='inventory-lens';
+        lens.setAttribute('aria-hidden','true');
+        photo.appendChild(lens);
+
+        var zoomFactor=1.7;
+
+        function syncLens(e){
           var rect=photo.getBoundingClientRect();
-          var x=((e.clientX-rect.left)/rect.width)*100;
-          var y=((e.clientY-rect.top)/rect.height)*100;
-          photoImg.style.transformOrigin=x+'% '+y+'%';
+          var localX=Math.max(0,Math.min(rect.width,e.clientX-rect.left));
+          var localY=Math.max(0,Math.min(rect.height,e.clientY-rect.top));
+          var xPct=rect.width?localX/rect.width:0.5;
+          var yPct=rect.height?localY/rect.height:0.5;
+
+          photo.style.setProperty('--lens-x',localX.toFixed(2)+'px');
+          photo.style.setProperty('--lens-y',localY.toFixed(2)+'px');
+
+          lens.style.backgroundImage='url("'+photoImg.currentSrc.replace(/"/g,'%22')+'")';
+          lens.style.backgroundSize=(rect.width*zoomFactor).toFixed(2)+'px '+(rect.height*zoomFactor).toFixed(2)+'px';
+
+          var lensRect=lens.getBoundingClientRect();
+          var lensW=lensRect.width||170;
+          var lensH=lensRect.height||170;
+          var bgW=rect.width*zoomFactor;
+          var bgH=rect.height*zoomFactor;
+
+          var bgX=(lensW/2)-(xPct*bgW);
+          var bgY=(lensH/2)-(yPct*bgH);
+          lens.style.backgroundPosition=bgX.toFixed(2)+'px '+bgY.toFixed(2)+'px';
+        }
+
+        photo.addEventListener('mouseenter',function(e){
+          photo.classList.add('is-lens-active');
+          syncLens(e);
         });
+
+        photo.addEventListener('mousemove',syncLens);
+
         photo.addEventListener('mouseleave',function(){
-          photo.classList.remove('is-zooming');
-          photoImg.style.transformOrigin='50% 50%';
+          photo.classList.remove('is-lens-active');
+        });
+
+        photo.addEventListener('keydown',function(e){
+          if(e.key==='Escape'){
+            photo.classList.remove('is-lens-active');
+            photo.blur();
+          }
         });
       }
 
