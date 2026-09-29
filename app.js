@@ -19,6 +19,7 @@
     var darkHeaderSelector=[
       '.page-hero.dark',
       '.inventory-hero',
+      '.page-hero:not(.inventory-hero):not(.dark)',
       '.manifesto',
       '.manifesto-video-section',
       '.partner-band',

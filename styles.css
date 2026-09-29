@@ -5660,3 +5660,19 @@ body:has(.inventory-hero) .site-header:not(.is-scrolled) .menu-toggle span{
   background:#fff!important;
 }
 
+/* About hero first-screen white header */
+body:has(.page-hero:not(.inventory-hero):not(.dark)) .site-header:not(.is-scrolled) .desktop-nav a{
+  color:#fff!important;
+  text-shadow:0 1px 12px rgba(0,0,0,.34);
+}
+body:has(.page-hero:not(.inventory-hero):not(.dark)) .site-header:not(.is-scrolled) .header-cart{
+  color:#fff!important;
+  background:rgba(10,12,14,.22)!important;
+  border-color:rgba(255,255,255,.38)!important;
+  -webkit-backdrop-filter:blur(12px)!important;
+  backdrop-filter:blur(12px)!important;
+}
+body:has(.page-hero:not(.inventory-hero):not(.dark)) .site-header:not(.is-scrolled) .menu-toggle span{
+  background:#fff!important;
+}
+
