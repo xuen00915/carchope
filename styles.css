@@ -7576,3 +7576,88 @@ body:has(.page-hero:not(.inventory-hero):not(.dark)) .site-header:not(.is-scroll
   stroke-dashoffset:0!important;
 }
 
+/* Optical equalization for floating gauges */
+.floating-actions{
+  --floating-gauge-size:68px;
+  --floating-gauge-ring-extra:10px;
+}
+
+/* Exact same physical body for both controls. */
+.floating-actions > .floating-whatsapp,
+.floating-actions > .floating-top{
+  box-sizing:border-box!important;
+  flex:0 0 var(--floating-gauge-size)!important;
+  width:var(--floating-gauge-size)!important;
+  height:var(--floating-gauge-size)!important;
+  min-width:var(--floating-gauge-size)!important;
+  min-height:var(--floating-gauge-size)!important;
+  max-width:var(--floating-gauge-size)!important;
+  max-height:var(--floating-gauge-size)!important;
+  padding:0!important;
+  border:1px solid rgba(95,106,114,.92)!important;
+  border-radius:50%!important;
+  background:
+    radial-gradient(circle at 50% 50%,
+      #121922 0 58%,
+      #090e13 59% 70%,
+      #202a32 71% 76%,
+      #090d11 77% 100%)!important;
+}
+
+/* Exact same SVG gauge box for both controls. */
+.floating-actions > .floating-whatsapp > .dashboard-gauge,
+.floating-actions > .floating-top > .dashboard-gauge{
+  left:calc(var(--floating-gauge-ring-extra) / -2)!important;
+  top:calc(var(--floating-gauge-ring-extra) / -2)!important;
+  width:calc(100% + var(--floating-gauge-ring-extra))!important;
+  height:calc(100% + var(--floating-gauge-ring-extra))!important;
+}
+
+/* Keep the track and redline identical in visual weight. */
+.floating-actions .dashboard-gauge-track{
+  stroke-width:4!important;
+}
+.floating-actions .dashboard-gauge-redline{
+  stroke-width:4.6!important;
+}
+
+/* Slightly increase the WhatsApp mark so the top control does not look smaller. */
+.floating-actions > .floating-whatsapp .whatsapp-round-icon{
+  width:40px!important;
+  height:40px!important;
+}
+.floating-actions > .floating-whatsapp .whatsapp-round-icon img{
+  width:29px!important;
+  height:29px!important;
+}
+
+@media(max-width:900px){
+  .floating-actions{
+    --floating-gauge-size:64px;
+    --floating-gauge-ring-extra:9px;
+  }
+  .floating-actions > .floating-whatsapp .whatsapp-round-icon{
+    width:38px!important;
+    height:38px!important;
+  }
+  .floating-actions > .floating-whatsapp .whatsapp-round-icon img{
+    width:27px!important;
+    height:27px!important;
+  }
+}
+
+@media(max-width:580px){
+  .floating-actions{
+    --floating-gauge-size:58px;
+    --floating-gauge-ring-extra:8px;
+  }
+  .floating-actions > .floating-whatsapp .whatsapp-round-icon{
+    width:35px!important;
+    height:35px!important;
+  }
+  .floating-actions > .floating-whatsapp .whatsapp-round-icon img{
+    width:25px!important;
+    height:25px!important;
+  }
+}
+
