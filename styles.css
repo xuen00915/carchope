@@ -5203,3 +5203,71 @@ body{
   }
 }
 
+/* Header logo visible wordmark crop fix */
+.site-header .header-logo{
+  flex:0 0 292px!important;
+  width:292px!important;
+  height:74px!important;
+}
+
+.site-header .header-logo .header-brand-logo-crop{
+  position:absolute!important;
+  left:0!important;
+  top:2px!important;
+  display:block!important;
+  width:286px!important;
+  height:72px!important;
+  max-width:none!important;
+  background-image:url("https://media.i-sgcm.com/article/articleImages/gallery/37769/37769_1.jpg")!important;
+  background-repeat:no-repeat!important;
+  background-size:900px 600px!important;
+  background-position:-342px -100px!important;
+  border-radius:6px!important;
+  box-shadow:0 8px 18px rgba(15,23,42,.12)!important;
+  transform:none!important;
+  overflow:hidden!important;
+}
+
+@media(max-width:1180px){
+  .site-header .header-logo{
+    flex-basis:246px!important;
+    width:246px!important;
+  }
+  .site-header .header-logo .header-brand-logo-crop{
+    width:240px!important;
+    height:66px!important;
+    top:4px!important;
+    background-size:760px 507px!important;
+    background-position:-289px -84px!important;
+  }
+}
+
+@media(max-width:860px){
+  .site-header .header-logo{
+    flex-basis:198px!important;
+    width:198px!important;
+    height:64px!important;
+  }
+  .site-header .header-logo .header-brand-logo-crop{
+    width:194px!important;
+    height:58px!important;
+    top:3px!important;
+    background-size:620px 414px!important;
+    background-position:-236px -69px!important;
+  }
+}
+
+@media(max-width:580px){
+  .site-header .header-logo{
+    flex-basis:168px!important;
+    width:168px!important;
+  }
+  .site-header .header-logo .header-brand-logo-crop{
+    width:164px!important;
+    height:52px!important;
+    top:5px!important;
+    background-size:530px 354px!important;
+    background-position:-201px -59px!important;
+  }
+}
+
