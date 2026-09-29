@@ -7,12 +7,13 @@
 
 html{
   background:#08090b;
+  overflow-x:clip;
 }
 
 body.road-experience-page{
   position:relative;
   min-height:100%;
-  overflow-x:hidden;
+  overflow-x:clip;
   background:#08090b;
 }
 
@@ -201,6 +202,259 @@ body.road-experience-page{
   border-color:rgba(17,18,20,.12)!important;
 }
 
+/* Scroll-driven featured-car arrivals. */
+.road-experience-page .featured-drive-section{
+  padding:0;
+  background:rgba(247,247,246,.72)!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+}
+
+.featured-drive-track{
+  position:relative;
+  height:390vh;
+}
+
+.featured-drive-sticky{
+  position:sticky;
+  top:0;
+  box-sizing:border-box;
+  height:100vh;
+  min-height:0;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  padding:clamp(92px,11vh,126px) 0 clamp(32px,5vh,64px);
+}
+
+.featured-drive-heading{
+  width:100%;
+  margin-bottom:clamp(18px,3vh,34px);
+}
+
+.featured-drive-heading>div{
+  display:flex;
+  align-items:baseline;
+  gap:24px;
+}
+
+.featured-drive-heading .featured-drive-intro{
+  max-width:none;
+  margin:0;
+  text-align:left;
+  font-size:12px;
+  color:#30363b;
+}
+
+.featured-drive-stage{
+  --car-x:112;
+  --info-opacity:0;
+  --motion-blur:2px;
+  position:relative;
+  width:100%;
+  height:min(58vh,590px);
+  min-height:430px;
+  overflow:hidden;
+  isolation:isolate;
+  background:
+    linear-gradient(180deg,rgba(7,9,12,.22),rgba(7,9,12,.72)),
+    rgba(8,10,13,.55);
+  box-shadow:0 28px 70px rgba(5,7,10,.18);
+}
+
+.featured-drive-stage::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:0;
+  background:
+    linear-gradient(90deg,rgba(0,0,0,.22),transparent 24%,transparent 76%,rgba(0,0,0,.2)),
+    linear-gradient(180deg,transparent 68%,rgba(5,7,9,.3));
+  pointer-events:none;
+}
+
+.featured-drive-road{
+  position:absolute;
+  z-index:1;
+  left:0;
+  right:0;
+  bottom:15%;
+  display:flex;
+  justify-content:space-around;
+  opacity:.3;
+  transform:perspective(500px) rotateX(68deg);
+  transform-origin:center bottom;
+}
+
+.featured-drive-road span{
+  width:18%;
+  height:3px;
+  background:rgba(255,255,255,.75);
+  box-shadow:0 0 14px rgba(255,255,255,.2);
+}
+
+.featured-drive-car{
+  --car-x:112;
+  --info-opacity:0;
+  --motion-blur:2px;
+  position:absolute;
+  z-index:2;
+  inset:clamp(22px,4vw,54px);
+  min-height:0;
+  display:grid;
+  grid-template-columns:minmax(0,1.65fr) minmax(270px,.75fr);
+  overflow:hidden;
+  color:#fff;
+  background:rgba(9,11,14,.92);
+  opacity:0;
+  pointer-events:none;
+  transform:translate3d(calc(var(--car-x) * 1%),0,0) rotateY(calc(var(--car-tilt,0) * 1deg));
+  transform-origin:center bottom;
+  transition:opacity .16s linear;
+  will-change:transform,opacity;
+}
+
+.featured-drive-car.is-active{
+  opacity:1;
+}
+
+.featured-drive-car.is-parked{
+  pointer-events:auto;
+}
+
+.featured-drive-car::after{
+  display:none;
+}
+
+.featured-drive-media{
+  position:relative;
+  min-width:0;
+  overflow:hidden;
+}
+
+.featured-drive-car .featured-drive-media img{
+  position:absolute;
+  inset:-3%;
+  width:106%;
+  height:106%;
+  object-fit:cover;
+  object-position:center;
+  filter:saturate(.88) contrast(1.03) blur(var(--motion-blur));
+  transform:scale(var(--media-scale,1.035));
+  transition:none;
+  will-change:filter,transform;
+}
+
+.featured-drive-car:hover .featured-drive-media img{
+  transform:scale(var(--media-scale,1.035));
+}
+
+.featured-drive-media::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(90deg,transparent 62%,rgba(9,11,14,.94) 100%);
+}
+
+.featured-drive-motion-line{
+  position:absolute;
+  left:5%;
+  right:4%;
+  bottom:8%;
+  height:1px;
+  opacity:calc(1 - var(--info-opacity));
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.65),transparent);
+  transform:scaleX(calc(1 + (1 - var(--info-opacity)) * .6));
+  transform-origin:right center;
+}
+
+.featured-drive-copy{
+  position:relative;
+  inset:auto;
+  z-index:2;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  padding:clamp(28px,4vw,52px);
+  color:#fff;
+  opacity:var(--info-opacity);
+  transform:translate3d(calc((1 - var(--info-opacity)) * 32px),0,0);
+  will-change:opacity,transform;
+}
+
+.featured-drive-copy h3,
+.featured-drive-copy.large h3{
+  max-width:280px;
+  margin:14px 0 0;
+  font-size:clamp(28px,3.1vw,48px);
+  line-height:.96;
+  letter-spacing:-.045em;
+}
+
+.featured-drive-label{
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:#ff7433;
+}
+
+.featured-drive-copy .feature-meta{
+  margin-top:18px;
+  gap:8px 14px;
+  font-size:11px;
+  color:rgba(255,255,255,.68);
+}
+
+.featured-drive-copy .feature-price{
+  margin-top:18px;
+  font-size:clamp(25px,2.5vw,36px);
+  letter-spacing:-.035em;
+}
+
+.featured-drive-link{
+  display:inline-flex;
+  gap:12px;
+  align-items:center;
+  margin-top:26px;
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+
+.featured-drive-progress{
+  position:absolute;
+  z-index:5;
+  left:clamp(18px,3vw,36px);
+  right:clamp(18px,3vw,36px);
+  bottom:14px;
+  display:flex;
+  align-items:center;
+  gap:14px;
+  color:rgba(255,255,255,.78);
+}
+
+.featured-drive-count{
+  flex:0 0 auto;
+  font-size:9px;
+  font-weight:800;
+  letter-spacing:.13em;
+}
+
+.featured-drive-progress-track{
+  width:100%;
+  height:1px;
+  background:rgba(255,255,255,.25);
+}
+
+.featured-drive-progress-track i{
+  display:block;
+  width:0;
+  height:100%;
+  background:#ff5a00;
+}
+
 /* Ownership support keeps its image, with the road visible behind its copy. */
 .road-experience-page .partner-band{
   background:rgba(17,17,17,.68)!important;
@@ -248,12 +502,72 @@ body.road-experience-page{
   .road-experience-page .site-footer{
     background:rgba(17,17,17,.88)!important;
   }
+
+  .featured-drive-track{height:345vh}
+  .featured-drive-sticky{padding-top:92px}
+  .featured-drive-heading>div{display:block}
+  .featured-drive-heading .featured-drive-intro{margin-top:7px}
+  .featured-drive-stage{height:min(62vh,560px);min-height:440px}
+  .featured-drive-car{
+    inset:18px 18px 46px;
+    grid-template-columns:1fr;
+    grid-template-rows:minmax(0,1.45fr) minmax(190px,.75fr);
+  }
+  .featured-drive-media::after{
+    background:linear-gradient(180deg,transparent 65%,rgba(9,11,14,.98) 100%);
+  }
+  .featured-drive-copy{padding:24px 26px 28px}
+  .featured-drive-copy h3{font-size:clamp(26px,7vw,38px)}
+  .featured-drive-copy .feature-meta{margin-top:10px}
+  .featured-drive-copy .feature-price{margin-top:10px;font-size:25px}
+  .featured-drive-link{position:absolute;right:26px;bottom:30px;margin:0}
 }
 
 @media(prefers-reduced-motion:reduce){
   .road-page-video-loading span{
     animation:none;
   }
+
+  .featured-drive-track{height:auto}
+  .featured-drive-sticky{position:relative;height:auto;min-height:0;padding:96px 0}
+  .featured-drive-stage{
+    height:auto;
+    min-height:0;
+    display:grid;
+    gap:18px;
+    overflow:visible;
+    border:0;
+    box-shadow:none;
+    background:transparent;
+  }
+  .featured-drive-road,.featured-drive-progress{display:none}
+  .featured-drive-car{
+    position:relative;
+    inset:auto;
+    min-height:440px;
+    opacity:1;
+    pointer-events:auto;
+    transform:none!important;
+  }
+  .featured-drive-copy{opacity:1;transform:none}
+  .featured-drive-car .featured-drive-media img{filter:saturate(.88) contrast(1.03);transform:scale(1.035)}
+}
+
+@media(max-width:580px){
+  .featured-drive-sticky{padding-top:82px}
+  .featured-drive-heading{gap:14px;margin-bottom:16px}
+  .featured-drive-stage{height:62vh;min-height:500px}
+  .featured-drive-car{inset:12px 12px 42px;grid-template-rows:minmax(0,1.2fr) minmax(220px,.9fr)}
+  .featured-drive-copy{padding:20px 20px 24px}
+  .featured-drive-copy .feature-meta{padding-right:0}
+  .featured-drive-link{position:static;margin-top:16px}
+  .featured-drive-progress{left:13px;right:13px;bottom:14px}
+}
+
+@media(max-width:580px) and (prefers-reduced-motion:reduce){
+  .featured-drive-sticky{padding:72px 0}
+  .featured-drive-stage{height:auto;min-height:0}
+  .featured-drive-car{min-height:520px}
 }
 
 

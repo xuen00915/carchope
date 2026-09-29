@@ -1,4 +1,64 @@
 
+/* Pure timeline model shared by the featured-car renderer and its tests. */
+(function(root){
+  "use strict";
+
+  function clamp01(value){
+    return Math.max(0,Math.min(1,value));
+  }
+
+  function easeOutCubic(value){
+    var t=clamp01(value);
+    return 1-Math.pow(1-t,3);
+  }
+
+  function round(value){
+    return Math.round(value*1000)/1000;
+  }
+
+  function getState(progress,count){
+    var total=Math.max(1,Math.floor(count||1));
+    var p=clamp01(Number(progress)||0);
+
+    if(p>=1){
+      return {index:total-1,phase:"parked",local:1,x:0,info:1,wheels:-1440};
+    }
+
+    var scaled=p*total;
+    var index=Math.min(total-1,Math.floor(scaled));
+    var local=clamp01(scaled-index);
+    var enterEnd=.24;
+    var parkEnd=.72;
+    var phase="parked";
+    var x=0;
+    var info=1;
+
+    if(local<enterEnd){
+      phase="entering";
+      var entering=easeOutCubic(local/enterEnd);
+      x=112*(1-entering);
+      info=clamp01((local-.16)/.08);
+    }else if(local>parkEnd){
+      phase="leaving";
+      var leaving=easeOutCubic((local-parkEnd)/(1-parkEnd));
+      x=-118*leaving;
+      info=1-clamp01((local-parkEnd)/.08);
+    }
+
+    return {
+      index:index,
+      phase:phase,
+      local:round(local),
+      x:round(x),
+      info:round(info),
+      wheels:round(-1440*local)
+    };
+  }
+
+  root.CarchopeFeaturedSequence={getState:getState};
+})(typeof globalThis!=="undefined"?globalThis:window);
+
+
 /* Carchope whole-page scroll-scrub road background */
 (function(){
   "use strict";
@@ -153,6 +213,95 @@
       video.pause();
     }
   });
+})();
+
+
+/* Featured Cars: drive in from the right, park, reveal, then leave. */
+(function(){
+  "use strict";
+
+  var section=document.getElementById("featured-drive-section");
+  var track=document.getElementById("featured-drive-track");
+  var stage=document.getElementById("featured-drive-stage");
+  var countLabel=document.getElementById("featured-drive-count");
+  var progressBar=document.getElementById("featured-drive-progress-bar");
+  var cars=stage?Array.prototype.slice.call(stage.querySelectorAll("[data-featured-car]")):[];
+  var sequence=window.CarchopeFeaturedSequence;
+
+  if(!section||!track||!stage||!cars.length||!sequence) return;
+
+  var reduced=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var queued=false;
+
+  function clamp01(value){
+    return Math.max(0,Math.min(1,value));
+  }
+
+  function sectionProgress(){
+    var rect=track.getBoundingClientRect();
+    var range=Math.max(1,track.offsetHeight-window.innerHeight);
+    return clamp01(-rect.top/range);
+  }
+
+  function setAccessibleCar(activeIndex,phase){
+    cars.forEach(function(car,index){
+      var available=reduced||(index===activeIndex&&phase==="parked");
+      car.tabIndex=available?0:-1;
+      car.setAttribute("aria-hidden",reduced||index===activeIndex?"false":"true");
+      if(index===activeIndex&&phase==="parked"){
+        car.setAttribute("aria-current","true");
+      }else{
+        car.removeAttribute("aria-current");
+      }
+    });
+  }
+
+  function renderFeaturedCars(){
+    queued=false;
+
+    if(reduced){
+      setAccessibleCar(0,"parked");
+      return;
+    }
+
+    var progress=sectionProgress();
+    var state=sequence.getState(progress,cars.length);
+
+    cars.forEach(function(car,index){
+      var active=index===state.index;
+      car.classList.toggle("is-active",active);
+      car.classList.toggle("is-parked",active&&state.phase==="parked");
+      car.dataset.phase=active?state.phase:"waiting";
+
+      if(active){
+        car.style.setProperty("--car-x",state.x);
+        car.style.setProperty("--info-opacity",state.info);
+        car.style.setProperty("--motion-blur",state.phase==="parked"?"0px":"2px");
+        car.style.setProperty("--media-scale",state.phase==="parked"?"1.02":"1.055");
+        car.style.setProperty("--car-tilt",state.phase==="entering"?"-1.1":state.phase==="leaving"?"1.1":"0");
+      }
+    });
+
+    setAccessibleCar(state.index,state.phase);
+
+    if(countLabel){
+      countLabel.textContent=String(state.index+1).padStart(2,"0")+" / "+String(cars.length).padStart(2,"0");
+    }
+    if(progressBar){
+      progressBar.style.width=(progress*100).toFixed(2)+"%";
+    }
+  }
+
+  function requestRender(){
+    if(queued) return;
+    queued=true;
+    requestAnimationFrame(renderFeaturedCars);
+  }
+
+  window.addEventListener("scroll",requestRender,{passive:true});
+  window.addEventListener("resize",requestRender,{passive:true});
+  window.addEventListener("load",requestRender,{once:true});
+  renderFeaturedCars();
 })();
 
 

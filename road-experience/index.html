@@ -6,12 +6,13 @@
   <meta name="theme-color" content="#ffffff">
   <meta name="description" content="Carchope premium automotive frontend redesign preview.">
   <title>Carchope — Road Experience</title>
+  <base href="../">
   <link rel="stylesheet" href="styles.css?v=optical-equal-gauges-1">
-  <link rel="stylesheet" href="road-experience.css?v=1">
+  <link rel="stylesheet" href="road-experience/road-experience.css?v=1">
 </head>
 <body class="road-experience-page">
 
-<a class="skip-link" href="#main">Skip to content</a>
+<a class="skip-link" href="road-experience/#main">Skip to content</a>
 <header class="site-header">
   <div class="container header-inner">
     <a class="logo header-logo" href="index.html" aria-label="Carchope home"><img class="header-brand-logo" src="https://www.carchope.com//image/catalog/Slicing/header/logo.png" alt="Carchope"></a>
@@ -148,27 +149,70 @@
     </div>
   </section>
 
-  <section class="section section-line">
-    <div class="container">
-      <div class="section-heading reveal">
-        <h2 class="section-title">Featured Cars</h2>
-        <a class="text-link" href="products.html">View all cars</a>
+  <section class="section section-line featured-drive-section" id="featured-drive-section">
+    <div class="featured-drive-track" id="featured-drive-track">
+      <div class="container featured-drive-sticky">
+        <div class="section-heading featured-drive-heading reveal">
+          <div>
+            <h2 class="section-title">Featured Cars</h2>
+            <p class="featured-drive-intro">Watch each car arrive, park and reveal its details.</p>
+          </div>
+          <a class="text-link" href="products.html">View all cars</a>
+        </div>
+
+        <div class="featured-drive-stage" id="featured-drive-stage" aria-label="Featured car showcase">
+          <div class="featured-drive-road" aria-hidden="true"><span></span><span></span><span></span></div>
+
+          <a class="feature-car featured-drive-car is-active" data-featured-car href="products.html" aria-label="View XPENG G6 Electric">
+            <div class="featured-drive-media">
+              <img src="https://images.unsplash.com/photo-1619767886558-efdc259cde1a?auto=format&fit=crop&w=1800&q=90" alt="XPENG G6 Electric">
+              <span class="featured-drive-motion-line" aria-hidden="true"></span>
+            </div>
+            <div class="feature-copy featured-drive-copy">
+              <span class="featured-drive-label">Featured 01</span>
+              <h3>XPENG G6 Electric</h3>
+              <div class="feature-meta"><span>2025</span><span>7,000 km</span><span>SUV</span></div>
+              <div class="feature-price">$201,705</div>
+              <span class="featured-drive-link">View car <span aria-hidden="true">→</span></span>
+            </div>
+          </a>
+
+          <a class="feature-car featured-drive-car" data-featured-car href="products.html" aria-label="View Volkswagen Golf SV" tabindex="-1">
+            <div class="featured-drive-media">
+              <img src="https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&w=1800&q=90" alt="Volkswagen Golf SV">
+              <span class="featured-drive-motion-line" aria-hidden="true"></span>
+            </div>
+            <div class="feature-copy featured-drive-copy">
+              <span class="featured-drive-label">Featured 02</span>
+              <h3>Volkswagen Golf SV</h3>
+              <div class="feature-meta"><span>2018</span><span>50,000 km</span><span>Hatchback</span></div>
+              <div class="feature-price">$55,988</div>
+              <span class="featured-drive-link">View car <span aria-hidden="true">→</span></span>
+            </div>
+          </a>
+
+          <a class="feature-car featured-drive-car" data-featured-car href="products.html" aria-label="View Toyota Prius Plus Hybrid" tabindex="-1">
+            <div class="featured-drive-media">
+              <img src="https://images.unsplash.com/photo-1542362567-b07e54358753?auto=format&fit=crop&w=1800&q=90" alt="Toyota Prius Plus Hybrid">
+              <span class="featured-drive-motion-line" aria-hidden="true"></span>
+            </div>
+            <div class="feature-copy featured-drive-copy">
+              <span class="featured-drive-label">Featured 03</span>
+              <h3>Toyota Prius Plus Hybrid</h3>
+              <div class="feature-meta"><span>2020</span><span>89,000 km</span><span>Hybrid MPV</span></div>
+              <div class="feature-price">$98,888</div>
+              <span class="featured-drive-link">View car <span aria-hidden="true">→</span></span>
+            </div>
+          </a>
+
+          <div class="featured-drive-progress" aria-hidden="true">
+            <span class="featured-drive-count" id="featured-drive-count">01 / 03</span>
+            <span class="featured-drive-progress-track"><i id="featured-drive-progress-bar"></i></span>
+          </div>
+        </div>
+
+        <div class="preview-caption">Vehicle details are based on Carchope’s public catalogue. Photography is concept imagery for this design preview.</div>
       </div>
-      <div class="featured-grid">
-        <a class="feature-car large reveal" href="products.html">
-          <img src="https://images.unsplash.com/photo-1619767886558-efdc259cde1a?auto=format&fit=crop&w=1600&q=90" alt="XPENG G6 Electric">
-          <div class="feature-copy large"><h3>XPENG G6 Electric</h3><div class="feature-meta"><span>2025</span><span>7,000 km</span><span>SUV</span></div><div class="feature-price">$201,705</div></div>
-        </a>
-        <a class="feature-car reveal" data-delay="1" href="products.html">
-          <img src="https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&w=1200&q=90" alt="Volkswagen Golf">
-          <div class="feature-copy"><h3>Volkswagen Golf SV</h3><div class="feature-meta"><span>2018</span><span>50,000 km</span></div><div class="feature-price">$55,988</div></div>
-        </a>
-        <a class="feature-car reveal" data-delay="2" href="products.html">
-          <img src="https://images.unsplash.com/photo-1542362567-b07e54358753?auto=format&fit=crop&w=1200&q=90" alt="Toyota Prius Plus Hybrid">
-          <div class="feature-copy"><h3>Toyota Prius Plus Hybrid</h3><div class="feature-meta"><span>2020</span><span>89,000 km</span></div><div class="feature-price">$98,888</div></div>
-        </a>
-      </div>
-      <div class="preview-caption">Vehicle details are based on Carchope’s public catalogue. Photography is concept imagery for this design preview.</div>
     </div>
   </section>
 
@@ -321,7 +365,7 @@
   </button>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/three@0.168.0/build/three.min.js"></script>
-<script src="road-experience.js?v=webgl1"></script>
+<script src="road-experience/road-experience.js?v=featured-drive-1"></script>
 <script src="app.js?v=gauge-white-start-1"></script>
 <!-- whatsapp-logo-sync -->
 </body>
