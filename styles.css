@@ -7417,3 +7417,50 @@ body:has(.page-hero:not(.inventory-hero):not(.dark)) .site-header:not(.is-scroll
   }
 }
 
+/* Refined WhatsApp green + thinner gauge glow */
+.floating-whatsapp .dashboard-gauge-live{
+  stroke:#25D366!important;
+  stroke-width:4.4!important;
+  filter:
+    drop-shadow(0 0 1px rgba(37,211,102,.85))
+    drop-shadow(0 0 3px rgba(37,211,102,.24))!important;
+}
+
+.floating-actions.is-accelerating .floating-whatsapp .dashboard-gauge-live{
+  filter:
+    drop-shadow(0 0 1px rgba(37,211,102,.95))
+    drop-shadow(0 0 4px rgba(37,211,102,.38))
+    drop-shadow(0 0 7px rgba(37,211,102,.12))!important;
+}
+
+.floating-top .dashboard-gauge-live{
+  stroke-width:4.4!important;
+  filter:
+    drop-shadow(0 0 1px rgba(255,255,255,.76))
+    drop-shadow(0 0 3px rgba(255,255,255,.16))!important;
+}
+
+.floating-actions.is-accelerating .floating-top .dashboard-gauge-live{
+  filter:
+    drop-shadow(0 0 1px rgba(255,255,255,.90))
+    drop-shadow(0 0 4px rgba(255,255,255,.28))!important;
+}
+
+.floating-whatsapp .whatsapp-round-icon img{
+  filter:
+    drop-shadow(0 0 1px rgba(37,211,102,.88))
+    drop-shadow(0 0 3px rgba(37,211,102,.28))!important;
+}
+
+.floating-actions.is-accelerating .floating-whatsapp .whatsapp-round-icon img{
+  filter:
+    drop-shadow(0 0 1px rgba(37,211,102,.95))
+    drop-shadow(0 0 4px rgba(37,211,102,.38))!important;
+}
+
+@media(max-width:580px){
+  .dashboard-gauge-live{
+    stroke-width:4!important;
+  }
+}
+
