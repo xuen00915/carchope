@@ -346,6 +346,55 @@
   var floatingActions=document.getElementById('floating-actions');
   var scrollTopBtn=document.getElementById('scroll-top-btn');
 
+  /* Inject real SVG car-dashboard gauges */
+  var dashboardGaugeLivePaths=[];
+
+  function addDashboardGauge(button){
+    if(!button||button.querySelector('.dashboard-gauge')) return;
+
+    var ns='http://www.w3.org/2000/svg';
+    var svg=document.createElementNS(ns,'svg');
+    svg.setAttribute('class','dashboard-gauge');
+    svg.setAttribute('viewBox','0 0 100 100');
+    svg.setAttribute('aria-hidden','true');
+
+    /*
+      270deg automotive arc:
+      lower-left -> left -> top -> right -> lower-right,
+      leaving a clear gap at the bottom.
+    */
+    var pathData='M 18.18 81.82 A 45 45 0 1 1 81.82 81.82';
+
+    var track=document.createElementNS(ns,'path');
+    track.setAttribute('class','dashboard-gauge-track');
+    track.setAttribute('d',pathData);
+    track.setAttribute('pathLength','100');
+
+    var live=document.createElementNS(ns,'path');
+    live.setAttribute('class','dashboard-gauge-live');
+    live.setAttribute('d',pathData);
+    live.setAttribute('pathLength','100');
+    live.style.strokeDasharray='0 100';
+
+    var redline=document.createElementNS(ns,'path');
+    redline.setAttribute('class','dashboard-gauge-redline');
+    redline.setAttribute('d',pathData);
+    redline.setAttribute('pathLength','100');
+
+    svg.appendChild(track);
+    svg.appendChild(live);
+    svg.appendChild(redline);
+
+    button.insertBefore(svg,button.firstChild);
+    dashboardGaugeLivePaths.push(live);
+  }
+
+  if(floatingActions){
+    addDashboardGauge(floatingActions.querySelector('.floating-whatsapp'));
+    addDashboardGauge(floatingActions.querySelector('.floating-top'));
+  }
+
+
   function updateFloatingActions(){
     if(!floatingActions) return;
     var threshold=Math.max(window.innerHeight*0.8,520);
@@ -410,6 +459,12 @@
 
       floatingActions.style.setProperty('--gauge-speed',gaugeShown.toFixed(4));
       floatingActions.style.setProperty('--gauge-sweep',Math.min(270,sweep).toFixed(2)+'deg');
+
+      var gaugePercent=Math.max(0,Math.min(100,gaugeShown*100));
+      dashboardGaugeLivePaths.forEach(function(path){
+        path.style.strokeDasharray=gaugePercent.toFixed(1)+' 100';
+      });
+
       floatingActions.classList.toggle('is-accelerating',gaugeShown>.06);
       floatingActions.classList.toggle('is-high-speed',gaugeShown>.78);
     }

@@ -7288,3 +7288,132 @@ body:has(.page-hero:not(.inventory-hero):not(.dark)) .site-header:not(.is-scroll
   outline-offset:0!important;
 }
 
+/* SVG automotive gauge — final visible speedometer */
+/* Disable the older pseudo-element rings completely. */
+.floating-actions > .floating-whatsapp::before,
+.floating-actions > .floating-top::before{
+  display:none!important;
+  content:none!important;
+}
+
+/* The SVG sits slightly outside the button bezel, like a real cluster ring. */
+.dashboard-gauge{
+  position:absolute!important;
+  left:-5px!important;
+  top:-5px!important;
+  z-index:7!important;
+  width:calc(100% + 10px)!important;
+  height:calc(100% + 10px)!important;
+  max-width:none!important;
+  max-height:none!important;
+  overflow:visible!important;
+  pointer-events:none!important;
+  transform:none!important;
+  filter:none!important;
+  fill:none!important;
+}
+
+.dashboard-gauge path{
+  fill:none!important;
+  vector-effect:non-scaling-stroke;
+}
+
+/* Permanent 270deg speedometer track with bottom gap. */
+.dashboard-gauge-track{
+  stroke:rgba(208,218,224,.72)!important;
+  stroke-width:4!important;
+  stroke-linecap:round!important;
+}
+
+/* Live speed arc. JS changes stroke-dasharray from 0 -> 100. */
+.dashboard-gauge-live{
+  stroke-width:5.6!important;
+  stroke-linecap:round!important;
+  stroke-dasharray:0 100;
+  transition:stroke-dasharray .035s linear;
+}
+
+/* High-speed redline is always visible at the end of the gauge. */
+.dashboard-gauge-redline{
+  stroke:#ff4236!important;
+  stroke-width:5.2!important;
+  stroke-linecap:round!important;
+  stroke-dasharray:11 89;
+  stroke-dashoffset:-89;
+}
+
+.floating-whatsapp .dashboard-gauge-live{
+  stroke:#42ff98!important;
+  filter:
+    drop-shadow(0 0 2px rgba(66,255,152,.95))
+    drop-shadow(0 0 5px rgba(66,255,152,.42))!important;
+}
+
+.floating-top .dashboard-gauge-live{
+  stroke:#ffffff!important;
+  filter:
+    drop-shadow(0 0 2px rgba(255,255,255,.90))
+    drop-shadow(0 0 4px rgba(255,255,255,.25))!important;
+}
+
+.floating-actions.is-accelerating .floating-whatsapp .dashboard-gauge-live{
+  filter:
+    drop-shadow(0 0 2px rgba(66,255,152,1))
+    drop-shadow(0 0 7px rgba(66,255,152,.75))
+    drop-shadow(0 0 12px rgba(66,255,152,.30))!important;
+}
+
+.floating-actions.is-accelerating .floating-top .dashboard-gauge-live{
+  filter:
+    drop-shadow(0 0 2px rgba(255,255,255,1))
+    drop-shadow(0 0 6px rgba(255,255,255,.48))!important;
+}
+
+/* Because older CSS targets every SVG inside the top button. */
+.floating-top > svg.dashboard-gauge{
+  position:absolute!important;
+  left:-5px!important;
+  top:-5px!important;
+  width:calc(100% + 10px)!important;
+  height:calc(100% + 10px)!important;
+  transform:none!important;
+  stroke:initial!important;
+  filter:none!important;
+}
+
+.floating-top > svg:not(.dashboard-gauge){
+  position:absolute!important;
+  left:50%!important;
+  top:50%!important;
+  z-index:10!important;
+  transform:translate(-50%,-50%)!important;
+}
+
+/* Ensure the center symbols sit above the actual speedometer ring. */
+.floating-whatsapp .whatsapp-round-icon{
+  z-index:10!important;
+}
+.floating-whatsapp .whatsapp-round-icon img{
+  position:relative!important;
+  z-index:11!important;
+}
+
+@media(max-width:580px){
+  .dashboard-gauge,
+  .floating-top > svg.dashboard-gauge{
+    left:-4px!important;
+    top:-4px!important;
+    width:calc(100% + 8px)!important;
+    height:calc(100% + 8px)!important;
+  }
+  .dashboard-gauge-track{
+    stroke-width:3.6!important;
+  }
+  .dashboard-gauge-live{
+    stroke-width:5!important;
+  }
+  .dashboard-gauge-redline{
+    stroke-width:4.8!important;
+  }
+}
+
