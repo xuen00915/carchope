@@ -18,6 +18,7 @@
   if(siteHeader){
     var darkHeaderSelector=[
       '.page-hero.dark',
+      '.inventory-hero',
       '.manifesto',
       '.manifesto-video-section',
       '.partner-band',
