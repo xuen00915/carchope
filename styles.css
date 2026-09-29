@@ -6831,3 +6831,100 @@ body:has(.page-hero:not(.inventory-hero):not(.dark)) .site-header:not(.is-scroll
   }
 }
 
+/* Outer-rim speed indicator — no inner tick marks */
+.floating-whatsapp,
+.floating-top{
+  overflow:visible!important;
+}
+
+/* Remove all interior gauge ticks / labels. */
+.floating-whatsapp::before,
+.floating-top::before{
+  content:""!important;
+  display:block!important;
+  position:absolute!important;
+  inset:-1px!important;
+  z-index:2!important;
+  border-radius:50%!important;
+  pointer-events:none!important;
+  background:
+    conic-gradient(
+      from 214deg,
+      var(--gauge-live-color) 0deg var(--gauge-sweep),
+      rgba(255,255,255,.055) var(--gauge-sweep) 258deg,
+      transparent 258deg 360deg
+    )!important;
+
+  /* Only keep a thin ring at the OUTER edge. */
+  -webkit-mask:
+    radial-gradient(circle,
+      transparent 0 83%,
+      #000 84% 94%,
+      transparent 95% 100%)!important;
+  mask:
+    radial-gradient(circle,
+      transparent 0 83%,
+      #000 84% 94%,
+      transparent 95% 100%)!important;
+
+  opacity:1!important;
+  transform:none!important;
+}
+
+.floating-whatsapp{
+  --gauge-live-color:#42ff98;
+}
+.floating-top{
+  --gauge-live-color:#ffffff;
+}
+
+/* Soft glow follows the live outer rim. */
+.floating-whatsapp::before{
+  filter:
+    drop-shadow(0 0 2px rgba(66,255,152,.9))
+    drop-shadow(0 0 6px rgba(66,255,152,.35))!important;
+}
+
+.floating-top::before{
+  filter:
+    drop-shadow(0 0 2px rgba(255,255,255,.85))
+    drop-shadow(0 0 5px rgba(255,255,255,.20))!important;
+}
+
+/* Keep the base silver bezel clean and visible beneath the live light. */
+.floating-whatsapp,
+.floating-top{
+  border:2px solid #cfd6da!important;
+  outline:1px solid rgba(55,64,72,.72)!important;
+  outline-offset:-1px!important;
+}
+
+.floating-actions.is-accelerating .floating-whatsapp::before{
+  filter:
+    drop-shadow(0 0 3px rgba(66,255,152,1))
+    drop-shadow(0 0 9px rgba(66,255,152,.58))
+    drop-shadow(0 0 15px rgba(66,255,152,.24))!important;
+}
+
+.floating-actions.is-accelerating .floating-top::before{
+  filter:
+    drop-shadow(0 0 3px rgba(255,255,255,.95))
+    drop-shadow(0 0 8px rgba(255,255,255,.34))!important;
+}
+
+/* Keep the centers visually quiet so the rim animation is the focus. */
+.floating-whatsapp .whatsapp-round-icon{
+  background:transparent!important;
+  border:0!important;
+  box-shadow:none!important;
+}
+
+.floating-top{
+  background:
+    radial-gradient(circle at 50% 48%,
+      #121922 0 58%,
+      #090e13 59% 70%,
+      #202a32 71% 76%,
+      #090d11 77% 100%)!important;
+}
+
