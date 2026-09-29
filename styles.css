@@ -7464,3 +7464,95 @@ body:has(.page-hero:not(.inventory-hero):not(.dark)) .site-header:not(.is-scroll
   }
 }
 
+/* Mobile/tablet header cart beside hamburger */
+@media(max-width:860px){
+  .site-header .header-inner{
+    display:flex!important;
+    align-items:center!important;
+  }
+
+  /* Push the cart + hamburger together to the far right. */
+  .site-header .header-cart-wrap{
+    order:3!important;
+    margin-left:auto!important;
+    margin-right:8px!important;
+    flex:0 0 auto!important;
+  }
+
+  .site-header .menu-toggle{
+    order:4!important;
+    margin-left:0!important;
+    flex:0 0 40px!important;
+    width:40px!important;
+    height:40px!important;
+    align-items:center!important;
+    justify-content:center!important;
+  }
+
+  /* Compact icon-only cart in the header. */
+  .site-header .header-cart{
+    position:relative!important;
+    display:inline-flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+    width:42px!important;
+    height:40px!important;
+    min-width:42px!important;
+    min-height:40px!important;
+    padding:0!important;
+    gap:0!important;
+  }
+
+  .site-header .header-cart-label{
+    display:none!important;
+  }
+
+  .site-header .header-cart svg{
+    width:20px!important;
+    height:20px!important;
+  }
+
+  .site-header .header-cart-count{
+    position:absolute!important;
+    top:-6px!important;
+    right:-6px!important;
+    min-width:18px!important;
+    height:18px!important;
+    padding:0 4px!important;
+    font-size:9px!important;
+    box-shadow:0 0 0 2px rgba(255,255,255,.88)!important;
+  }
+
+  /* Header cart replaces the duplicate cart row inside the mobile menu. */
+  .mobile-panel .mobile-cart-link{
+    display:none!important;
+  }
+
+  /* Keep the cart popover aligned with the right-side controls. */
+  .cart-popover{
+    top:68px!important;
+    right:14px!important;
+    left:auto!important;
+    width:min(340px,calc(100vw - 28px))!important;
+  }
+}
+
+@media(max-width:580px){
+  .site-header .header-cart-wrap{
+    margin-right:6px!important;
+  }
+
+  .site-header .header-cart{
+    width:40px!important;
+    min-width:40px!important;
+    height:38px!important;
+    min-height:38px!important;
+  }
+
+  .site-header .menu-toggle{
+    width:38px!important;
+    height:38px!important;
+    flex-basis:38px!important;
+  }
+}
+
