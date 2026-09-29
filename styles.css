@@ -7197,3 +7197,94 @@ body:has(.page-hero:not(.inventory-hero):not(.dark)) .site-header:not(.is-scroll
   }
 }
 
+
+
+/* Always-visible automotive speedometer track */
+/*
+  Make the gauge readable even at 0 speed:
+  - permanent silver 270deg track
+  - bottom gap like a dashboard speedometer
+  - small redline zone at high end
+  - live green/white arc grows over the same track
+*/
+.floating-actions > .floating-whatsapp::before,
+.floating-actions > .floating-top::before{
+  content:""!important;
+  display:block!important;
+  position:absolute!important;
+  inset:-2px!important;
+  z-index:8!important;
+  border-radius:50%!important;
+  pointer-events:none!important;
+
+  background:
+    conic-gradient(
+      from 225deg,
+      var(--gauge-live-color) 0deg var(--gauge-sweep),
+      transparent var(--gauge-sweep) 360deg
+    ),
+    conic-gradient(
+      from 225deg,
+      rgba(220,228,232,.54) 0deg 238deg,
+      #ff4236 238deg 270deg,
+      transparent 270deg 360deg
+    )!important;
+
+  -webkit-mask:
+    radial-gradient(
+      circle,
+      transparent 0 88%,
+      #000 89% 96%,
+      transparent 97% 100%
+    )!important;
+  mask:
+    radial-gradient(
+      circle,
+      transparent 0 88%,
+      #000 89% 96%,
+      transparent 97% 100%
+    )!important;
+
+  opacity:1!important;
+  transform:none!important;
+}
+
+/* Live rim colors */
+.floating-actions > .floating-whatsapp{
+  --gauge-live-color:#42ff98!important;
+}
+.floating-actions > .floating-top{
+  --gauge-live-color:#ffffff!important;
+}
+
+/* At rest, keep the instrument track crisp but restrained */
+.floating-actions > .floating-whatsapp::before{
+  filter:
+    drop-shadow(0 0 1px rgba(66,255,152,.36))!important;
+}
+.floating-actions > .floating-top::before{
+  filter:
+    drop-shadow(0 0 1px rgba(255,255,255,.28))!important;
+}
+
+/* Acceleration increases glow; JS continues controlling arc length */
+.floating-actions.is-accelerating > .floating-whatsapp::before{
+  filter:
+    drop-shadow(0 0 2px rgba(66,255,152,1))
+    drop-shadow(0 0 7px rgba(66,255,152,.58))
+    drop-shadow(0 0 12px rgba(66,255,152,.18))!important;
+}
+.floating-actions.is-accelerating > .floating-top::before{
+  filter:
+    drop-shadow(0 0 2px rgba(255,255,255,.95))
+    drop-shadow(0 0 6px rgba(255,255,255,.30))!important;
+}
+
+/* Keep the physical bezel quieter than the speed track */
+.floating-actions > .floating-whatsapp,
+.floating-actions > .floating-top{
+  border:1px solid rgba(95,106,114,.92)!important;
+  outline:1px solid rgba(215,222,226,.55)!important;
+  outline-offset:0!important;
+}
+
