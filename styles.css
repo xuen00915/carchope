@@ -2956,9 +2956,13 @@ a.footer-contact-item:hover{color:#fff}
 }
 .multi-option.active .multi-option-check svg{opacity:1}
 .brand-option-logo{
-  width:50px!important;
-  height:40px!important;
-  flex:0 0 230px!important;
+  width:46px!important;
+  height:34px!important;
+  flex:0 0 46px!important;
+  display:grid!important;
+  place-items:center!important;
+  overflow:hidden!important;
+  padding:2px!important;
   background:#fff;
 }
 .brand-option-logo img{
@@ -5674,5 +5678,62 @@ body:has(.page-hero:not(.inventory-hero):not(.dark)) .site-header:not(.is-scroll
 }
 body:has(.page-hero:not(.inventory-hero):not(.dark)) .site-header:not(.is-scrolled) .menu-toggle span{
   background:#fff!important;
+}
+
+/* Brand dropdown logo containment repair */
+.brand-select-menu .brand-option{
+  min-height:54px!important;
+  padding:8px 10px!important;
+  gap:10px!important;
+  overflow:hidden!important;
+}
+
+.brand-select-menu .brand-option-logo{
+  width:46px!important;
+  height:34px!important;
+  flex:0 0 46px!important;
+  min-width:46px!important;
+  max-width:46px!important;
+  overflow:hidden!important;
+  display:grid!important;
+  place-items:center!important;
+  padding:2px!important;
+  background:#fff!important;
+}
+
+.brand-select-menu .brand-option-logo img{
+  display:block!important;
+  width:100%!important;
+  height:100%!important;
+  max-width:100%!important;
+  max-height:100%!important;
+  object-fit:contain!important;
+  object-position:center!important;
+  transform:none!important;
+}
+
+.brand-select-menu .brand-option-name{
+  min-width:0!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+  white-space:nowrap!important;
+  line-height:1.25!important;
+}
+
+.brand-select-menu .multi-option-check{
+  flex:0 0 18px!important;
+  width:18px!important;
+  height:18px!important;
+}
+
+@media(max-width:860px){
+  .brand-select-menu{
+    width:min(460px,calc(100vw - 32px))!important;
+    grid-template-columns:1fr!important;
+  }
+
+  .brand-select-menu .brand-option{
+    min-height:52px!important;
+  }
 }
 
