@@ -23,22 +23,56 @@
       '.partner-band',
       '.site-footer',
       '.quote-panel.dark',
+      '.feature-car',
+      '.product-featured-card',
+      '.inventory-photo',
       '[data-header-theme="dark"]'
     ].join(',');
 
+    function getUnderlyingElement(x,y){
+      if(document.elementsFromPoint){
+        var stack=document.elementsFromPoint(x,y);
+        for(var i=0;i<stack.length;i++){
+          var candidate=stack[i];
+          if(
+            candidate!==siteHeader &&
+            !siteHeader.contains(candidate) &&
+            !(candidate.closest&&candidate.closest('.global-wheel-scroll')) &&
+            !(candidate.closest&&candidate.closest('.floating-actions'))
+          ){
+            return candidate;
+          }
+        }
+      }
+
+      var previousPointerEvents=siteHeader.style.pointerEvents;
+      siteHeader.style.pointerEvents='none';
+      var fallback=document.elementFromPoint(x,y);
+      siteHeader.style.pointerEvents=previousPointerEvents;
+      return fallback;
+    }
+
     function syncHeaderContrast(){
       var headerRect=siteHeader.getBoundingClientRect();
-      var sampleY=Math.min(window.innerHeight-1,Math.max(1,headerRect.bottom+6));
+      var sampleY=Math.min(
+        window.innerHeight-1,
+        Math.max(1,headerRect.top+(headerRect.height*.56))
+      );
       var sampleXs=[
-        Math.round(window.innerWidth*.55),
-        Math.round(window.innerWidth*.72),
-        Math.round(window.innerWidth*.86)
+        Math.round(window.innerWidth*.56),
+        Math.round(window.innerWidth*.70),
+        Math.round(window.innerWidth*.82)
       ];
 
       var darkVotes=0;
+
       sampleXs.forEach(function(x){
-        var el=document.elementFromPoint(Math.min(window.innerWidth-2,Math.max(1,x)),sampleY);
-        if(el&&el.closest&&el.closest(darkHeaderSelector)) darkVotes++;
+        var safeX=Math.min(window.innerWidth-2,Math.max(1,x));
+        var el=getUnderlyingElement(safeX,sampleY);
+
+        if(el&&el.closest&&el.closest(darkHeaderSelector)){
+          darkVotes++;
+        }
       });
 
       siteHeader.classList.toggle('on-dark',darkVotes>=2);
