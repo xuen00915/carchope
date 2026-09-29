@@ -5332,3 +5332,95 @@ body{
   }
 }
 
+/* Final transparent header + smaller square logo */
+.site-header{
+  height:74px!important;
+  overflow:visible!important;
+  background:rgba(255,255,255,.10)!important;
+  -webkit-backdrop-filter:blur(20px) saturate(155%)!important;
+  backdrop-filter:blur(20px) saturate(155%)!important;
+  border-bottom:1px solid rgba(255,255,255,.30)!important;
+  box-shadow:
+    0 8px 24px rgba(15,23,42,.06),
+    inset 0 1px 0 rgba(255,255,255,.32)!important;
+}
+
+.site-header::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+  background:
+    linear-gradient(115deg,
+      rgba(255,255,255,.16) 0%,
+      rgba(255,255,255,.03) 34%,
+      rgba(255,255,255,.10) 56%,
+      rgba(255,255,255,.02) 78%,
+      rgba(255,255,255,.12) 100%)!important;
+  opacity:.55!important;
+}
+
+.site-header .header-logo{
+  position:relative!important;
+  align-self:flex-start!important;
+  flex:0 0 96px!important;
+  width:96px!important;
+  height:74px!important;
+  margin:0 14px 0 0!important;
+  overflow:visible!important;
+  z-index:5!important;
+}
+
+.site-header .header-logo .header-brand-logo{
+  position:absolute!important;
+  top:4px!important;
+  left:0!important;
+  display:block!important;
+  width:auto!important;
+  height:96px!important;
+  max-width:none!important;
+  object-fit:contain!important;
+  object-position:left top!important;
+  filter:drop-shadow(0 7px 12px rgba(15,23,42,.14))!important;
+}
+
+@media(max-width:1180px){
+  .site-header .header-logo{
+    flex-basis:90px!important;
+    width:90px!important;
+    margin-right:12px!important;
+  }
+  .site-header .header-logo .header-brand-logo{
+    height:90px!important;
+    top:5px!important;
+  }
+}
+
+@media(max-width:860px){
+  .site-header{
+    height:64px!important;
+  }
+  .site-header .header-logo{
+    flex-basis:80px!important;
+    width:80px!important;
+    height:64px!important;
+    margin-right:8px!important;
+  }
+  .site-header .header-logo .header-brand-logo{
+    height:82px!important;
+    top:3px!important;
+  }
+}
+
+@media(max-width:580px){
+  .site-header .header-logo{
+    flex-basis:72px!important;
+    width:72px!important;
+  }
+  .site-header .header-logo .header-brand-logo{
+    height:74px!important;
+    top:3px!important;
+  }
+}
+
