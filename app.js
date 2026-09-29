@@ -379,14 +379,16 @@
       var dy=Math.abs(y-gaugeLastY);
 
       /*
-        Real speed-indicator behavior:
-        - both scroll directions count as speed
-        - slow scroll = short arc
-        - fast scroll = long arc
-        - stop = decay back toward zero
+        Car-dashboard feel:
+        - direction does not matter; speed is absolute
+        - quick wheel/trackpad input climbs the gauge rapidly
+        - very slow movement only lights a short section
       */
       var pxPerMs=dy/dt;
-      gaugeTarget=Math.min(1,pxPerMs/5.5);
+      var normalized=Math.min(1,pxPerMs/3.2);
+
+      /* Slightly ease the input so medium scrolling is clearly visible. */
+      gaugeTarget=Math.pow(normalized,.72);
 
       gaugeLastY=y;
       gaugeLastTime=now;
@@ -395,19 +397,21 @@
     function animateGauge(){
       gaugeRaf=requestAnimationFrame(animateGauge);
 
-      var response=gaugeTarget>gaugeShown?.20:.085;
+      /* Fast throttle response, slower falloff like a real instrument. */
+      var response=gaugeTarget>gaugeShown?.24:.060;
       gaugeShown+=(gaugeTarget-gaugeShown)*response;
-      gaugeTarget*=.91;
+      gaugeTarget*=.925;
 
-      if(gaugeTarget<.0025) gaugeTarget=0;
-      if(gaugeShown<.0025) gaugeShown=0;
+      if(gaugeTarget<.002) gaugeTarget=0;
+      if(gaugeShown<.002) gaugeShown=0;
 
-      /* 12deg idle hint, up to ~248deg at full scroll speed. */
-      var sweep=gaugeShown>0 ? 12+(gaugeShown*236) : 0;
+      /* Full automotive sweep: lower-left -> across top -> lower-right. */
+      var sweep=gaugeShown>0 ? 5+(gaugeShown*265) : 0;
 
       floatingActions.style.setProperty('--gauge-speed',gaugeShown.toFixed(4));
-      floatingActions.style.setProperty('--gauge-sweep',sweep.toFixed(2)+'deg');
-      floatingActions.classList.toggle('is-accelerating',gaugeShown>.08);
+      floatingActions.style.setProperty('--gauge-sweep',Math.min(270,sweep).toFixed(2)+'deg');
+      floatingActions.classList.toggle('is-accelerating',gaugeShown>.06);
+      floatingActions.classList.toggle('is-high-speed',gaugeShown>.78);
     }
 
     window.addEventListener('scroll',measureGaugeSpeed,{passive:true});

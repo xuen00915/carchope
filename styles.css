@@ -7010,3 +7010,69 @@ body:has(.page-hero:not(.inventory-hero):not(.dark)) .site-header:not(.is-scroll
     drop-shadow(0 0 6px rgba(255,255,255,.32))!important;
 }
 
+/* Car-style dashboard sweep on the button bezel */
+.floating-actions{
+  --gauge-sweep:0deg;
+  --gauge-speed:0;
+}
+
+/*
+  Car dashboard geometry:
+  start = lower-left (225deg)
+  finish = lower-right after a 270deg sweep
+*/
+.floating-whatsapp::before,
+.floating-top::before{
+  inset:-2px!important;
+  background:
+    conic-gradient(
+      from 225deg,
+      var(--gauge-live-color) 0deg var(--gauge-sweep),
+      rgba(255,255,255,.055) var(--gauge-sweep) 270deg,
+      transparent 270deg 360deg
+    )!important;
+
+  -webkit-mask:
+    radial-gradient(
+      circle,
+      transparent 0 90%,
+      #000 91% 100%
+    )!important;
+  mask:
+    radial-gradient(
+      circle,
+      transparent 0 90%,
+      #000 91% 100%
+    )!important;
+}
+
+/* The unlit portion of the speedometer remains a subtle metallic track. */
+.floating-whatsapp,
+.floating-top{
+  border:2px solid rgba(177,188,195,.78)!important;
+}
+
+/* Stronger dashboard glow when the arc gets into the high-speed region. */
+.floating-actions.is-high-speed .floating-whatsapp::before{
+  filter:
+    drop-shadow(0 0 3px rgba(66,255,152,1))
+    drop-shadow(0 0 10px rgba(66,255,152,.70))
+    drop-shadow(0 0 18px rgba(66,255,152,.28))!important;
+}
+.floating-actions.is-high-speed .floating-top::before{
+  filter:
+    drop-shadow(0 0 3px rgba(255,255,255,1))
+    drop-shadow(0 0 8px rgba(255,255,255,.46))!important;
+}
+
+/* Tiny redline cue at the final edge only, like a car cluster. */
+.floating-whatsapp,
+.floating-top{
+  background:
+    radial-gradient(circle at 50% 48%,
+      #121922 0 58%,
+      #090e13 59% 70%,
+      #202a32 71% 76%,
+      #090d11 77% 100%)!important;
+}
+
