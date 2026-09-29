@@ -7076,3 +7076,32 @@ body:has(.page-hero:not(.inventory-hero):not(.dark)) .site-header:not(.is-scroll
       #090d11 77% 100%)!important;
 }
 
+/* Equal-size floating gauges */
+.floating-whatsapp,
+.floating-top{
+  width:72px!important;
+  height:72px!important;
+  min-width:72px!important;
+  min-height:72px!important;
+}
+
+@media(max-width:900px){
+  .floating-whatsapp,
+  .floating-top{
+    width:66px!important;
+    height:66px!important;
+    min-width:66px!important;
+    min-height:66px!important;
+  }
+}
+
+@media(max-width:580px){
+  .floating-whatsapp,
+  .floating-top{
+    width:60px!important;
+    height:60px!important;
+    min-width:60px!important;
+    min-height:60px!important;
+  }
+}
+
