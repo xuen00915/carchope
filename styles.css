@@ -5424,3 +5424,54 @@ body{
   }
 }
 
+/* First-screen transparent overlay header */
+.site-header{
+  position:sticky!important;
+  top:0!important;
+  z-index:50!important;
+  margin-bottom:-74px!important;
+  background:rgba(255,255,255,.045)!important;
+  -webkit-backdrop-filter:blur(14px) saturate(145%)!important;
+  backdrop-filter:blur(14px) saturate(145%)!important;
+  border-bottom:1px solid rgba(255,255,255,.18)!important;
+  box-shadow:
+    0 8px 22px rgba(15,23,42,.035),
+    inset 0 1px 0 rgba(255,255,255,.18)!important;
+}
+
+.site-header::before{
+  background:
+    linear-gradient(115deg,
+      rgba(255,255,255,.09) 0%,
+      rgba(255,255,255,.018) 36%,
+      rgba(255,255,255,.06) 58%,
+      rgba(255,255,255,.01) 80%,
+      rgba(255,255,255,.07) 100%)!important;
+  opacity:.46!important;
+}
+
+/* Keep the first hero beginning behind the transparent header. */
+.hero,
+.page-hero,
+.road-experience-page .hero{
+  padding-top:74px;
+}
+
+/* Road Experience already has a fixed video background, so let it remain visible behind the glass. */
+.road-experience-page .site-header{
+  background:rgba(255,255,255,.035)!important;
+  -webkit-backdrop-filter:blur(12px) saturate(145%)!important;
+  backdrop-filter:blur(12px) saturate(145%)!important;
+}
+
+@media(max-width:860px){
+  .site-header{
+    margin-bottom:-64px!important;
+  }
+  .hero,
+  .page-hero,
+  .road-experience-page .hero{
+    padding-top:64px;
+  }
+}
+
