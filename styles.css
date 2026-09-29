@@ -6021,3 +6021,219 @@ body:has(.page-hero:not(.inventory-hero):not(.dark)) .site-header:not(.is-scroll
   }
 }
 
+/* Speedometer floating controls — scroll-reactive */
+.floating-actions{
+  --gauge-speed:0;
+  --gauge-angle:-128deg;
+  --gauge-sweep:0deg;
+  right:18px!important;
+  bottom:18px!important;
+  gap:10px!important;
+  align-items:center!important;
+}
+
+.floating-btn,
+.floating-whatsapp,
+.floating-top{
+  --gauge-accent:#21d879;
+  position:relative!important;
+  width:68px!important;
+  height:68px!important;
+  min-width:68px!important;
+  min-height:68px!important;
+  border-radius:50%!important;
+  overflow:visible!important;
+  border:2px solid rgba(238,244,248,.94)!important;
+  background:
+    radial-gradient(circle at 50% 50%,
+      #10161d 0 54%,
+      #0a0f14 55% 61%,
+      #28323b 62% 66%,
+      #0a0e12 67% 100%)!important;
+  box-shadow:
+    0 11px 26px rgba(7,11,15,.28),
+    inset 0 0 0 1px rgba(255,255,255,.08),
+    0 0 calc(10px + (var(--gauge-speed) * 16px)) rgba(33,216,121,calc(.10 + (var(--gauge-speed) * .20)))!important;
+  isolation:isolate;
+  transition:
+    transform .18s ease,
+    box-shadow .18s ease!important;
+}
+
+/* Outer tick ring + illuminated acceleration arc. */
+.floating-btn::before{
+  content:"";
+  position:absolute;
+  inset:5px;
+  z-index:0;
+  border-radius:50%;
+  pointer-events:none;
+  background:
+    repeating-conic-gradient(
+      from 225deg,
+      rgba(255,255,255,.92) 0deg 1.2deg,
+      transparent 1.2deg 12deg
+    ),
+    conic-gradient(
+      from 225deg,
+      var(--gauge-accent) 0deg var(--gauge-sweep),
+      rgba(255,255,255,.10) var(--gauge-sweep) 270deg,
+      transparent 270deg 360deg
+    );
+  -webkit-mask:
+    radial-gradient(circle,
+      transparent 0 61%,
+      #000 62% 78%,
+      transparent 79% 100%);
+  mask:
+    radial-gradient(circle,
+      transparent 0 61%,
+      #000 62% 78%,
+      transparent 79% 100%);
+  filter:drop-shadow(0 0 calc(3px + (var(--gauge-speed) * 8px)) var(--gauge-accent));
+  opacity:.95;
+}
+
+/* Speedometer needle. */
+.floating-btn::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:50%;
+  z-index:1;
+  width:23px;
+  height:2px;
+  border-radius:999px;
+  background:linear-gradient(90deg,#fff 0 25%,var(--gauge-accent) 26% 100%);
+  box-shadow:0 0 8px var(--gauge-accent);
+  transform-origin:1px 50%;
+  transform:translateY(-50%) rotate(var(--gauge-angle));
+  transition:transform .035s linear;
+  pointer-events:none;
+}
+
+/* WhatsApp = green illuminated speedometer. */
+.floating-whatsapp{
+  --gauge-accent:#21d879;
+  color:#fff!important;
+}
+
+.floating-whatsapp .whatsapp-round-icon{
+  position:relative!important;
+  z-index:3!important;
+  width:30px!important;
+  height:30px!important;
+  border-radius:50%!important;
+  display:grid!important;
+  place-items:center!important;
+  background:#10a84f!important;
+  box-shadow:
+    0 0 0 2px rgba(255,255,255,.86),
+    0 0 calc(8px + (var(--gauge-speed) * 16px)) rgba(33,216,121,.58)!important;
+}
+
+.floating-whatsapp .whatsapp-round-icon img{
+  width:20px!important;
+  height:20px!important;
+  display:block!important;
+  object-fit:contain!important;
+}
+
+/* Scroll-to-top = performance gauge with warm red/orange redline. */
+.floating-top{
+  --gauge-accent:#ff5a00;
+  color:#fff!important;
+}
+
+.floating-top::before{
+  background:
+    repeating-conic-gradient(
+      from 225deg,
+      rgba(255,255,255,.92) 0deg 1.2deg,
+      transparent 1.2deg 12deg
+    ),
+    conic-gradient(
+      from 225deg,
+      #fff 0deg calc(var(--gauge-sweep) * .58),
+      #ffb000 calc(var(--gauge-sweep) * .58) calc(var(--gauge-sweep) * .78),
+      #ff3b18 calc(var(--gauge-sweep) * .78) var(--gauge-sweep),
+      rgba(255,255,255,.10) var(--gauge-sweep) 270deg,
+      transparent 270deg 360deg
+    );
+  filter:drop-shadow(0 0 calc(3px + (var(--gauge-speed) * 7px)) rgba(255,90,0,.8));
+}
+
+.floating-top svg{
+  position:relative!important;
+  z-index:3!important;
+  width:22px!important;
+  height:22px!important;
+  stroke:#fff!important;
+  filter:drop-shadow(0 1px 5px rgba(0,0,0,.5));
+}
+
+/* Slight punch while the user is actively accelerating the scroll. */
+.floating-actions.is-accelerating .floating-btn{
+  transform:scale(calc(1 + (var(--gauge-speed) * .035)))!important;
+}
+
+.floating-btn:hover{
+  transform:translateY(-2px) scale(1.025)!important;
+}
+
+@media(max-width:900px){
+  .floating-btn,
+  .floating-whatsapp,
+  .floating-top{
+    width:62px!important;
+    height:62px!important;
+    min-width:62px!important;
+    min-height:62px!important;
+  }
+  .floating-btn::after{
+    width:21px;
+  }
+}
+
+@media(max-width:580px){
+  .floating-actions{
+    right:10px!important;
+    bottom:10px!important;
+    gap:8px!important;
+  }
+  .floating-btn,
+  .floating-whatsapp,
+  .floating-top{
+    width:56px!important;
+    height:56px!important;
+    min-width:56px!important;
+    min-height:56px!important;
+  }
+  .floating-btn::before{
+    inset:4px;
+  }
+  .floating-btn::after{
+    width:18px;
+  }
+  .floating-whatsapp .whatsapp-round-icon{
+    width:26px!important;
+    height:26px!important;
+  }
+  .floating-whatsapp .whatsapp-round-icon img{
+    width:18px!important;
+    height:18px!important;
+  }
+  .floating-top svg{
+    width:19px!important;
+    height:19px!important;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  .floating-btn::after,
+  .floating-actions.is-accelerating .floating-btn{
+    transition:none!important;
+    transform:none!important;
+  }
+}
+

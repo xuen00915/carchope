@@ -364,6 +364,58 @@
     });
   }
 
+  /* Scroll-velocity speedometer animation for floating controls */
+  if(floatingActions){
+    var gaugeLastY=window.scrollY||window.pageYOffset||0;
+    var gaugeLastTime=performance.now();
+    var gaugeTarget=0;
+    var gaugeShown=0;
+    var gaugeRaf=0;
+
+    function measureGaugeSpeed(){
+      var now=performance.now();
+      var y=window.scrollY||window.pageYOffset||0;
+      var dt=Math.max(16,now-gaugeLastTime);
+      var dy=Math.abs(y-gaugeLastY);
+
+      /*
+        Map scroll velocity to a dashboard-style 0..1 gauge.
+        Trackpad/flick scrolls climb rapidly; slow wheel scrolls sit lower.
+      */
+      var velocity=dy/dt;
+      gaugeTarget=Math.min(1,velocity/2.25);
+
+      gaugeLastY=y;
+      gaugeLastTime=now;
+    }
+
+    function animateGauge(){
+      gaugeRaf=requestAnimationFrame(animateGauge);
+
+      var accel=gaugeTarget>gaugeShown?.25:.10;
+      gaugeShown+=(gaugeTarget-gaugeShown)*accel;
+      gaugeTarget*=.88;
+
+      if(gaugeTarget<.003) gaugeTarget=0;
+      if(gaugeShown<.003) gaugeShown=0;
+
+      var angle=-128+(gaugeShown*256);
+      var sweep=gaugeShown*258;
+
+      floatingActions.style.setProperty('--gauge-speed',gaugeShown.toFixed(4));
+      floatingActions.style.setProperty('--gauge-angle',angle.toFixed(2)+'deg');
+      floatingActions.style.setProperty('--gauge-sweep',sweep.toFixed(2)+'deg');
+      floatingActions.classList.toggle('is-accelerating',gaugeShown>.16);
+    }
+
+    window.addEventListener('scroll',measureGaugeSpeed,{passive:true});
+    window.addEventListener('wheel',measureGaugeSpeed,{passive:true});
+    window.addEventListener('touchmove',measureGaugeSpeed,{passive:true});
+    measureGaugeSpeed();
+    animateGauge();
+  }
+
+
   var cartStorageKey='carchopePreviewCart';
 
   function normalizeCart(items){
