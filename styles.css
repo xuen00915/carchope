@@ -5537,3 +5537,110 @@ body{
   position:relative;
 }
 
+/* Smaller logo + automatic dark-section header contrast */
+/* Smaller square logo */
+.site-header .header-logo{
+  flex:0 0 82px!important;
+  width:82px!important;
+  margin-right:10px!important;
+}
+.site-header .header-logo .header-brand-logo{
+  height:82px!important;
+  top:2px!important;
+}
+
+@media(max-width:1180px){
+  .site-header .header-logo{
+    flex-basis:76px!important;
+    width:76px!important;
+  }
+  .site-header .header-logo .header-brand-logo{
+    height:76px!important;
+    top:3px!important;
+  }
+}
+@media(max-width:860px){
+  .site-header .header-logo{
+    flex-basis:68px!important;
+    width:68px!important;
+    margin-right:6px!important;
+  }
+  .site-header .header-logo .header-brand-logo{
+    height:70px!important;
+    top:1px!important;
+  }
+}
+@media(max-width:580px){
+  .site-header .header-logo{
+    flex-basis:62px!important;
+    width:62px!important;
+  }
+  .site-header .header-logo .header-brand-logo{
+    height:64px!important;
+    top:1px!important;
+  }
+}
+
+/* Smooth contrast transition as the sticky header moves across sections. */
+.site-header .desktop-nav a,
+.site-header .header-cart,
+.site-header .menu-toggle span{
+  transition:
+    color .28s ease,
+    background-color .28s ease,
+    border-color .28s ease,
+    opacity .28s ease!important;
+}
+
+/* Light section state */
+.site-header:not(.on-dark) .desktop-nav a{
+  color:#2f3337!important;
+}
+.site-header:not(.on-dark) .header-cart{
+  color:#17191b!important;
+  background:rgba(255,255,255,.62)!important;
+  border-color:rgba(17,18,20,.15)!important;
+}
+.site-header:not(.on-dark) .menu-toggle span{
+  background:#111!important;
+}
+
+/* Dark section state */
+.site-header.on-dark .desktop-nav a{
+  color:#fff!important;
+  text-shadow:0 1px 12px rgba(0,0,0,.32);
+}
+.site-header.on-dark .header-cart{
+  color:#fff!important;
+  background:rgba(12,14,16,.24)!important;
+  border-color:rgba(255,255,255,.42)!important;
+  -webkit-backdrop-filter:blur(14px)!important;
+  backdrop-filter:blur(14px)!important;
+}
+.site-header.on-dark .header-cart:hover{
+  color:#fff!important;
+  background:rgba(12,14,16,.36)!important;
+  border-color:rgba(255,255,255,.62)!important;
+}
+.site-header.on-dark .menu-toggle span{
+  background:#fff!important;
+}
+
+/* When glass is visible over a dark section, use a darker glass tint. */
+.site-header.is-scrolled.on-dark{
+  background:rgba(8,10,12,.28)!important;
+  border-bottom-color:rgba(255,255,255,.22)!important;
+  box-shadow:
+    0 10px 28px rgba(0,0,0,.15),
+    inset 0 1px 0 rgba(255,255,255,.14)!important;
+}
+.site-header.is-scrolled.on-dark::before{
+  background:
+    linear-gradient(115deg,
+      rgba(255,255,255,.10) 0%,
+      rgba(255,255,255,.015) 35%,
+      rgba(255,255,255,.07) 58%,
+      rgba(255,255,255,.01) 80%,
+      rgba(255,255,255,.06) 100%)!important;
+}
+

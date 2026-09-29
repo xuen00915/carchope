@@ -12,6 +12,44 @@
     syncHeaderGlass();
   }
 
+
+
+  /* Automatic dark-section header contrast */
+  if(siteHeader){
+    var darkHeaderSelector=[
+      '.page-hero.dark',
+      '.manifesto',
+      '.manifesto-video-section',
+      '.partner-band',
+      '.site-footer',
+      '.quote-panel.dark',
+      '[data-header-theme="dark"]'
+    ].join(',');
+
+    function syncHeaderContrast(){
+      var headerRect=siteHeader.getBoundingClientRect();
+      var sampleY=Math.min(window.innerHeight-1,Math.max(1,headerRect.bottom+6));
+      var sampleXs=[
+        Math.round(window.innerWidth*.55),
+        Math.round(window.innerWidth*.72),
+        Math.round(window.innerWidth*.86)
+      ];
+
+      var darkVotes=0;
+      sampleXs.forEach(function(x){
+        var el=document.elementFromPoint(Math.min(window.innerWidth-2,Math.max(1,x)),sampleY);
+        if(el&&el.closest&&el.closest(darkHeaderSelector)) darkVotes++;
+      });
+
+      siteHeader.classList.toggle('on-dark',darkVotes>=2);
+    }
+
+    window.addEventListener('scroll',syncHeaderContrast,{passive:true});
+    window.addEventListener('resize',syncHeaderContrast,{passive:true});
+    window.addEventListener('load',syncHeaderContrast,{once:true});
+    syncHeaderContrast();
+  }
+
   var menu=document.getElementById('menu-toggle');
   var panel=document.getElementById('mobile-panel');
 
