@@ -277,67 +277,47 @@ test('homepage manifesto title uses the lighter title weight', async () => {
   }
 });
 
-test('XPENG G6 is zoomed within its featured card', async () => {
-  const page = await browser.newPage({ viewport: { width: 1440, height: 1000 } });
-  await page.goto(`${baseUrl}/products.html`, { waitUntil: 'domcontentloaded' });
+test('featured cars use a smaller contained presentation', async () => {
+  for (const viewport of [{ width: 1440, height: 1000 }, { width: 390, height: 844 }]) {
+    const page = await browser.newPage({ viewport });
+    await page.goto(`${baseUrl}/products.html`, { waitUntil: 'domcontentloaded' });
 
-  const featuredCard = page.locator('.featured-grid .feature-car').filter({ hasText: 'XPENG G6 Electric' });
-  const presentation = await featuredCard.evaluate((card) => {
-    const image = card.querySelector('img');
-    const matrix = new DOMMatrixReadOnly(getComputedStyle(image).transform);
-    return {
-      scale: matrix.a,
-      overflow: getComputedStyle(card).overflow,
-      cardWidth: card.getBoundingClientRect().width,
-      cardHeight: card.getBoundingClientRect().height,
-    };
-  });
+    for (const model of Object.keys(expectedImages)) {
+      const image = page.locator('.featured-grid .feature-car').filter({ hasText: model }).locator('img');
+      const presentation = await image.evaluate((element) => ({
+        objectFit: getComputedStyle(element).objectFit,
+        scale: new DOMMatrixReadOnly(getComputedStyle(element).transform).a,
+      }));
 
-  assert.ok(presentation.scale >= 1.15, 'XPENG should render visibly closer than the default image scale');
-  assert.equal(presentation.overflow, 'hidden', 'the enlarged image should stay inside the existing card');
-  assert.ok(presentation.cardWidth > 0 && presentation.cardHeight > 0, 'the featured card should remain visible');
+      assert.equal(presentation.objectFit, 'contain', `${model} should remain fully visible at ${viewport.width}px`);
+      assert.ok(presentation.scale >= 0.88 && presentation.scale <= 0.94, `${model} should have more breathing room at ${viewport.width}px`);
+    }
 
-  await page.close();
+    await page.close();
+  }
 });
 
-test('XPENG G6 uses a gentler featured-card zoom on phones', async () => {
-  const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
-  await page.goto(`${baseUrl}/products.html`, { waitUntil: 'domcontentloaded' });
+test('product-list page one cars use the smaller contained presentation', async () => {
+  for (const viewport of [{ width: 1440, height: 1000 }, { width: 390, height: 844 }]) {
+    const page = await browser.newPage({ viewport });
+    await page.goto(`${baseUrl}/products.html`, { waitUntil: 'domcontentloaded' });
+    const images = page.locator('.inventory-card .inventory-photo > img');
+    await images.first().waitFor();
 
-  const image = page.locator('.featured-grid .feature-car').filter({ hasText: 'XPENG G6 Electric' }).locator('img');
-  const scale = await image.evaluate((element) => new DOMMatrixReadOnly(getComputedStyle(element).transform).a);
+    assert.equal(await images.count(), 9, 'the first product page should contain nine cars');
+    const presentations = await images.evaluateAll((elements) => elements.map((element) => ({
+      model: element.alt,
+      objectFit: getComputedStyle(element).objectFit,
+      scale: new DOMMatrixReadOnly(getComputedStyle(element).transform).a,
+    })));
 
-  assert.ok(scale >= 1.08, 'the XPENG should still be visibly closer on phones');
-  assert.ok(scale <= 1.12, 'the phone zoom should avoid excessive edge cropping');
+    for (const presentation of presentations) {
+      assert.equal(presentation.objectFit, 'contain', `${presentation.model} should remain fully visible at ${viewport.width}px`);
+      assert.ok(presentation.scale >= 0.88 && presentation.scale <= 0.92, `${presentation.model} should render smaller at ${viewport.width}px`);
+    }
 
-  await page.close();
-});
-
-test('XPENG G6 is zoomed closer in the product inventory', async () => {
-  const page = await browser.newPage({ viewport: { width: 1440, height: 1000 } });
-  await page.goto(`${baseUrl}/products.html`, { waitUntil: 'domcontentloaded' });
-  await page.locator('.inventory-card').first().waitFor();
-
-  const image = page.locator('.inventory-card').filter({ hasText: 'XPENG G6 Electric' }).locator('.inventory-photo > img');
-  const scale = await image.evaluate((element) => new DOMMatrixReadOnly(getComputedStyle(element).transform).a);
-
-  assert.ok(scale >= 1.2, 'the XPENG inventory image should render visibly closer');
-
-  await page.close();
-});
-
-test('XPENG G6 product inventory zoom stays balanced on phones', async () => {
-  const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
-  await page.goto(`${baseUrl}/products.html`, { waitUntil: 'domcontentloaded' });
-  await page.locator('.inventory-card').first().waitFor();
-
-  const image = page.locator('.inventory-card').filter({ hasText: 'XPENG G6 Electric' }).locator('.inventory-photo > img');
-  const scale = await image.evaluate((element) => new DOMMatrixReadOnly(getComputedStyle(element).transform).a);
-
-  assert.ok(scale >= 1.08, 'the XPENG inventory image should remain closer on phones');
-  assert.ok(scale <= 1.12, 'the phone listing zoom should avoid excessive edge cropping');
-
-  await page.close();
+    await page.close();
+  }
 });
 
 test('Nissan Serena front view is framed with more breathing room', async () => {
@@ -388,11 +368,13 @@ test('product image lens uses a white canvas', async () => {
     backgroundColor: getComputedStyle(element).backgroundColor,
     backgroundImage: getComputedStyle(element).backgroundImage,
     opacity: getComputedStyle(element).opacity,
+    baseImageFilter: getComputedStyle(element.parentElement.querySelector('img')).filter,
   }));
 
   assert.equal(presentation.backgroundColor, 'rgb(255, 255, 255)');
   assert.notEqual(presentation.backgroundImage, 'none', 'the lens should still magnify the car image');
   assert.equal(presentation.opacity, '1', 'the lens should remain visible while hovering');
+  assert.doesNotMatch(presentation.baseImageFilter, /brightness\((?:0(?:\.\d+)?|\.\d+)\)/, 'hover should not dim the white photo background');
 
   await page.close();
 });

@@ -5757,7 +5757,7 @@ body:has(.page-hero:not(.inventory-hero):not(.dark)) .site-header:not(.is-scroll
 }
 
 .inventory-photo.is-lens-active > img{
-  filter:saturate(.78) brightness(.96)!important;
+  filter:saturate(.78)!important;
 }
 
 .inventory-lens{
@@ -6036,36 +6036,33 @@ body:has(.page-hero:not(.inventory-hero):not(.dark)) .site-header:not(.is-scroll
   line-height:normal!important;
 }
 
-/* Bring the XPENG closer in its featured cards without changing card geometry. */
-.featured-grid .feature-car img[alt="XPENG G6 Electric"]{
-  transform:scale(1.18);
+/* Smaller, fully visible cars on white canvases in featured and inventory cards. */
+.featured-grid .feature-car{
+  background:#fff!important;
 }
-.featured-grid .feature-car:hover img[alt="XPENG G6 Electric"]{
-  transform:scale(1.215);
+.featured-grid .feature-car > img{
+  object-fit:contain!important;
+  object-position:center!important;
+  transform:scale(.92)!important;
+  background:#fff!important;
 }
-@media(max-width:580px){
-  .featured-grid .feature-car img[alt="XPENG G6 Electric"],
-  .featured-grid .feature-car:hover img[alt="XPENG G6 Electric"]{
-    transform:scale(1.1);
-  }
+.featured-grid .feature-car:hover > img{
+  transform:scale(.94)!important;
 }
 
-/* Closer XPENG crop in the product inventory and a light lens canvas. */
-.inventory-card .inventory-photo > img[alt="XPENG G6 Electric"]{
-  transform:scale(1.22)!important;
+.inventory-grid .inventory-photo{
+  background:#fff!important;
+}
+.inventory-grid .inventory-photo > img,
+.inventory-grid .inventory-card:hover .inventory-photo > img,
+.inventory-grid .inventory-photo.is-zooming > img{
+  object-fit:contain!important;
+  object-position:center!important;
+  transform:scale(.9)!important;
+  background:#fff!important;
 }
 .inventory-lens{
-  background-color:#fff;
-}
-@media(max-width:580px){
-  .inventory-card .inventory-photo > img[alt="XPENG G6 Electric"]{
-    transform:scale(1.1)!important;
-  }
-}
-
-/* Show the complete tall front-view photo without cropping its roof or bumper. */
-.inventory-card .inventory-photo > img[alt="Nissan Serena e-POWER Hybrid 1.4A Highway Star Premium"]{
-  object-fit:contain!important;
+  background-color:#fff!important;
 }
 
 /* Speedometer floating controls — scroll-reactive */
