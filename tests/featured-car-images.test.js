@@ -158,3 +158,29 @@ test('every inventory model uses a unique, clear local image', async () => {
 
   await page.close();
 });
+
+test('product filter values match the Search model typography', async () => {
+  const page = await browser.newPage({ viewport: { width: 1440, height: 1000 } });
+  await page.goto(`${baseUrl}/products.html`, { waitUntil: 'domcontentloaded' });
+
+  const typography = await page.evaluate(() => {
+    const properties = ['fontFamily', 'fontSize', 'fontWeight', 'lineHeight', 'letterSpacing', 'color'];
+    const read = (selector, pseudo) => {
+      const styles = getComputedStyle(document.querySelector(selector), pseudo);
+      return Object.fromEntries(properties.map((property) => [property, styles[property]]));
+    };
+
+    return {
+      searchModel: read('#car-search', '::placeholder'),
+      anyBrand: read('#brand-current'),
+      anyType: read('#type-current'),
+      inStockFirst: read('#sort-current'),
+    };
+  });
+
+  for (const field of ['anyBrand', 'anyType', 'inStockFirst']) {
+    assert.deepEqual(typography[field], typography.searchModel, `${field} should match Search model`);
+  }
+
+  await page.close();
+});
