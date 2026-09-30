@@ -82,6 +82,39 @@ for (const pagePath of ['/index.html', '/products.html']) {
   });
 }
 
+test('the three uploaded car photos use clean white backgrounds', async () => {
+  const page = await browser.newPage();
+  await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
+
+  for (const [model, imagePath] of Object.entries(expectedImages)) {
+    const cornerColors = await page.evaluate(async ({ baseUrl, imagePath }) => {
+      const image = new Image();
+      image.src = `${baseUrl}/${imagePath}`;
+      await image.decode();
+
+      const canvas = document.createElement('canvas');
+      canvas.width = image.naturalWidth;
+      canvas.height = image.naturalHeight;
+      const context = canvas.getContext('2d');
+      context.drawImage(image, 0, 0);
+
+      const inset = 4;
+      return [
+        [inset, inset],
+        [canvas.width - inset - 1, inset],
+        [inset, canvas.height - inset - 1],
+        [canvas.width - inset - 1, canvas.height - inset - 1],
+      ].map(([x, y]) => Array.from(context.getImageData(x, y, 1, 1).data.slice(0, 3)));
+    }, { baseUrl, imagePath });
+
+    for (const [red, green, blue] of cornerColors) {
+      assert.ok(red >= 245 && green >= 245 && blue >= 245, `${model} should have a white canvas`);
+    }
+  }
+
+  await page.close();
+});
+
 test('Road Experience showcase uses the same exact model images', async () => {
   const page = await browser.newPage({ viewport: { width: 1440, height: 1000 } });
   await page.goto(`${baseUrl}/road-experience/index.html`, { waitUntil: 'domcontentloaded' });
