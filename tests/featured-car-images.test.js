@@ -53,6 +53,7 @@ after(async () => {
 });
 
 async function assertImageLoaded(card, expectedPath) {
+  await card.scrollIntoViewIfNeeded();
   const image = card.locator('img').first();
   assert.equal(await image.getAttribute('src'), expectedPath);
   await image.evaluate((element) => element.complete || new Promise((resolve) => {
@@ -107,6 +108,32 @@ test('product inventory reuses the exact XPENG and Volkswagen model images', asy
   for (const [model, expectedPath] of Object.entries(inventoryImages)) {
     const card = page.locator('.inventory-card').filter({ hasText: model });
     assert.equal(await card.count(), 1, `${model} should appear once in inventory`);
+    await assertImageLoaded(card, expectedPath);
+  }
+
+  await page.close();
+});
+
+test('first product page uses the supplied white-background photos', async () => {
+  const page = await browser.newPage({ viewport: { width: 1440, height: 1000 } });
+  await page.goto(`${baseUrl}/products.html`, { waitUntil: 'domcontentloaded' });
+  await page.locator('.inventory-card').first().waitFor();
+
+  const suppliedImages = {
+    'Toyota Sienta Hybrid 1.5A Elegance': 'assets/cars/toyota-sienta-hybrid-white.webp',
+    'Tesla Model Y Electric RWD': 'assets/cars/tesla-model-y-white.webp',
+    'Škoda Kodiaq Mild Hybrid 1.5 TSI Selection 7-Seater': 'assets/cars/skoda-kodiaq-white.webp',
+    'SEAT Alhambra Diesel 2.0A TDI DSG Style': 'assets/cars/seat-alhambra-white.webp',
+    'Porsche Taycan Electric': 'assets/cars/porsche-taycan-white.webp',
+    'Peugeot e-2008 Electric GT': 'assets/cars/peugeot-e-2008-white.webp',
+    'Nissan Serena e-POWER Hybrid 1.4A Highway Star Premium': 'assets/cars/nissan-serena-epower-white.webp',
+  };
+
+  assert.equal(await page.locator('.inventory-card').count(), 9, 'the first product page should contain nine cars');
+
+  for (const [model, expectedPath] of Object.entries(suppliedImages)) {
+    const card = page.locator('.inventory-card').filter({ hasText: model });
+    assert.equal(await card.count(), 1, `${model} should appear once on the first product page`);
     await assertImageLoaded(card, expectedPath);
   }
 
