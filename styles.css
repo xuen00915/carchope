@@ -4921,6 +4921,9 @@ body{
     linear-gradient(90deg,rgba(8,10,12,.62) 0%,rgba(8,10,12,.34) 48%,rgba(8,10,12,.12) 100%),
     linear-gradient(0deg,rgba(8,10,12,.16),rgba(8,10,12,.02))!important;
 }
+.manifesto-video-section h2.display-md{
+  font-weight:600!important;
+}
 @media(max-width:860px){
   .manifesto-video{
     filter:saturate(.82) contrast(1.04) brightness(.76)!important;

@@ -258,6 +258,25 @@ test('product filter values match the Search model typography', async () => {
   await page.close();
 });
 
+test('homepage manifesto title uses the lighter title weight', async () => {
+  for (const viewport of [{ width: 1440, height: 1000 }, { width: 390, height: 844 }]) {
+    const page = await browser.newPage({ viewport });
+    await page.goto(`${baseUrl}/index.html`, { waitUntil: 'domcontentloaded' });
+
+    const title = page.locator('.manifesto-video-section h2.display-md');
+    const presentation = await title.evaluate((element) => ({
+      fontWeight: getComputedStyle(element).fontWeight,
+      lineBreaks: element.querySelectorAll('br').length,
+      fitsViewport: element.getBoundingClientRect().right <= document.documentElement.clientWidth,
+    }));
+
+    assert.equal(presentation.fontWeight, '600', `the ${viewport.width}px manifesto title should use the lighter weight`);
+    assert.equal(presentation.lineBreaks, 2, 'the existing three-line title composition should remain unchanged');
+    assert.ok(presentation.fitsViewport, `the ${viewport.width}px manifesto title should not overflow`);
+    await page.close();
+  }
+});
+
 test('XPENG G6 is zoomed within its featured card', async () => {
   const page = await browser.newPage({ viewport: { width: 1440, height: 1000 } });
   await page.goto(`${baseUrl}/products.html`, { waitUntil: 'domcontentloaded' });
