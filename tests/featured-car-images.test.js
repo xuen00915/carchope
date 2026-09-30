@@ -339,6 +339,20 @@ test('Nissan Serena front view is framed with more breathing room', async () => 
   await page.close();
 });
 
+test('product image placeholders use a pure white canvas', async () => {
+  for (const viewport of [{ width: 1440, height: 1000 }, { width: 390, height: 844 }]) {
+    const page = await browser.newPage({ viewport });
+    await page.goto(`${baseUrl}/products.html`, { waitUntil: 'domcontentloaded' });
+    await page.locator('.inventory-card').first().waitFor();
+
+    const nissanPhoto = page.locator('.inventory-card').filter({ hasText: 'Nissan Serena e-POWER' }).locator('.inventory-photo');
+    const backgroundColor = await nissanPhoto.evaluate((element) => getComputedStyle(element).backgroundColor);
+
+    assert.equal(backgroundColor, 'rgb(255, 255, 255)', `the ${viewport.width}px product image placeholder should be white`);
+    await page.close();
+  }
+});
+
 test('product image lens uses a white canvas', async () => {
   const page = await browser.newPage({ viewport: { width: 1440, height: 1000 } });
   await page.goto(`${baseUrl}/products.html`, { waitUntil: 'domcontentloaded' });

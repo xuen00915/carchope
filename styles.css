@@ -562,7 +562,7 @@ button{cursor:pointer}
 .inventory-card:first-child{grid-column:span 2}
 .inventory-top{display:flex;justify-content:space-between;margin-bottom:9px;font-size:8px;letter-spacing:.13em;text-transform:uppercase;color:#999}
 .inventory-top b{color:var(--orange)}
-.inventory-photo{aspect-ratio:1.5/1;overflow:hidden;background:#eff0f0;position:relative}
+.inventory-photo{aspect-ratio:1.5/1;overflow:hidden;background:#fff;position:relative}
 .inventory-card:first-child .inventory-photo{aspect-ratio:2.05/1}
 .inventory-photo img{height:100%;object-fit:cover;filter:saturate(.73);transition:transform .5s var(--ease)}
 .inventory-card:hover .inventory-photo img{transform:scale(1.025)}
