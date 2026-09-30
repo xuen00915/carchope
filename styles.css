@@ -6047,6 +6047,19 @@ body:has(.page-hero:not(.inventory-hero):not(.dark)) .site-header:not(.is-scroll
   }
 }
 
+/* Closer XPENG crop in the product inventory and a light lens canvas. */
+.inventory-card .inventory-photo > img[alt="XPENG G6 Electric"]{
+  transform:scale(1.22)!important;
+}
+.inventory-lens{
+  background-color:#fff;
+}
+@media(max-width:580px){
+  .inventory-card .inventory-photo > img[alt="XPENG G6 Electric"]{
+    transform:scale(1.1)!important;
+  }
+}
+
 /* Speedometer floating controls — scroll-reactive */
 .floating-actions{
   --gauge-speed:0;

@@ -220,3 +220,55 @@ test('XPENG G6 uses a gentler featured-card zoom on phones', async () => {
 
   await page.close();
 });
+
+test('XPENG G6 is zoomed closer in the product inventory', async () => {
+  const page = await browser.newPage({ viewport: { width: 1440, height: 1000 } });
+  await page.goto(`${baseUrl}/products.html`, { waitUntil: 'domcontentloaded' });
+  await page.locator('.inventory-card').first().waitFor();
+
+  const image = page.locator('.inventory-card').filter({ hasText: 'XPENG G6 Electric' }).locator('.inventory-photo > img');
+  const scale = await image.evaluate((element) => new DOMMatrixReadOnly(getComputedStyle(element).transform).a);
+
+  assert.ok(scale >= 1.2, 'the XPENG inventory image should render visibly closer');
+
+  await page.close();
+});
+
+test('XPENG G6 product inventory zoom stays balanced on phones', async () => {
+  const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
+  await page.goto(`${baseUrl}/products.html`, { waitUntil: 'domcontentloaded' });
+  await page.locator('.inventory-card').first().waitFor();
+
+  const image = page.locator('.inventory-card').filter({ hasText: 'XPENG G6 Electric' }).locator('.inventory-photo > img');
+  const scale = await image.evaluate((element) => new DOMMatrixReadOnly(getComputedStyle(element).transform).a);
+
+  assert.ok(scale >= 1.08, 'the XPENG inventory image should remain closer on phones');
+  assert.ok(scale <= 1.12, 'the phone listing zoom should avoid excessive edge cropping');
+
+  await page.close();
+});
+
+test('product image lens uses a white canvas', async () => {
+  const page = await browser.newPage({ viewport: { width: 1440, height: 1000 } });
+  await page.goto(`${baseUrl}/products.html`, { waitUntil: 'domcontentloaded' });
+  await page.locator('.inventory-card').first().waitFor();
+
+  const photo = page.locator('.inventory-card').filter({ hasText: 'XPENG G6 Electric' }).locator('.inventory-photo');
+  await photo.hover({ position: { x: 8, y: 8 } });
+  const lens = photo.locator('.inventory-lens');
+  await page.waitForFunction(() => {
+    const element = document.querySelector('.inventory-card .inventory-photo.is-lens-active .inventory-lens');
+    return element && getComputedStyle(element).opacity === '1';
+  });
+  const presentation = await lens.evaluate((element) => ({
+    backgroundColor: getComputedStyle(element).backgroundColor,
+    backgroundImage: getComputedStyle(element).backgroundImage,
+    opacity: getComputedStyle(element).opacity,
+  }));
+
+  assert.equal(presentation.backgroundColor, 'rgb(255, 255, 255)');
+  assert.notEqual(presentation.backgroundImage, 'none', 'the lens should still magnify the car image');
+  assert.equal(presentation.opacity, '1', 'the lens should remain visible while hovering');
+
+  await page.close();
+});
