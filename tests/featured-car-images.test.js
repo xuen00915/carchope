@@ -120,13 +120,13 @@ test('first product page uses the supplied white-background photos', async () =>
   await page.locator('.inventory-card').first().waitFor();
 
   const suppliedImages = {
-    'Toyota Sienta Hybrid 1.5A Elegance': 'assets/cars/toyota-sienta-hybrid-white.webp',
-    'Tesla Model Y Electric RWD': 'assets/cars/tesla-model-y-white.webp',
+    'Toyota Sienta Hybrid 1.5A Elegance': 'assets/cars/toyota-sienta-hybrid-front-white.webp',
+    'Tesla Model Y Electric RWD': 'assets/cars/tesla-model-y-front-white.webp',
     'Škoda Kodiaq Mild Hybrid 1.5 TSI Selection 7-Seater': 'assets/cars/skoda-kodiaq-white.webp',
     'SEAT Alhambra Diesel 2.0A TDI DSG Style': 'assets/cars/seat-alhambra-white.webp',
     'Porsche Taycan Electric': 'assets/cars/porsche-taycan-white.webp',
-    'Peugeot e-2008 Electric GT': 'assets/cars/peugeot-e-2008-white.webp',
-    'Nissan Serena e-POWER Hybrid 1.4A Highway Star Premium': 'assets/cars/nissan-serena-epower-white.webp',
+    'Peugeot e-2008 Electric GT': 'assets/cars/peugeot-e-2008-front-white.webp',
+    'Nissan Serena e-POWER Hybrid 1.4A Highway Star Premium': 'assets/cars/nissan-serena-epower-front-white.webp',
   };
 
   assert.equal(await page.locator('.inventory-card').count(), 9, 'the first product page should contain nine cars');
