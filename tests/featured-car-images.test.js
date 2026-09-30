@@ -112,3 +112,49 @@ test('product inventory reuses the exact XPENG and Volkswagen model images', asy
 
   await page.close();
 });
+
+test('every inventory model uses a unique, clear local image', async () => {
+  const page = await browser.newPage({ viewport: { width: 1440, height: 1000 } });
+  await page.goto(`${baseUrl}/products.html`, { waitUntil: 'domcontentloaded' });
+  await page.locator('.inventory-card').first().waitFor();
+
+  const inventory = [];
+  const pageButtons = page.locator('#pagination button[aria-label^="Page "]');
+  const pageCount = await pageButtons.count();
+
+  for (let index = 0; index < pageCount; index += 1) {
+    await page.locator('#pagination button[aria-label="Page ' + (index + 1) + '"]').click();
+    const cards = page.locator('.inventory-card');
+    await cards.first().waitFor();
+    await cards.locator('.inventory-photo img').evaluateAll((images) => Promise.all(images.map((image) => {
+      if (image.complete) return undefined;
+      return new Promise((resolve) => {
+        image.addEventListener('load', resolve, { once: true });
+        image.addEventListener('error', resolve, { once: true });
+      });
+    })));
+    inventory.push(...await cards.evaluateAll((nodes) => nodes.map((card) => {
+      const image = card.querySelector('.inventory-photo img');
+      return {
+        model: card.querySelector('h3')?.textContent.trim(),
+        src: image?.getAttribute('src'),
+        naturalWidth: image?.naturalWidth || 0,
+        naturalHeight: image?.naturalHeight || 0,
+        renderedWidth: image?.getBoundingClientRect().width || 0,
+      };
+    })));
+  }
+
+  assert.equal(inventory.length, 26, 'all inventory models should be covered');
+  assert.equal(new Set(inventory.map(({ model }) => model)).size, 26, 'model names should be unique');
+  assert.equal(new Set(inventory.map(({ src }) => src)).size, 26, 'each model should have its own image');
+
+  for (const car of inventory) {
+    assert.match(car.src, /^assets\//, `${car.model} should use a local image`);
+    assert.ok(car.naturalWidth >= 900, `${car.model} image should be at least 900px wide`);
+    assert.ok(car.naturalHeight >= 600, `${car.model} image should be at least 600px tall`);
+    assert.ok(car.renderedWidth > 0, `${car.model} image should be visible`);
+  }
+
+  await page.close();
+});
