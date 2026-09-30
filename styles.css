@@ -7661,3 +7661,154 @@ body:has(.page-hero:not(.inventory-hero):not(.dark)) .site-header:not(.is-scroll
   }
 }
 
+/* Header containment + lighter hero page titles */
+/* Desktop: contain the full 82px logo inside the header instead of letting it hang out. */
+.site-header{
+  height:90px!important;
+  margin-bottom:-90px!important;
+}
+
+.site-header .header-inner{
+  height:90px!important;
+  min-height:90px!important;
+  align-items:center!important;
+}
+
+.site-header .header-logo{
+  height:90px!important;
+  align-self:center!important;
+}
+
+.site-header .header-logo .header-brand-logo{
+  height:82px!important;
+  top:50%!important;
+  transform:translateY(-50%)!important;
+}
+
+.hero,
+.page-hero{
+  padding-top:90px!important;
+}
+
+/* Main page titles: lighter, softer, and more breathing room between rows. */
+h1.display,
+h1.display-md{
+  color:#252A2F!important;
+  font-weight:600!important;
+  letter-spacing:-.035em!important;
+  text-wrap:balance;
+}
+
+h1.display{
+  line-height:1.06!important;
+}
+
+h1.display-md{
+  line-height:1.10!important;
+}
+
+/* Dark hero pages still use white titles. */
+.page-hero.dark h1.display,
+.page-hero.dark h1.display-md{
+  color:#FFFFFF!important;
+}
+
+/* Tablet / compact laptop header */
+@media(max-width:1180px){
+  .site-header{
+    height:84px!important;
+    margin-bottom:-84px!important;
+  }
+
+  .site-header .header-inner,
+  .site-header .header-logo{
+    height:84px!important;
+    min-height:84px!important;
+  }
+
+  .site-header .header-logo .header-brand-logo{
+    height:76px!important;
+    top:50%!important;
+  }
+
+  .hero,
+  .page-hero{
+    padding-top:84px!important;
+  }
+}
+
+/* Tablet / hamburger header */
+@media(max-width:860px){
+  .site-header{
+    height:78px!important;
+    margin-bottom:-78px!important;
+  }
+
+  .site-header .header-inner,
+  .site-header .header-logo{
+    height:78px!important;
+    min-height:78px!important;
+  }
+
+  .site-header .header-logo .header-brand-logo{
+    height:70px!important;
+    top:50%!important;
+  }
+
+  .hero,
+  .page-hero{
+    padding-top:78px!important;
+  }
+
+  .mobile-panel{
+    top:78px!important;
+  }
+
+  .cart-popover{
+    top:86px!important;
+  }
+
+  h1.display,
+  h1.display-md{
+    line-height:1.10!important;
+  }
+}
+
+/* Mobile */
+@media(max-width:580px){
+  .site-header{
+    height:72px!important;
+    margin-bottom:-72px!important;
+  }
+
+  .site-header .header-inner,
+  .site-header .header-logo{
+    height:72px!important;
+    min-height:72px!important;
+  }
+
+  .site-header .header-logo .header-brand-logo{
+    height:64px!important;
+    top:50%!important;
+  }
+
+  .hero,
+  .page-hero{
+    padding-top:72px!important;
+  }
+
+  .mobile-panel{
+    top:72px!important;
+  }
+
+  .cart-popover{
+    top:80px!important;
+  }
+
+  h1.display,
+  h1.display-md{
+    letter-spacing:-.025em!important;
+    line-height:1.12!important;
+  }
+}
+
