@@ -6060,6 +6060,11 @@ body:has(.page-hero:not(.inventory-hero):not(.dark)) .site-header:not(.is-scroll
   }
 }
 
+/* Show the complete tall front-view photo without cropping its roof or bumper. */
+.inventory-card .inventory-photo > img[alt="Nissan Serena e-POWER Hybrid 1.4A Highway Star Premium"]{
+  object-fit:contain!important;
+}
+
 /* Speedometer floating controls — scroll-reactive */
 .floating-actions{
   --gauge-speed:0;

@@ -275,6 +275,24 @@ test('XPENG G6 product inventory zoom stays balanced on phones', async () => {
   await page.close();
 });
 
+test('Nissan Serena front view is framed with more breathing room', async () => {
+  const page = await browser.newPage({ viewport: { width: 1440, height: 1000 } });
+  await page.goto(`${baseUrl}/products.html`, { waitUntil: 'domcontentloaded' });
+  await page.locator('.inventory-card').first().waitFor();
+
+  const nissanImage = page.locator('.inventory-card').filter({ hasText: 'Nissan Serena e-POWER' }).locator('.inventory-photo > img');
+  await nissanImage.scrollIntoViewIfNeeded();
+  const framing = await nissanImage.evaluate((element) => ({
+    objectFit: getComputedStyle(element).objectFit,
+    scale: new DOMMatrixReadOnly(getComputedStyle(element).transform).a,
+  }));
+
+  assert.equal(framing.objectFit, 'contain', 'the complete Nissan front view should fit inside the photo area');
+  assert.ok(framing.scale <= 1, 'the Nissan should not be enlarged inside the product card');
+
+  await page.close();
+});
+
 test('product image lens uses a white canvas', async () => {
   const page = await browser.newPage({ viewport: { width: 1440, height: 1000 } });
   await page.goto(`${baseUrl}/products.html`, { waitUntil: 'domcontentloaded' });
