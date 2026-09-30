@@ -677,8 +677,8 @@
   if(!grid) return;
 
   var cars=[
-    {brand:'xpeng',name:'XPENG G6 Electric',type:'SUV',price:201705,reg:'27 Mar 2025',dep:'$21,010/yr',km:'7,000 km',year:2025,status:'Available',img:'assets/xpeng-g6-electric.png'},
-    {brand:'volkswagen',name:'Volkswagen Golf SV 1.4A TSI Comfortline',type:'Hatchback',price:55988,reg:'13 Nov 2018',dep:'$13,910/yr',km:'50,000 km',year:2018,status:'Available',img:'assets/volkswagen-golf-sv.webp'},
+    {brand:'xpeng',name:'XPENG G6 Electric',type:'SUV',price:201705,reg:'27 Mar 2025',dep:'$21,010/yr',km:'7,000 km',year:2025,status:'Available',img:'assets/xpeng-g6-electric-photo.webp'},
+    {brand:'volkswagen',name:'Volkswagen Golf SV 1.4A TSI Comfortline',type:'Hatchback',price:55988,reg:'13 Nov 2018',dep:'$13,910/yr',km:'50,000 km',year:2018,status:'Available',img:'assets/volkswagen-golf-sv-photo.webp'},
     {brand:'toyota',name:'Toyota Sienta Hybrid 1.5A Elegance',type:'MPV',price:149105,reg:'04 Mar 2024',dep:'$16,220/yr',km:'25,000 km',year:2024,status:'Available',img:'assets/cars/toyota-sienta-hybrid-front-white.webp'},
     {brand:'tesla',name:'Tesla Model Y Electric RWD',type:'SUV',price:158885,reg:'27 Sep 2022',dep:'$19,250/yr',km:'75,000 km',year:2022,status:'Available',img:'assets/cars/tesla-model-y-front-white.webp'},
     {brand:'skoda',name:'Škoda Kodiaq Mild Hybrid 1.5 TSI Selection 7-Seater',type:'SUV',price:199888,reg:'30 Jun 2025',dep:'$18,830/yr',km:'1,800 km',year:2025,status:'Available',img:'assets/cars/skoda-kodiaq-white.webp'},
@@ -686,6 +686,7 @@
     {brand:'porsche',name:'Porsche Taycan Electric',type:'Sports Car',price:395888,reg:'19 Jun 2023',dep:'$43,680/yr',km:'38,888 km',year:2023,status:'Available',img:'assets/cars/porsche-taycan-white.webp'},
     {brand:'peugeot',name:'Peugeot e-2008 Electric GT',type:'SUV',price:118088,reg:'28 Jul 2023',dep:'$15,010/yr',km:'30,882 km',year:2023,status:'Available',img:'assets/cars/peugeot-e-2008-front-white.webp'},
     {brand:'nissan',name:'Nissan Serena e-POWER Hybrid 1.4A Highway Star Premium',type:'MPV',price:207905,reg:'28 May 2025',dep:'$19,910/yr',km:'500 km',year:2025,status:'Available',img:'assets/cars/nissan-serena-epower-front-white.webp'},
+    {brand:'toyota',name:'Toyota Prius Plus Hybrid',type:'MPV',price:98888,reg:'2020',dep:'Contact us',km:'89,000 km',year:2020,status:'Available',img:'assets/toyota-prius-plus-hybrid-photo.webp'},
     {brand:'mini',name:'MINI Cooper D 1.5A 5DR',type:'Hatchback',price:20888,reg:'21 Oct 2016',dep:'$14,410/yr',km:'123,000 km',year:2016,status:'Available',img:'assets/cars/mini-cooper-d-5dr.webp'},
     {brand:'mg',name:'MG 4 Electric Trophy Sport LR',type:'Hatchback',price:171885,reg:'25 Sep 2025',dep:'$17,260/yr',km:'50 km',year:2025,status:'Available',img:'assets/cars/mg4-electric.webp'},
     {brand:'mercedes',name:'Mercedes-Benz C-Class C180 Mild Hybrid Avantgarde',type:'Luxury Sedan',price:208888,reg:'29 Sep 2023',dep:'$23,250/yr',km:'31,600 km',year:2023,status:'Available',img:'assets/cars/mercedes-c180-w206.webp'},

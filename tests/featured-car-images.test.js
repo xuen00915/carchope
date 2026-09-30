@@ -8,9 +8,9 @@ const { chromium } = require('playwright');
 const siteRoot = path.resolve(__dirname, '..');
 const chromePath = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
 const expectedImages = {
-  'XPENG G6 Electric': 'assets/xpeng-g6-electric.png',
-  'Volkswagen Golf SV': 'assets/volkswagen-golf-sv.webp',
-  'Toyota Prius Plus Hybrid': 'assets/toyota-prius-plus-hybrid.png',
+  'XPENG G6 Electric': 'assets/xpeng-g6-electric-photo.webp',
+  'Volkswagen Golf SV': 'assets/volkswagen-golf-sv-photo.webp',
+  'Toyota Prius Plus Hybrid': 'assets/toyota-prius-plus-hybrid-photo.webp',
 };
 
 let server;
@@ -95,7 +95,7 @@ test('Road Experience showcase uses the same exact model images', async () => {
   await page.close();
 });
 
-test('product inventory reuses the exact XPENG and Volkswagen model images', async () => {
+test('product inventory reuses all three uploaded featured-car images', async () => {
   const page = await browser.newPage({ viewport: { width: 1440, height: 1000 } });
   await page.goto(`${baseUrl}/products.html`, { waitUntil: 'domcontentloaded' });
   await page.locator('.inventory-card').first().waitFor();
@@ -103,12 +103,25 @@ test('product inventory reuses the exact XPENG and Volkswagen model images', asy
   const inventoryImages = {
     'XPENG G6 Electric': expectedImages['XPENG G6 Electric'],
     'Volkswagen Golf SV 1.4A TSI Comfortline': expectedImages['Volkswagen Golf SV'],
+    'Toyota Prius Plus Hybrid': expectedImages['Toyota Prius Plus Hybrid'],
   };
 
   for (const [model, expectedPath] of Object.entries(inventoryImages)) {
-    const card = page.locator('.inventory-card').filter({ hasText: model });
-    assert.equal(await card.count(), 1, `${model} should appear once in inventory`);
-    await assertImageLoaded(card, expectedPath);
+    let matchingCard;
+    const pageCount = await page.locator('#pagination button[aria-label^="Page "]').count();
+
+    for (let pageNumber = 1; pageNumber <= pageCount; pageNumber += 1) {
+      await page.locator(`#pagination button[aria-label="Page ${pageNumber}"]`).click();
+      const card = page.locator('.inventory-card').filter({ hasText: model });
+      if (await card.count()) {
+        matchingCard = card;
+        break;
+      }
+    }
+
+    assert.ok(matchingCard, `${model} should appear once in inventory`);
+    assert.equal(await matchingCard.count(), 1, `${model} should appear once in inventory`);
+    await assertImageLoaded(matchingCard, expectedPath);
   }
 
   await page.close();
@@ -172,9 +185,9 @@ test('every inventory model uses a unique, clear local image', async () => {
     })));
   }
 
-  assert.equal(inventory.length, 26, 'all inventory models should be covered');
-  assert.equal(new Set(inventory.map(({ model }) => model)).size, 26, 'model names should be unique');
-  assert.equal(new Set(inventory.map(({ src }) => src)).size, 26, 'each model should have its own image');
+  assert.equal(inventory.length, 27, 'all inventory models should be covered');
+  assert.equal(new Set(inventory.map(({ model }) => model)).size, 27, 'model names should be unique');
+  assert.equal(new Set(inventory.map(({ src }) => src)).size, 27, 'each model should have its own image');
 
   for (const car of inventory) {
     assert.match(car.src, /^assets\//, `${car.model} should use a local image`);
