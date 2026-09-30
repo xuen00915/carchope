@@ -7851,3 +7851,41 @@ main h1.display{
   }
 }
 
+/* Canonical page-title rendering */
+/*
+  One explicit title face across Home, Products, Services and About.
+  This prevents .display / .display-md or browser fallback differences
+  from making one page look heavier than another.
+*/
+.page-title{
+  font-family:"Avenir Next","Helvetica Neue",Arial,sans-serif!important;
+  font-style:normal!important;
+  font-weight:800!important;
+  font-synthesis:none!important;
+  letter-spacing:-.035em!important;
+  line-height:1.10!important;
+  text-wrap:balance!important;
+  -webkit-font-smoothing:antialiased!important;
+  text-rendering:geometricPrecision!important;
+}
+
+.hero .page-title.display{
+  line-height:1.08!important;
+}
+
+.page-hero.dark .page-title{
+  color:#FFFFFF!important;
+}
+
+.page-hero:not(.dark) .page-title,
+.hero .page-title{
+  color:#252A2F!important;
+}
+
+@media(max-width:580px){
+  .page-title{
+    letter-spacing:-.025em!important;
+    line-height:1.12!important;
+  }
+}
+
