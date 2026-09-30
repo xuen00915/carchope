@@ -6033,6 +6033,20 @@ body:has(.page-hero:not(.inventory-hero):not(.dark)) .site-header:not(.is-scroll
   line-height:normal!important;
 }
 
+/* Bring the XPENG closer in its featured cards without changing card geometry. */
+.featured-grid .feature-car img[alt="XPENG G6 Electric"]{
+  transform:scale(1.18);
+}
+.featured-grid .feature-car:hover img[alt="XPENG G6 Electric"]{
+  transform:scale(1.215);
+}
+@media(max-width:580px){
+  .featured-grid .feature-car img[alt="XPENG G6 Electric"],
+  .featured-grid .feature-car:hover img[alt="XPENG G6 Electric"]{
+    transform:scale(1.1);
+  }
+}
+
 /* Speedometer floating controls — scroll-reactive */
 .floating-actions{
   --gauge-speed:0;

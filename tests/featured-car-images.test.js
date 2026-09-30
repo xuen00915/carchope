@@ -184,3 +184,39 @@ test('product filter values match the Search model typography', async () => {
 
   await page.close();
 });
+
+test('XPENG G6 is zoomed within its featured card', async () => {
+  const page = await browser.newPage({ viewport: { width: 1440, height: 1000 } });
+  await page.goto(`${baseUrl}/products.html`, { waitUntil: 'domcontentloaded' });
+
+  const featuredCard = page.locator('.featured-grid .feature-car').filter({ hasText: 'XPENG G6 Electric' });
+  const presentation = await featuredCard.evaluate((card) => {
+    const image = card.querySelector('img');
+    const matrix = new DOMMatrixReadOnly(getComputedStyle(image).transform);
+    return {
+      scale: matrix.a,
+      overflow: getComputedStyle(card).overflow,
+      cardWidth: card.getBoundingClientRect().width,
+      cardHeight: card.getBoundingClientRect().height,
+    };
+  });
+
+  assert.ok(presentation.scale >= 1.15, 'XPENG should render visibly closer than the default image scale');
+  assert.equal(presentation.overflow, 'hidden', 'the enlarged image should stay inside the existing card');
+  assert.ok(presentation.cardWidth > 0 && presentation.cardHeight > 0, 'the featured card should remain visible');
+
+  await page.close();
+});
+
+test('XPENG G6 uses a gentler featured-card zoom on phones', async () => {
+  const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
+  await page.goto(`${baseUrl}/products.html`, { waitUntil: 'domcontentloaded' });
+
+  const image = page.locator('.featured-grid .feature-car').filter({ hasText: 'XPENG G6 Electric' }).locator('img');
+  const scale = await image.evaluate((element) => new DOMMatrixReadOnly(getComputedStyle(element).transform).a);
+
+  assert.ok(scale >= 1.08, 'the XPENG should still be visibly closer on phones');
+  assert.ok(scale <= 1.12, 'the phone zoom should avoid excessive edge cropping');
+
+  await page.close();
+});
