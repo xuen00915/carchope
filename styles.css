@@ -7812,3 +7812,42 @@ h1.display-md{
   }
 }
 
+/* Global page-title typography — all pages */
+/*
+  One page-title treatment for every current page.
+  Keep the improved vertical breathing room, but use the requested 800 weight.
+*/
+.hero h1,
+.page-hero h1,
+main h1.display,
+main h1.display-md{
+  font-weight:800!important;
+  letter-spacing:-.035em!important;
+  line-height:1.10!important;
+  color:#252A2F!important;
+  text-wrap:balance!important;
+}
+
+/* Homepage display title can stay slightly tighter without touching rows. */
+.hero h1.display,
+main h1.display{
+  line-height:1.08!important;
+}
+
+/* Dark hero title remains white. */
+.page-hero.dark h1,
+.page-hero.dark h1.display,
+.page-hero.dark h1.display-md{
+  color:#FFFFFF!important;
+}
+
+@media(max-width:580px){
+  .hero h1,
+  .page-hero h1,
+  main h1.display,
+  main h1.display-md{
+    letter-spacing:-.025em!important;
+    line-height:1.12!important;
+  }
+}
+
