@@ -7889,3 +7889,45 @@ main h1.display{
   }
 }
 
+/* Balanced page-title sizing */
+/* Reduce the oversized hero-title scale while keeping the shared 700 weight. */
+.hero .page-title.display{
+  font-size:clamp(54px,5.8vw,92px)!important;
+  line-height:1.08!important;
+}
+
+.page-hero .page-title.display-md{
+  font-size:clamp(40px,4.35vw,64px)!important;
+  line-height:1.10!important;
+}
+
+@media(max-width:1180px){
+  .hero .page-title.display{
+    font-size:clamp(50px,6.2vw,78px)!important;
+  }
+
+  .page-hero .page-title.display-md{
+    font-size:clamp(38px,4.8vw,58px)!important;
+  }
+}
+
+@media(max-width:860px){
+  .hero .page-title.display{
+    font-size:clamp(46px,8vw,66px)!important;
+  }
+
+  .page-hero .page-title.display-md{
+    font-size:clamp(36px,6.4vw,52px)!important;
+  }
+}
+
+@media(max-width:580px){
+  .hero .page-title.display{
+    font-size:46px!important;
+  }
+
+  .page-hero .page-title.display-md{
+    font-size:38px!important;
+  }
+}
+
