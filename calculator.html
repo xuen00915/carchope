@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="description" content="Estimate COE renewal financing, remaining COE value and car affordability using official Singapore government COE data.">
+  <title>Carchope — COE Calculator</title>
+  <link rel="stylesheet" href="styles.css?v=car-scale-white-1">
+  <link rel="stylesheet" href="coe-calculator.css?v=1">
+</head>
+<body class="calculator-page">
+
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo header-logo" href="index.html" aria-label="Carchope home"><img class="header-brand-logo" src="https://www.carchope.com//image/catalog/Slicing/header/logo.png" alt="Carchope"></a>
+    <nav class="desktop-nav" aria-label="Primary navigation">
+      <a href="products.html">Buy</a>
+      <a href="https://www.carchope.com/sell-your-cars" target="_blank" rel="noopener">Sell</a>
+      <a href="https://www.carchope.com/consignment" target="_blank" rel="noopener">Consign</a>
+      <a href="service.html">Services</a>
+      <a href="calculator.html" aria-current="page">COE Calculator</a>
+      <a href="about-us.html">About</a>
+    </nav>
+    <div class="header-cart-wrap">
+      <button class="header-cart" id="header-cart-toggle" type="button" aria-label="Open cart menu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2l2.2 10.2a2 2 0 0 0 2 1.6h7.8a2 2 0 0 0 1.9-1.4L21 8H7"></path><circle cx="10" cy="20" r="1.4"></circle><circle cx="18" cy="20" r="1.4"></circle></svg>
+        <span class="header-cart-label">Cart</span>
+        <span class="header-cart-count" data-cart-count>0</span>
+      </button>
+      <div class="cart-popover" id="cart-popover" aria-hidden="true">
+        <div class="cart-popover-head"><div><strong>Your Cart</strong><span><span data-cart-count>0</span> item(s)</span></div><button class="cart-clear-btn" id="cart-clear-btn" type="button">Clear Cart</button></div>
+        <div class="cart-popover-items" id="cart-popover-items"></div>
+        <div class="cart-popover-empty" id="cart-popover-empty">No cars added yet.</div>
+        <a class="cart-popover-link" href="https://www.carchope.com/cart" target="_blank" rel="noopener">View Cart</a>
+      </div>
+    </div>
+    <a class="header-cta" href="https://www.carchope.com/contact-us" target="_blank" rel="noopener">Contact Us</a>
+    <button class="menu-toggle" id="menu-toggle" aria-label="Open navigation" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
+</header>
+<div class="mobile-panel" id="mobile-panel">
+  <a class="mobile-cart-link" href="https://www.carchope.com/cart" target="_blank" rel="noopener">Cart <span data-cart-count>0</span></a>
+  <a href="products.html">Buy / Pre-Owned Cars</a>
+  <a href="https://www.carchope.com/sell-your-cars" target="_blank" rel="noopener">Sell Your Car</a>
+  <a href="https://www.carchope.com/consignment" target="_blank" rel="noopener">Consign</a>
+  <a href="service.html">Services</a>
+  <a href="calculator.html" aria-current="page">COE Calculator</a>
+  <a href="about-us.html">About Us</a>
+</div>
+
+<main id="main">
+  <section class="calculator-hero">
+    <div class="container calculator-hero-grid">
+      <div>
+        <h1>Know the numbers<br>before the road.</h1>
+      </div>
+      <div class="calculator-hero-copy">
+        <p>Estimate renewal financing, unused COE value and the cost of your next car with rates retrieved from official Singapore government data.</p>
+        <p class="calculator-source"><span class="live-dot" aria-hidden="true"></span><span id="rate-status" role="status">Retrieving the latest official rates…</span></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="rate-strip" aria-labelledby="rate-heading">
+    <div class="container">
+      <div class="rate-strip-head">
+        <div><h2 id="rate-heading">Latest bidding premiums</h2></div>
+        <p id="bidding-period">Waiting for data.gov.sg</p>
+      </div>
+      <div class="rate-grid" id="rate-grid" aria-live="polite">
+        <div class="rate-card"><span>Category A</span><strong data-rate="A">—</strong><small>Cars ≤ 1,600cc / 97kW</small></div>
+        <div class="rate-card"><span>Category B</span><strong data-rate="B">—</strong><small>Cars above Cat A limits</small></div>
+        <div class="rate-card"><span>Category C</span><strong data-rate="C">—</strong><small>Goods vehicles &amp; buses</small></div>
+        <div class="rate-card"><span>Category D</span><strong data-rate="D">—</strong><small>Motorcycles</small></div>
+        <div class="rate-card"><span>Category E</span><strong data-rate="E">—</strong><small>Open category</small></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="calculator-workspace">
+    <div class="container">
+      <div class="calculator-tabs" role="tablist" aria-label="Choose a COE calculator">
+        <button id="tab-renewal" role="tab" type="button" aria-selected="true" aria-controls="panel-renewal" data-calculator-tab="renewal">Renewal loan</button>
+        <button id="tab-remaining" role="tab" type="button" aria-selected="false" aria-controls="panel-remaining" tabindex="-1" data-calculator-tab="remaining">Remaining value</button>
+        <button id="tab-affordability" role="tab" type="button" aria-selected="false" aria-controls="panel-affordability" tabindex="-1" data-calculator-tab="affordability">Car affordability</button>
+      </div>
+
+      <section class="calculator-panel" id="panel-renewal" role="tabpanel" aria-labelledby="tab-renewal" data-calculator-panel="renewal">
+        <div class="calculator-intro"><h2>COE renewal loan</h2><p>Uses the latest published Prevailing Quota Premium (PQP). Five-year renewal is calculated at 50% of PQP, rounded up to the nearest dollar.</p><p class="data-note" id="pqp-period">PQP period: loading…</p></div>
+        <form class="calculator-form" id="renewal-form">
+          <div class="calculator-fields">
+            <div class="calc-field"><label for="renewal-category">Vehicle category</label><select id="renewal-category"><option value="A">Category A — Smaller cars</option><option value="B">Category B — Larger cars</option><option value="C">Category C — Goods / buses</option><option value="D">Category D — Motorcycles</option></select></div>
+            <div class="calc-field"><label for="renewal-pqp">PQP <span>(S$)</span></label><input id="renewal-pqp" type="number" min="1" step="1" inputmode="decimal" required placeholder="Retrieving official rate"><small>Updated automatically; editable if needed.</small></div>
+            <fieldset class="calc-field calc-choice"><legend>Renewal period</legend><label><input type="radio" name="renewal-years" value="5"> 5 years</label><label><input type="radio" name="renewal-years" value="10" checked> 10 years</label></fieldset>
+            <div class="calc-field"><label for="renewal-down">Down payment <span>(S$)</span></label><input id="renewal-down" type="number" min="0" step="100" value="20000" inputmode="decimal" required></div>
+            <div class="calc-field"><label for="renewal-interest">Loan interest <span>(% p.a., flat)</span></label><input id="renewal-interest" type="number" min="0" max="20" step="0.01" value="2.78" inputmode="decimal" required><small>Enter your bank or dealer rate.</small></div>
+            <div class="calc-field"><label for="renewal-loan-years">Loan tenure</label><select id="renewal-loan-years"><option value="3">3 years</option><option value="5" selected>5 years</option><option value="7">7 years</option></select></div>
+          </div>
+          <button class="calc-submit" type="submit">Calculate renewal <span>→</span></button>
+          <p class="calc-error" id="renewal-error" role="alert"></p>
+        </form>
+        <div class="calculator-results" id="renewal-results" aria-live="polite">
+          <p class="result-kicker">Estimated monthly instalment</p><strong class="result-primary" data-result="monthly">S$—</strong>
+          <dl><div><dt>Renewal cost</dt><dd data-result="cost">S$—</dd></div><div><dt>Amount financed</dt><dd data-result="financed">S$—</dd></div><div><dt>Total interest</dt><dd data-result="interest">S$—</dd></div><div><dt>Total repayment</dt><dd data-result="repayment">S$—</dd></div></dl>
+        </div>
+      </section>
+
+      <section class="calculator-panel" id="panel-remaining" role="tabpanel" aria-labelledby="tab-remaining" data-calculator-panel="remaining" hidden>
+        <div class="calculator-intro"><h2>Remaining COE value</h2><p>Estimate the unused portion of the COE premium based on exact calendar days. Actual LTA rebates may differ for Category E vehicles and special cases.</p></div>
+        <form class="calculator-form" id="remaining-form">
+          <div class="calculator-fields">
+            <div class="calc-field"><label for="remaining-paid">COE premium paid <span>(S$)</span></label><input id="remaining-paid" type="number" min="1" step="1" value="100000" inputmode="decimal" required></div>
+            <div class="calc-field"><label for="remaining-registration">Registration date</label><input id="remaining-registration" type="date" required></div>
+            <div class="calc-field"><label for="remaining-expiry">COE expiry date</label><input id="remaining-expiry" type="date" required></div>
+            <div class="calc-field"><label for="remaining-as-of">Calculate as of</label><input id="remaining-as-of" type="date" required></div>
+          </div>
+          <button class="calc-submit" type="submit">Calculate remaining value <span>→</span></button>
+          <p class="calc-error" id="remaining-error" role="alert"></p>
+        </form>
+        <div class="calculator-results" id="remaining-results" aria-live="polite">
+          <p class="result-kicker">Estimated unused COE value</p><strong class="result-primary" data-result="value">S$—</strong>
+          <dl><div><dt>Value remaining</dt><dd data-result="percentage">—</dd></div><div><dt>Days remaining</dt><dd data-result="days">—</dd></div><div><dt>Original validity</dt><dd data-result="total-days">—</dd></div></dl>
+        </div>
+      </section>
+
+      <section class="calculator-panel" id="panel-affordability" role="tabpanel" aria-labelledby="tab-affordability" data-calculator-panel="affordability" hidden>
+        <div class="calculator-intro"><h2>Car affordability</h2><p>Adds the latest official bidding premium to the vehicle price before COE, then estimates financing using your own down payment and flat interest rate.</p><p class="data-note">The current premium is indicative; a future successful bid may differ.</p></div>
+        <form class="calculator-form" id="affordability-form">
+          <div class="calculator-fields">
+            <div class="calc-field"><label for="affordability-category">COE category</label><select id="affordability-category"><option value="A">Category A</option><option value="B">Category B</option><option value="C">Category C</option><option value="D">Category D</option><option value="E">Category E</option></select></div>
+            <div class="calc-field"><label for="affordability-coe">Latest COE premium <span>(S$)</span></label><input id="affordability-coe" type="number" min="1" step="1" inputmode="decimal" required placeholder="Retrieving official rate"><small>Updated automatically; editable if needed.</small></div>
+            <div class="calc-field"><label for="affordability-price">Vehicle price before COE <span>(S$)</span></label><input id="affordability-price" type="number" min="100" step="100" value="70000" inputmode="decimal" required></div>
+            <div class="calc-field"><label for="affordability-down">Down payment <span>(S$)</span></label><input id="affordability-down" type="number" min="0" step="100" value="60000" inputmode="decimal" required></div>
+            <div class="calc-field"><label for="affordability-interest">Loan interest <span>(% p.a., flat)</span></label><input id="affordability-interest" type="number" min="0" max="20" step="0.01" value="2.78" inputmode="decimal" required><small>Enter your bank or dealer rate.</small></div>
+            <div class="calc-field"><label for="affordability-years">Loan tenure</label><select id="affordability-years"><option value="3">3 years</option><option value="5">5 years</option><option value="7" selected>7 years</option></select></div>
+          </div>
+          <button class="calc-submit" type="submit">Calculate affordability <span>→</span></button>
+          <p class="calc-error" id="affordability-error" role="alert"></p>
+        </form>
+        <div class="calculator-results" id="affordability-results" aria-live="polite">
+          <p class="result-kicker">Estimated monthly instalment</p><strong class="result-primary" data-result="monthly">S$—</strong>
+          <dl><div><dt>Price including COE</dt><dd data-result="total-price">S$—</dd></div><div><dt>Amount financed</dt><dd data-result="financed">S$—</dd></div><div><dt>Total interest</dt><dd data-result="interest">S$—</dd></div><div><dt>Total repayment</dt><dd data-result="repayment">S$—</dd></div></dl>
+        </div>
+      </section>
+
+      <aside class="calculator-disclaimer">
+        <strong>Estimate, not a quotation.</strong>
+        <p>Official COE figures are retrieved from <a href="https://data.gov.sg/datasets/d_69b3380ad7e51aff3a7dcc84eba52b8a/view" target="_blank" rel="noopener">data.gov.sg / LTA</a>. Loan calculations use simple flat-rate interest and exclude fees, taxes, insurance and lender-specific rules. Confirm all amounts with LTA and your financial institution.</p>
+      </aside>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div><div class="footer-brand">Carchope</div><p class="footer-copy">Simple, honest, better cars — with practical tools for Singapore drivers.</p></div>
+    <div><div class="footer-title">Explore</div><a href="products.html">Pre-Owned Cars</a><a href="service.html">Services</a><a href="calculator.html">COE Calculator</a><a href="about-us.html">About Us</a></div>
+    <div><div class="footer-title">Contact</div><a href="https://www.carchope.com/contact-us" target="_blank" rel="noopener">Contact Carchope</a><a href="https://wa.me/6589151222" target="_blank" rel="noopener">WhatsApp</a></div>
+  </div>
+  <div class="container footer-bottom"><span>© 2026 Carchope</span><span>Frontend design preview</span></div>
+</footer>
+
+<script src="app.js?v=gauge-white-start-1"></script>
+<script src="coe-calculator.js?v=1"></script>
+</body>
+</html>

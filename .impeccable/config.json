@@ -1,0 +1,17 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "dark-glow",
+        "value": "*",
+        "files": [
+          "calculator.html"
+        ],
+        "createdAt": "2026-10-15T03:13:25.638Z",
+        "reason": "Agent: global stylesheet contains a WhatsApp glow, but calculator.html renders no WhatsApp floating control"
+      }
+    ]
+  }
+}
